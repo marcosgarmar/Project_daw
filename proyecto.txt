@@ -1,0 +1,15 @@
+-Pagina principal con ofertas de trabajo graduateland.com
+-Pagina de trabajo 
+-Pagina/Ventana de login
+-Pagina/ventana de crear perfil (usuario)
+-Pagina/ventana de crear perfil (empresa)
+-Vista adiministadror quitar y poner ofertas
+
+· tipos perfiles:
+
+-Usuarios:
+  * Aplicar a ofertas
+  * Ver ofertas inscrito
+-Empresa:
+  *Poner y quitar ofertas
+  *Ver candidatos inscritos

@@ -3,13 +3,19 @@
 -Pagina/Ventana de login
 -Pagina/ventana de crear perfil (usuario)
 -Pagina/ventana de crear perfil (empresa)
--Vista adiministadror quitar y poner ofertas
+-Vista adiministrador quitar y poner ofertas
 
 · tipos perfiles:
 
 -Usuarios:
   * Aplicar a ofertas
   * Ver ofertas inscrito
+  * Añadir y mantener su curriculum
 -Empresa:
   *Poner y quitar ofertas
   *Ver candidatos inscritos
+-Administador:
+
+ * Gestionar ofertas (añadir, borrar, modificar) ofertas de todos 
+ * "Alta y baja usuarios"
+ 

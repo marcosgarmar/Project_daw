@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -39,63 +39,67 @@
             <a class="nav-link " aria-current="page" href="#">Inicio</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Empleos</a>
+            <a class="nav-link" href="#">Empresas</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Curriculums</a>
+            <a class="nav-link" href="#">Mi Perfil</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link " href="#">Mas informacion</a>
+            <a class="nav-link " href="#">Noticias</a>
           </li>
         </ul>
       </div>
       </div>
   </nav>
 
-  <p>  <h1 class="text-center  text-uppercase mb ">Los Mejores Empleos Cerca de ti</h1></p>
-<div class="row justify-content-center">
-  <div class="card border-primary mb-3 col-m m-5 " style="max-width: 20rem;">
-    <div class="card-header">Categoria trabajo 1</div>
-    <div class="card-body">
-      <h4 class="card-title">trabajo 1</h4>
-      <p class="card-text">descripcion trabajo 1</p>
+  <p>  <h1 class="text-center  text-uppercase mb ">Ultima Hora</h1></p>
+
+         <!-- Carrusel -->
+
+<div id="carouselExampleInterval" class="carousel slide container-lg align-center w-50 "  data-bs-ride="carousel">
+
+  <ol class="carousel-indicators ">
+      <li data-bs-target="#carouselExampleIndicators " data-bs-slide-to="0" class="active"></li>
+      <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"></li>
+      <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"></li>
+    </ol>
+  <div class="carousel-inner ">
+    <div class="carousel-item active" data-bs-interval="10000">
+      <img src="img/carrusel1.jpg" class="d-block w-100"   alt="...">
+      <div class="carousel-caption d-none d-md-block text-secondary">
+        <h2>¿Como causar una buena impresion?</h2>
+        <h5>10 Trucos para tu primera entrevista de trabajo</h5>
+      </div>
+    </div>
+    <div class="carousel-item" data-bs-interval="2000">
+      <img src="img/carrusel2.jpg" class="d-block w-100"  alt="...">
+      <div class="carousel-caption d-none d-md-block text-secondary">
+        <h2>Trabaja en equipo</h2>
+        <h5>Como afrontar una reunion, gestionar y adaptarte a nuevos retos con un grupo de trabajo,...</h5>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img src="img/carrusel3.jpg" class="d-block w-100 "   alt="...">
+      <div class="carousel-caption d-none d-md-block text-secondary">
+        <h2>Mundo Freelance</h2>
+        <h5> Consejos para organizar tu espacio de trabajo</h5>
+      </div>
     </div>
   </div>
-
-  <div class="card border-primary mb-3 col-m m-5 " style="max-width: 20rem;">
-    <div class="card-header">Categoria trabajo 4</div>
-    <div class="card-body">
-      <h4 class="card-title">trabajo 4</h4>
-      <p class="card-text">descripcion trabajo 4</p>
-    </div>
-  </div>
-
-
-
-  <div class="card border-primary mb-3 col-m m-5 " style="max-width: 20rem;">
-    <div class="card-header">Categoria trabajo 2</div>
-    <div class="card-body">
-      <h4 class="card-title">trabajo 2</h4>
-      <p class="card-text">descripcion trabajo 2</p>
-    </div>
-  </div>
-<<div class="card border-primary mb-3 col-m m-5 " style="max-width: 20rem;">
-  <div class="card-header">Categoria trabajo 3</div>
-  <div class="card-body">
-    <h4 class="card-title">trabajo 3</h4>
-    <p class="card-text">descripcion trabajo 3</p>
-  </div>
+  <a class="carousel-control-prev" href="#carouselExampleInterval" role="button" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon " aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleInterval" role="button" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </a>
 </div>
-
-</div>
-
-
-
 
 
 <div class="row justify-content-around">
 
-
+<!--FIlTROS-->
 <div class="col-md-3 align-self-start ml-2 pr-5">
   <form>
   <fieldset>
@@ -160,16 +164,23 @@
 </form>
 </div>
 
-
+<!--OFERTAS-->
   	<div class="col-md-8 ml-5 justify-content-end">
 <div class="card mb-3 ml-5 container-md bg-light   mt-5 border-light" >
 
   <div class="card-body">
-    <h4 class="card-header  ">trabajo</h4>
-    <p class="card-text">descripcioewqtttttttttttttttttttttttttttttttttttasdtastasdtasdtasdtdsatasdt
-      astaatsdan</p>
-    <p class="card-text"><small class="text-muted">fecha de subida</small></p>
-    <a href="#" class="btn  btn-outline-primary">mas informacion</a>
+    <h4 class="card-header  ">Backend developer Google</h4>
+    <div class="d-flex ">
+    <img src="img/google.png" alt="Google" width="50" height="50" class="d-inline-block m-2">
+
+    <p class="card-text align-center m-2">    Se trata e una posición como Backend Developer en Google en nuestras oficinas de Nevada</p>     </div>
+<ul class="list-inlane">
+    <li class=" list-inline-item card-text"><small class="text-muted align-bottom">Nevada, EEUU</small></li>
+    <li class=" list-inline-item card-text"><small class="text-muted align-bottom">10 dias</small></li>
+
+</ul>
+    <a href="#" class="btn  btn-outline-primary">Oferta</a>
+
 
   </div>
 
@@ -219,6 +230,58 @@
       </div>
     </div>
   </div>
+
+<!-- FOOTER -->
+  <footer class=" text-center text-lg-start" style="background-color: #D1EAFC;">
+
+  <div class="container p-4">
+
+    <div class="row">
+
+      <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
+        <h5 class="text-uppercase">Footer Content</h5>
+
+        <p>
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iste atque ea quis
+          molestias. Fugiat pariatur maxime quis culpa corporis vitae repudiandae aliquam
+          voluptatem veniam, est atque cumque eum delectus sint!
+        </p>
+      </div>
+
+
+
+      <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
+        <h5 class="text-uppercase text-center">Links</h5>
+
+        <ul class="list-unstyled mb-0 text-center">
+          <li>
+            <a href="https://www.youtube.com/" class="text-primary ">Youtube</a>
+          </li>
+          <li>
+            <a href="https://www.instagram.com/" class="text-primary ">Instagram</a>
+          </li>
+          <li>
+            <a href="https://www.twitter.com/" class="text-primary ">Twitter</a>
+          </li>
+          <li>
+            <a href="https://www.facebook.com/!" class="text-primary ">Facebook</a>
+          </li>
+        </ul>
+      </div>
+
+
+    </div>
+
+  </div>
+
+
+  <
+  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
+    © 2020 Copyright:
+    <a class="text-white" href="https://youtu.be/dQw4w9WgXcQ">FindJobs.com</a>
+  </div>
+
+</footer>
 
 </div>
     <!-- Javascript -->

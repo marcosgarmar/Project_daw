@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" >
+    <link href="fontawesome/css/all.min.css" rel="stylesheet" />
+
+    <title>inicio</title>
+  </head>
+
+  <body style="background-color: #f2f2f2;">
+
+    <!-- Barra NavBar -->
+
+  <nav class="navbar navbar-expand-lg navbar-light shadow" style="background-color: #D1EAFC;">
+    <div class="container-fluid">
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse"  data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse " id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link " aria-current="page" href="index.html">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Empresas</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link " href="#">Noticias</a>
+          </li>   
+      </ul>
+    </div>
+      <ul class="navbar-nav">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle px-4" href="#" id="dropdown01" data-bs-toggle="dropdown" aria-expanded="false">Acceder</a>
+          <ul class="dropdown-menu" aria-labelledby="dropdown01">
+            <li><a class="dropdown-item" href="login.html">Entrar</a></li>
+            <li><a class="dropdown-item" href="elegir_perfil.html">Registrarse</a></li>
+    
+          </ul>
+        </li>
+      </ul>
+
+ </div>  
+  </nav>
+
+  <!--<p>  <h1 class="text-center  text-uppercase mb ">Ultima Hora</h1></p> -->
+
+         <!-- Carrusel -->
+  <div id="carouselExampleInterval" class="carousel slide container-fluid align-center mt-5" style="width:75%" data-bs-ride="carousel">
+
+    <ol class="carousel-indicators ">
+        <li data-bs-target="#carouselExampleIndicators " data-bs-slide-to="0" class="active"></li>
+        <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"></li>
+        <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"></li>
+      </ol>
+    <div class="carousel-inner shadow-lg ">
+      <div class="carousel-item active" data-bs-interval="10000">
+        <img src="img/carrusel4.jpg" class="d-block w-100"   alt="...">
+        <div class="carousel-caption d-none d-md-block text-secondary ">
+          <h2>¿Como causar una buena impresion?</h2>
+          <h5>10 Trucos para tu primera entrevista de trabajo</h5>
+        </div>
+      </div>
+      <div class="carousel-item" data-bs-interval="2000">
+        <img src="img/carrusel3.jpg" class="d-block w-100"  alt="...">
+        <div class="carousel-caption d-none d-md-block text-secondary ">
+          <h2>Trabaja en equipo</h2>
+          <h5>Como afrontar una reunion, gestionar y adaptarte a nuevos retos con un grupo de trabajo,...</h5>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img src="img/carrusel2.jpg" class="d-block w-100 "   alt="...">
+        <div class="carousel-caption d-none d-md-block text-secondary ">
+          <h2>Mundo Freelance</h2>
+          <h5> Consejos para organizar tu espacio de trabajo</h5>
+        </div>
+      </div>
+    </div>
+    <a class="carousel-control-prev" href="#carouselExampleInterval" role="button" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon " aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleInterval" role="button" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </a>
+  </div>
+<div class="row justify-content-around">
+
+<!--FIlTROS-->
+<div class="col-md-3 col-sm-9 align-self-start ml-2 pr-5 ">
+  <form>
+  <fieldset>
+    <legend>Filtros</legend>
+
+    <div class="form-group">
+      <label for="Textarea">Localizacion</label>
+
+      <textarea class="form-control" id="Textarea" rows="1" placeholder="Buscar"></textarea>
+    </div>
+    <label class="form-check-label">
+      <input class="form-check-input" type="checkbox" value="" checked=""> Remoto </label>
+      <fieldset class="form-group">
+        <legend>Rango salarial</legend>
+        <input type="range" class="custom-range" id="customRange1">
+      </fieldset>
+    <div class="form-group">
+      <label for="Textarea">Categoria</label>
+      <textarea class="form-control" id="Textarea1" rows="1" placeholder="Buscar"></textarea>
+    </div>
+    <div class="form-group">
+      <label for="Select1">Tipo de Contrato</label>
+      <select class="form-control" id="Select1">
+        <option>Fijo</option>
+        <option>Temporal</option>
+        <option>Practicas</option>
+        <option>Doctorado/ Trabajo de investigación</option>
+
+      </select>
+    </div>
+
+    <fieldset class="form-group">
+      <legend>Fecha de publicación </legend>
+      <div class="form-check">
+        <label class="form-check-label">
+          <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios1" value="option1" checked="">
+          &lt; 24h </label>
+      </div>
+      <div class="form-check">
+        <label class="form-check-label  ">
+          <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="option2">
+            24h >  &lt; 1 semana
+        </label>
+      </div>
+      <div class="form-check">
+        <label class="form-check-label">
+          <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios3" value="option2">
+            1 semana >  &lt; 1 mes
+        </label>
+      </div>
+      <div class="form-check">
+        <label class="form-check-label">
+          <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios4" value="option2">
+            1 mes >
+        </label>
+      </div>
+
+    </fieldset>
+
+    <button type="submit" class="btn btn-primary mt-3">Filtrar</button>
+  </fieldset>
+</form>
+</div>
+
+<!--OFERTAS-->
+  	<div class="col-md-8 ml-5 justify-content-end">
+<div class="card mb-3 ml-5 container-md bg-light   mt-5 border-light" >
+
+  <div class="card-body">
+    <h4 class="card-header  ">Backend developer Google</h4>
+    <div class="d-flex ">
+    <img src="img/google.png" alt="Google" width="50" height="50" class="d-inline-block m-2">
+
+    <p class="card-text align-center m-2">    Se trata e una posición como Backend Developer en Google en nuestras oficinas de Nevada</p>     </div>
+<ul class="list-inlane">
+    <li class=" list-inline-item card-text"><small class="text-muted align-bottom">Nevada, EEUU</small></li>
+    <li class=" list-inline-item card-text"><small class="text-muted align-bottom">2 dias</small></li>
+
+</ul>
+    <a href="#" class="btn  btn-outline-primary">Oferta</a>
+  </div>
+</div>
+
+<div class="card mb-3 ml-5 container-md bg-light   mt-5 border-light" >
+
+  <div class="card-body">
+    <h4 class="card-header  ">Ingeniero Mecanico BMW</h4>
+    <div class="d-flex ">
+    <img src="img/bmw.png" alt="bmw" width="50" height="50" class="d-inline-block m-2">
+
+    <p class="card-text align-center m-2">   ¿Te gusta conducir? ¿Eres Ingeniero/a Técnico/a-Industrial y especialista en mecánica?
+Proa Premium, Concesionario Oficial de la Red Comercial de BMW y MINI en Palma de Mallorca</p>     </div>
+<ul class="list-inlane">
+    <li class=" list-inline-item card-text"><small class="text-muted align-bottom">Palma de Mallorca, EEUU</small></li>
+    <li class=" list-inline-item card-text"><small class="text-muted align-bottom">10 dias</small></li>
+
+</ul>
+    <a href="#" class="btn  btn-outline-primary">Oferta</a>
+  </div>
+</div>
+
+<div class="card mb-3 ml-5 container-md bg-light   mt-5 border-light" >
+
+  <div class="card-body">
+    <h4 class="card-header  ">ES-Market Leader Apple</h4>
+    <div class="d-flex ">
+    <img src="img/apple.png" alt="Apple" width="50" height="50" class="d-inline-block m-2">
+
+    <p class="card-text align-center m-2">  Como Responsable de Zona, te apasiona el reto de contribuir al desarrollo de los trabajadores, formar equipos y consolidar el crecimiento de los Apple Store.</p>     </div>
+<ul class="list-inlane">
+    <li class=" list-inline-item card-text"><small class="text-muted align-bottom">Madrid, España</small></li>
+    <li class=" list-inline-item card-text"><small class="text-muted align-bottom">15 dias</small></li>
+</ul>
+    <a href="#" class="btn  btn-outline-primary">Oferta</a>
+  </div>
+</div>
+
+<div class="card mb-3 ml-5 container-md bg-light   mt-5 border-light" >
+
+  <div class="card-body">
+    <h4 class="card-header  ">Systems Engineer AWS Amazon I</h4>
+    <div class="d-flex ">
+    <img src="img/amazon.png" alt="amazon" width="50" height="50" class="d-inline-block m-2">
+
+    <p class="card-text align-center m-2">    Have you ever thought about helping U.S. Intelligence Community agencies implement innovative cloud computing solutions and solve technical problems?</p>     </div>
+<ul class="list-inlane">
+    <li class=" list-inline-item card-text"><small class="text-muted align-bottom">Vancuver, Canada</small></li>
+    <li class=" list-inline-item card-text"><small class="text-muted align-bottom">20 dias</small></li>
+
+</ul>
+    <a href="#" class="btn  btn-outline-primary">Oferta</a>
+  </div>
+</div>
+
+  </div>
+</div>
+
+<!-- FOOTER -->
+  <footer class=" text-center text-lg-start shadow" style="background-color: #D1EAFC;">
+
+  <div class="container p-4">
+
+    <div class="row">
+
+      <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
+        <h5 class="text-uppercase">Footer Content</h5>
+
+        <p>
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iste atque ea quis
+          molestias. Fugiat pariatur maxime quis culpa corporis vitae repudiandae aliquam
+          voluptatem veniam, est atque cumque eum delectus sint!
+        </p>
+      </div>
+
+      <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
+        <h5 class="text-uppercase text-center">Links</h5>
+
+        <ul class="list-unstyled mb-0 text-center">
+          <li>
+            <a href="https://www.youtube.com/watch?v=FwhKhecN-1E" ><i class="fab fa-youtube" style="font-size:25px;" ></i></a>
+            <a href="https://www.instagram.com/usal" ><i class="fab fa-instagram" style="font-size:25px;" ></i></a>
+          </li>
+        
+          <li>
+            <a href="https://www.twitter.com/usal"><i class="fab fa-twitter" style="font-size:25px;" ></i></a>
+            <a href="https://www.facebook.com/" ><i class="fab fa-facebook" style="font-size:25px;" ></i></a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
+    © 2020 Copyright:
+    <a class="text-white" href="https://youtu.be/dQw4w9WgXcQ">FindJobs.com</a>
+  </div>
+
+</footer>
+    <!-- Javascript -->
+    <script src="js/bootstrap.min.js"></script>
+  </body>
+</html>

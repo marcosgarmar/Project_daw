@@ -13,67 +13,69 @@
   </head>
 
   <body style="background-color: #f2f2f2;">
-    <!-- Barra NavBar -->
 
+    <!-- Barra NavBar -->
   <nav class="navbar navbar-expand-lg navbar-light shadow" style="background-color: #D1EAFC;">
     <div class="container-fluid">
 
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse"  data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
-  </button>
+    </button>
 
-  
-  <div class="collapse navbar-collapse " id="navbarNav">
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link " aria-current="page" href="index.html">Inicio</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Empresas</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link " href="#">Noticias</a>
-      </li>   
-  </ul>
-</div>
-  <ul class="navbar-nav">
-    <li class="nav-item dropdown">
-      <a class="nav-link dropdown-toggle px-4" href="#" id="dropdown01" data-bs-toggle="dropdown" aria-expanded="false">Acceder</a>
-      <ul class="dropdown-menu" aria-labelledby="dropdown01">
-        <li><a class="dropdown-item" href="login.html">Entrar</a></li>
-        <li><a class="dropdown-item" href="elegir_perfil.html">Registrarse</a></li>
 
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link " aria-current="page" href="vista_Admin.html">Inicio</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="gestionar_ofertas.html">Gestionar ofertas</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link " href="gestionar_empresas.html">gestionar empresas</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="gestionar_usuarios.html">Gestionar usuarios</a>
+        </li>
       </ul>
-    </li>
-  </ul>
-  
-</div>  
+    </div>
+      
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a href="index.html" class="btn btn-danger px-4">Salir</a>
+        </li>
+      </ul>
+    </div> 
+    
 </nav>
-<!--  Cuerpo  -->
-<div class="ofertas-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-    <h1 class="display-4">Página de registro</h1>
-    <p class="lead">Elije un perfil</p>
-</div>
 
-<main class="container container-mis text-center">
-<div class="mb-5">
-<a href="Registrarse_usuario.html" class="btn btn-primary btn-lg">Busco Trabajo</a>
-<a href="registrarse_empresa.html" class="btn btn-secondary btn-lg">Empresa</a>
-</div>
-<!-- Para generar espacio y dejar el footer abajo -->
-<div class="ofertas-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-    <p class="lead"></p>
-</div>
-
-</main>
+        <div class="container text-center">
+            <br>
+              <a data-toggle="modal" data-target="#myModal"><img src="img/perfil.png" alt="aboutme" width="110" height="110"></a>   
+          <section class=" row">
+            <h3>Empresa.SL</h3><br>
+          <article style="margin-left: 12%; margin-right: 15%" class="col-sm-9 col-md-9 col-lg-9">
+            <h6>&nbsp;</h6><br>
+                <table class="table table-striped">
+                    <tr><th>Nombre: Empresa.SL</th></tr>
+                    <tr><th>Correo electrónico: empresa@correo.es</th></tr>	
+                    <tr><th>CIF: 1541515c</th></tr>
+                </table>
+        </article>
+	    	</section>
+	    </div>
+      <br><br><br><br>
 
 
 
 
 <!-- FOOTER -->
   <footer class="text-center text-lg-start shadow" style="background-color: #D1EAFC;">
-    <div class="container p-4">
+
+  <div class="container p-4">
+
     <div class="row">
+
       <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
         <h5 class="text-uppercase">Footer Content</h5>
 
@@ -99,23 +101,17 @@
           </li>
         </ul>
       </div>
-
     </div>
   </div>
 
   <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
-    © 2020 Copyright:
-    <a class="text-white" href="https://youtu.be/dQw4w9WgXcQ">FindJobs.com</a>
+    © 2020 Copyright: Fahd & Marcos,
+    <a class="text-muted" style="text-decoration:none">EncuentraJob</a>
   </div>
 
 </footer>
 
-
     <!-- Javascript -->
-
-    <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
-
-
   </body>
 </html>

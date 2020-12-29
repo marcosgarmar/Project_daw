@@ -295,17 +295,6 @@ pieza iframe { width:100%; height:100%; overflow:auto; border:none; margin:auto;
 </pantalla>
 
 
-<p>Y aplicando a esta definición XML una hoja de estilos CSS, podría quedar así...</p>
-<pantalla>
-  <!-- object data="Bloque01 - Ejemplo - Plantilla General.xml" type="text/xml" style="width:100%;height:100%;overflow:auto">
-    ERROR (no se puede mostrar el objeto XML)
-  </object -->
-  <iframe src="Bloque01 - Ejemplo - Plantilla General con CSS.xml" type="text/xml" class="marco"></iframe>
-</pantalla>
-<p>Y aplicando ahora una transformación XSL para generar un HTML el cual usa una hoja de estilos CSS parecida a la anterior, quedaría así...</p>
-<pantalla>
-  <iframe src="Bloque01 - Ejemplo - Plantilla General con XSL.xml" type="text/xml" class="marco"></iframe>
-</pantalla>
 
 <h2>Plantillas de Contenido:</h2>
 <p>En este apartado se deben diseñar los bocetos comunes a los módulos de la aplicación, como por ejemplo el diseño de las acciones de "Hojear" elementos de datos, junto con las opciones de búsqueda o filtrado, paginación u ordenación, o el diseño de las acciones de "Listar" información, etc.</p>
@@ -316,6 +305,48 @@ pieza iframe { width:100%; height:100%; overflow:auto; border:none; margin:auto;
   <li class="lista-separador"></li>
   <li>...Y otros Bocetos que se consideren necesarios</li>
 </ul>
+<h3>Formulario de Filtrado</h3>
+<p>
+  Formulario con las etiquetas y controles para que se intoduzcan los datos de filtrado
+    ,con boton de acción
+    para lanzar la petición y obtener resultados
+</p>
+<div class="codigo">
+  <![CDATA[
+  <filtrado>
+    <rango_salarial>Salario de la oferta</rango_salarial>
+    <categoria>categoria del contrato</categoria>
+    <fecha_publicacion >
+      <opcion> menos de 24 h</opcion>
+      <opcion> 24 h - 1 semana</opcion>
+      <opcion> 1 semana - 1 mes</opcion>
+      <opcion> mas de un mes</opcion>
+
+    </fecha_publicacion>
+    <acciones>
+      <accion>Filtrar</accion>
+    </acciones>
+  </filtrado>
+  ]]>
+</div>
+<pre class="xml">
+
+  &lt;filtrado&gt;
+    &lt;rango_salarial&gt;Salario de la oferta&lt;/rango_salarial&gt;
+    &lt;categoria&gt;categoria del contrato&lt;/categoria&gt;
+    &lt;fecha_publicacion &gt;
+      &lt;opcion&gt; menos de 24 h&lt;/opcion&gt;
+      &lt;opcion&gt; 24 h - 1 semana&lt;/opcion&gt;
+      &lt;opcion&gt; 1 semana - 1 mes&lt;/opcion&gt;
+      &lt;opcion&gt; mas de un mes&lt;/opcion&gt;
+
+    &lt;/fecha_publicacion&gt;
+    &lt;acciones&gt;
+      &lt;accion&gt;Filtrar&lt;/accion&gt;
+    &lt;/acciones&gt;
+  &lt;/filtrado&gt;
+</pre>
+
 
 
 <h2>Piezas de Contenido de Datos:</h2>
@@ -331,6 +362,9 @@ pieza iframe { width:100%; height:100%; overflow:auto; border:none; margin:auto;
   <li class="lista-separador"></li>
   <li>Formularios para la Creación, Modificación, Consulta, y Eliminación de Acciones.</li>
 </ul>
+
+
+
 
 <h2>Piezas de Contenido General:</h2>
 <p>En este apartado se deberían indicar los bocetos de las diferentes piezas que se necesitan para mostrar todos los elementos que forman parte de la aplicación, de los que aún no se han hecho mención y posiblemente tengan un uso muy general, es decir, que se aprovechen para integrarlos en diferentes "Plantillas de Contenido", o en "Piezas de Contenido de Datos", o similar.</p>

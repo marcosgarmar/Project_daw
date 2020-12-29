@@ -1,0 +1,388 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="es" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="language" content="es"/>
+<meta name="Revisit" content="0 days"/>
+<meta name="REVISIT-AFTER" content="0 days"/>
+<meta name="robots" content="all"/>
+<style rel="stylesheet" type="text/css">
+body {
+  font-family:tahoma,arial;
+  font-size:14pt;
+  text-align:justify;
+  margin:1em;
+  background:#FFF7F7; color:#000010;
+}
+h1,h2,h3 { display:block; font-weight:bold; margin:1.5em 0 0.5em 0; }
+h1 { font-size:2.0em; text-align:center;}
+h2 { font-size:1.25em; text-align:justify; text-decoration:underline;}
+h3 { font-size:1.0em; text-align:justify;}
+ol, ul {  margin-left:0px; padding-left:1.5em;}
+ul, .lista-guion { list-style:disc outside url("Bloque01 - Ejemplo - lista-guion.png");}
+.lista-circulo { list-style:circle outside none;}
+.lista-punto { list-style:disc outside none;}
+.lista-cuadrado { list-style:square outside none;}
+.lista-separador { list-style:none; height:1em;}
+.lista-asterisco3 { list-style:circle inside url("Bloque01 - Ejemplo - lista-asterisco3.png"); padding-left:0em;}
+.lista-indice { list-style:decimal outside none;}
+nota {display:block; width:80%; margin:auto; padding:3px 5px; font-size:0.75em; text-align:center;
+  background:#F0F0A0; color:#102040;
+  border:2px outset #102080; border-width:1px 2px 2px 1px; -moz-border-radius:5px;
+}
+campo { font-weight:bold; }
+codigo, .codigo { display:none; }
+pre { background-color:#F0F080; border:2px solid #F08080; width:80%; margin:auto; font-size:0.75em;}
+
+pantalla { display:block; background-color:#0F0F0F; border:2px solid #208020; width:100%; height:550px; margin:auto; padding:5px; font-size:0.75em;}
+pantalla iframe { width:100%; height:100%; overflow:auto; border:0px solid #208020;}
+
+pieza { display:block; background-color:#0F0F0F; width:100%; border:none; margin:auto; padding:0px; font-size:0.75em; text-align:center;}
+pieza iframe { width:100%; height:100%; overflow:auto; border:none; margin:auto;}
+</style>
+<script type="text/javascript">
+//Este bloque Javascript SIN CODIGO es para fastidiar un poco a Internet Explorer...
+</script>
+<title>Desarrollo de Aplicaciones Web - Bloque 1 - Ejemplo</title>
+</head>
+<body>
+<h1>Desarrollo de Aplicaciones Web - Bloque 1 - Ejemplo</h1>
+<nota>Se recomienda "Mozilla FireFox" o "Google Chrome" para visualizar correctamente este documento, Internet Explorer tiene ciertos problemas con los estándares XML.</nota>
+
+
+<h2>Ejemplo de Especificación y Boceto de Aplicación Web</h2>
+<p>A continuación se muestra un sencillo ejemplo de cómo debería especificarse mínimamente una aplicación web en sus diferentes aspectos:
+<ul class="lista-punto">
+<li><strong>Objetivos:</strong> Información de lo que se pretende desarrollar.</li>
+<li><strong>Requisitos:</strong> Descripción de funciones que se tendrán disponibles en la aplicación, datos que deben tratar esas funciones (argumentos y opciones) y datos que deben permanecer a lo largo del tiempo (en una Base de Datos).</li>
+
+<li><strong>Modelo de Datos:</strong> Si es conveniente, se debe especificar más detalladamente el Diccionario de Datos y/o la Estructura de la Base de Datos necesaria para implementar los Requisitos indicados anteriormente.</li>
+<li><strong>Descripción Semántica de los Datos en XML:</strong> Si es necesario, se deben especificar los conjuntos de información que manejará la aplicación internamente entre procedimientos, funciones o clases, y/o externamente entre aplicaciones o interfaces de usuario.</li>
+
+<li><strong>Plantilla General:</strong> Un boceto visual y/o de datos de la Estructura Principal de la aplicación, cómo se colocan los diferentes elementos que la componen, y cómo se van a ver. Se pueden tener más de una Plantilla General en función de los casos diferentes de ejecución de la aplicación.<br/>Normalmente todos los bocetos visuales suelen estar descritos en XML, XHTML o HTML, transformados en XSLT (si es necesario), y presentados o diseñados en CSS.</li>
+<li><strong>Plantillas de Contenido:</strong> Bocetos visuales y/o de datos de los Elementos típicamente Comunes a usar en la aplicación. Pueden ser bocetos de listas generales, formularios, ventanas, menús, etc.</li>
+
+<li><strong>Piezas de Contenido de Datos:</strong> Bocetos visuales de los datos concretos especificados tanto en el "Modelo de Datos" como en la "Descripción Semántica de los Datos". Suelen ser listas, formularios, o vistas con los detalles concretos de los datos que se van a tratar en la aplicación.</li>
+<li><strong>Piezas de Contenido General:</strong> Si es necesario especificar más elementos que formarán parte de la aplicación pero que se desarrollan/programan de forma independiente o en forma de componentes individuales, se deben diseñar los bocetos visuales y/o de datos de los mismos. En ejemplo son los mensajes de alerta, notificaciones (error, información, ...), notas (tipo "post-it") que se muestran en algunos momentos, y que son comunes a toda la aplicación.</li>
+<li><strong>Mapa de la Aplicación:</strong> Cuando en una aplicación existen múltiples caminos para ir de un lugar a otro, o existen en una Vista elementos de interacción del usuario que provocan cambios en la visualización de la misma, se debe realizar un Mapa de la Aplicación para indicar y aclarar los eventos y elementos (botones, enlaces, temporizadores, ...) que permitirán cambiar de una zona a otra de la aplicación debido a la interacción del usuario.
+</li>
+</ul>
+</p>
+
+<hr/>
+
+<h2>Objetivos:</h2>
+<p>La aplicación tratará sobre la gestión de una <strong>Web de ofertas de empleo en linea</strong>, desde el punto de vista de los solicitantes de empleo , de las empresas y los administradores</p>
+
+<p> Los solicitantes pueden ver la informacion de las ofertas de empleo (Localización , rango salarial, categoria, tipo de contrato, fecha de publicación , descripcion ,...) que las empresas han publicado
+, pueden/deben registrarse como candidatos para poder registrarse en las ofertas de empleo , subir y modificar su curriculum a la plataforma para que las empresas puedan consultarlo </p>
+
+<p> Las empresas pueden registrarse para crear ofertas de empleo con diferentes datos  (Localización , rango salarial, categoria, tipo de contrato, fecha de publicación , descripcion ,...), pueden consultar los solicitantes que se registran en la oferta y revisar su curriculum</p>
+
+<P> Los administradores tienen la función de gestionar la pagina web, pueden gestionar las cuentas de los candidatos y de las empresas y modificar la informacion de estas, tambien pueden gestionar las diferentes  ofertas de empleo</p>
+
+
+
+
+
+<h2>Requisitos:</h2>
+<ol>
+<li><h3>Funciones de los solicitantes</h3>
+  <ul class="lista-guion">
+    <li>Ver las ofertas de trabajo y acceder a ellas</li>
+    <li>Busqueda con filtros de las ofertas de empleo</li>
+    <li class="lista-separador"></li>
+    <li>Pueden añadir  su curriculum</li>
+    <li>Pueden modificar su curriculum</li>
+    <li>Pueden borrar su curriculum</li>
+    <li class="lista-separador"></li>
+    <li>Pueden añadir  su informacion de usuario</li>
+    <li>Pueden modificar su informacion de usuario</li>
+    <li>Pueden borrar su informacion de usuario</li>
+    <li class="lista-separador"></li>
+    <li>Inicio de Sesión de Usuario, es decir, acceso de un usuario a la aplicación introduciendo su "login" y "password".</li>
+    <li>Fin de Sesión de Usuario, es decir, que el usuario cierra o sale de la aplicación.</li>
+    <li class="lista-separador"></li>
+
+  </ul>
+</li>
+
+<li><h3>Datos mínimos a guardar de un solicitante:</h3>
+  <ul class="lista-punto">
+    <li><campo>idusuario</campo>: identificador interno del usuario.</li>
+    <li><campo>nombre completo</campo>: texto con el nombre y apellidos del usuario.</li>
+    <li><campo>email</campo>: correo electrónico para notificaciones al usuario y login para acceder a la cuenta.</li>
+    <li><campo>contraseña</campo>: contraseña relacionada con el correo para haceder a la cuenta</li>
+    <li><campo>DNI</campo> Documento Nacional de Identidad del usuario debe ser unico</li>
+    <li><campo>Categoria</campo>Categoria de trabajos que busca el usuario </li>
+
+
+  </ul>
+</li>
+
+<li><h3>Funciones de las Empresas:</h3>
+  <ul class="lista-guion">
+    <li>Crear y publicar ofertas de trabajo</li>
+    <li>Borrar las ofertas de trabajo publicadas</li>
+    <li>Consultar los solicitantes inscritos en las ofertas de trabajo</li>
+    <li>Consultar curriculum de los solicitantes</li>
+
+    <li class="lista-separador"></li>
+    <li>Crear el perfil de la empresa </li>
+    <li>Borrar el perfil de la empresa </li>
+    <li>Modificar el perfil de la empresa </li>
+
+  </ul>
+</li>
+
+<li><h3>Datos mínimos a guardar de una empresa:</h3>
+  <ul class="lista-punto">
+    <li><campo>idempresa</campo>: identificador interno del perfil.</li>
+    <li><campo>nombre_empresa</campo>: nombre publico de la empresa.</li>
+    <li><campo>email</campo>: correo electrónico para notificaciones a la empresa y login para acceder a la cuenta.</li>
+    <li><campo>contraseña</campo>: contraseña relacionada con el correo para acceder a la cuenta</li>
+    <li><campo>cif</campo>: CIF de la empresa, debe ser unico</li>
+
+  </ul>
+</li>
+
+<li><h3>Relación de usuarios con perfiles:</h3>
+  <ul class="lista-asterisco">
+    <li>Se relacionara a los solicitantes en funcion del email ya uqe es único y el idusuario </li>
+
+  </ul>
+  <ul class="lista-punto">
+    <li class="lista-separador"></li>
+    <li><campo>idusuario</campo>: identificador interno del usuario.</li>
+    <li><campo>email</campo>: identificador interno del .</li>
+  </ul>
+</li>
+
+<li><h3>Funciones para el mantenimiento de Acciones:</h3>
+  <ul class="lista-guion">
+    <li>Crear una oferta de trabajo</li>
+    <li>Listar ofertas de trabajo, con opciones de Filtrado y Ordenación.</li>
+    <li>Eliminar una oferta de trabajo</li>
+    <li>Registrarse en  una oferta de trabajo</li>
+    <li>consultar candidatos de una oferta de trabajo</li>
+    <li>Consultar lista de usuarios tipo candidatos</li>
+    <li>Consultar lista de usuarios tipo empresa</li>
+    <li>Registrar usuario tipo candidato</li>
+    <li>Registrar usuario tipo empresa</li>
+    <li>Eliminar usuario tipo candidato</li>
+    <li>Eliminar usuario tipo empresa</li>
+    <li>Modificar usuario tipo candidato</li>
+    <li>Modificar usuario tipo empresa</li>
+
+
+  </ul>
+</li>
+
+<li><h3>Datos mínimos a guardar de una oferta de trabajo:</h3>
+  <ul class="lista-punto">
+    <li><campo>titulo</campo>: titulo de la oferta, debe ser única.</li>
+    <li><campo>Empresa</campo>: usuario de tipo empresa que crea la ofertas.</li>
+    <li><campo>Localización</campo>: localizacion de la oferta.</li>
+    <li><campo>fecha</campo>: fecha de publicacion de la oferta</li>
+    <li><campo>descripcion</campo>:descripion de la oferta</li>
+  </ul>
+</li>
+
+</ol>
+
+
+<h2>Modelo de Datos:</h2>
+<p>Los datos a utilizar en este módulo de aplicación están bastante detallados en los puntos anteriores referentes a "Datos mínimos ..." y "Relación de ...", teniendo en cuenta al menos, que los datos de tipo "idXXXX" deben ser identificadores numéricos.</p>
+
+
+<h2>Descripción Semántica de los Datos en XML:</h2>
+<p>Como ejemplos de descripción semántica, se hace un boceto de cada clase de dato...</p>
+
+<h3>Solicitantes:</h3>
+<div class="codigo"><![CDATA[
+<solicitantes>
+  <solicitante>
+    <idusuario>1</idusuario>
+    <nombrecompleto>usuario</nombrecompleto>
+    <contraseña>alksndcajsndckajsndckjksjdcn</contraseña>
+    <DNI>12345678A</DNI>
+    <email>usuario@prueba.es</email>
+    <categoria> cocinero </categoria>
+
+  </solicitante>
+  ...
+</solicitantes>
+]]></div>
+<pre class="xml">
+&lt;solicitantes&gt;
+  &lt;solicitante&gt;
+    &lt;idusuario&gt;1&lt;/idusuario&gt;
+    &lt;nombrecompleto&gt;usuario&lt;/nombrecompleto&gt;
+    &lt;contraseña&gt;alksndcajsndckajsndckjksjdcn&lt;/contraseña&gt;
+    &lt;DNI&gt;12345678A&lt;/DNI&gt;
+    &lt;email&gt;usuario@prueba.es&lt;/email&gt;
+    &lt;categoria&gt;cocinero&lt;/categoria&gt;
+  &lt;/solicitante&gt;
+  ...
+&lt;/solicitantes&gt;
+</pre>
+
+<h3>Empresas:</h3>
+<div class="codigo"><![CDATA[
+<empresas>
+  <empresa>
+    <idempresa>1</idempresa>
+    <nombre_empresa>Empresa S.A</nombre_empresa>
+    <contraseña>ddgoajgoapg.</contraseña>
+    <email>correo@correo.es</email>
+    <CIF>Numero CIF</CIF>
+
+  </empresa>
+  ...
+</empresas>
+]]></div>
+<pre class="xml">
+&lt;empresas&gt;
+  &lt;empresa&gt;
+    &lt;idempresa&gt;1&lt;/idempresa&gt;
+    &lt;nombre_empresa&gt;Empresa S.A &lt;/nombre_empresa&gt;
+    &lt;contraseña&gt;tdfghkjjhgf&lt;/contraseña&gt;
+    &lt;email&gt;correo@correo.es&lt;/email&gt;
+    &lt;CIF&gt;Numero CIF&lt;/CIF&gt;
+  &lt;/empresa&gt;
+  ...
+&lt;/empresas&gt;
+</pre>
+
+<h3>Ofertas:</h3>
+<div class="codigo"><![CDATA[
+<ofertas>
+  <oferta>
+    <titulo>Oferta</titulo>
+    <empresa>Empresa S.A</empresa>
+    <localizacion>Lugar</localizacion>
+    <fecha>22-10-20</fecha>
+    <descripcion>Descripcion de la oferta</descripcion>
+  </oferta>
+  ...
+</ofertas>
+]]></div>
+<pre class="xml">
+
+  &lt;ofertas&gt;
+    &lt;oferta&gt;
+      &lt;titulo&gt;Oferta&lt;/titulo&gt;
+      &lt;empresa&gt;Empresa S.A&lt;/empresa&gt;
+      &lt;localizacion&gt;Lugar&lt;/localizacion&gt;
+      &lt;fecha>22-10-20&lt;/fecha&gt;
+      &lt;descripcion&gt;Descripcion de la oferta&lt;/descripcion&gt;
+    &lt;/oferta&gt;
+    ...
+  &lt;/ofertas&gt;
+
+</pre>
+
+
+<h2>Vista de la página principal:</h2>
+<p>Vista de la página principal si entramos a la web sin registrarnos (con html y css):</p>
+<pantalla>
+  <iframe
+    src="index.html"
+    type="text/xml"
+    class="marco"
+  ></iframe>
+</pantalla>
+
+
+<p>Y aplicando a esta definición XML una hoja de estilos CSS, podría quedar así...</p>
+<pantalla>
+  <!-- object data="Bloque01 - Ejemplo - Plantilla General.xml" type="text/xml" style="width:100%;height:100%;overflow:auto">
+    ERROR (no se puede mostrar el objeto XML)
+  </object -->
+  <iframe src="Bloque01 - Ejemplo - Plantilla General con CSS.xml" type="text/xml" class="marco"></iframe>
+</pantalla>
+<p>Y aplicando ahora una transformación XSL para generar un HTML el cual usa una hoja de estilos CSS parecida a la anterior, quedaría así...</p>
+<pantalla>
+  <iframe src="Bloque01 - Ejemplo - Plantilla General con XSL.xml" type="text/xml" class="marco"></iframe>
+</pantalla>
+
+<h2>Plantillas de Contenido:</h2>
+<p>En este apartado se deben diseñar los bocetos comunes a los módulos de la aplicación, como por ejemplo el diseño de las acciones de "Hojear" elementos de datos, junto con las opciones de búsqueda o filtrado, paginación u ordenación, o el diseño de las acciones de "Listar" información, etc.</p>
+<ul>
+  <li>Boceto de "Formulario de Búsqueda o Filtrado" para "Hojear datos" (Un diseño de formulario con las etiquetas y controles para que se introduzcan los datos de búsqueda y filtrado, y con botones de acción para lanzar la petición y obtener resultados)</li>
+  <li>Boceto de "Lista de Resultados" para "Hojear datos" (Un diseño de tabla con filas y columnas, donde se tendrá una cabecera con los títulos de las columnas, y controles para lanzar las opciones de ordenación, una serie de datos resultantes limitados a un número de "filas por página", un pie de tabla con la pieza de paginación y controles para cambiar de página, y alguna columna donde se tengan los controles para lanzar las acciones de "Consulta", "Modificación", "Eliminación", etc...)</li>
+  <li>Boceto de Menú de Opciones (acciones alternativas, cuando se necesiten más opciones de las globales en la parte del "menú de acciones", es decir, cuando se necesiten subopciones a las principales)</li>
+  <li class="lista-separador"></li>
+  <li>...Y otros Bocetos que se consideren necesarios</li>
+</ul>
+
+
+<h2>Piezas de Contenido de Datos:</h2>
+<p>Aquí se deben diseñar los bocetos de las fichas o formularios de datos para las clases de datos especificadas en el "Modelo de Datos" o en la "Descripción Semántica de Datos en XML", ya que generalmente son elementos de información que deben ser mostrados en la aplicación de alguna manera, y según las acciones que se estén realizando, así por ejemplo, en ese módulo se deben diseñar:</p>
+<ul>
+  <li>Formulario para la Creación de un Usuario (controles sin datos o con datos "por defecto" para poder ser rellenados)</li>
+  <li>Formulario para la Modificación de un Usuario (puede ser como el anterior, pero con los controles de datos rellenados, y algunos diferentes o como "solo lectura", según necesidades)</li>
+  <li>Formulario para la Consulta de un Usuario (puede ser el anterior con los controles de datos en "solo lectura")</li>
+  <li>Posible formulario para la Eliminación de un Usuario (puede ser como el de "Consulta" para que se confirme la eliminación)</li>
+  <li class="lista-separador"></li>
+  <li>Formulario para la Creación de un Perfil ...</li>
+  <li>...en resumen, Formularios para la Creación, Modificación, Consulta, y Eliminación de Perfiles.</li>
+  <li class="lista-separador"></li>
+  <li>Formularios para la Creación, Modificación, Consulta, y Eliminación de Acciones.</li>
+</ul>
+
+<h2>Piezas de Contenido General:</h2>
+<p>En este apartado se deberían indicar los bocetos de las diferentes piezas que se necesitan para mostrar todos los elementos que forman parte de la aplicación, de los que aún no se han hecho mención y posiblemente tengan un uso muy general, es decir, que se aprovechen para integrarlos en diferentes "Plantillas de Contenido", o en "Piezas de Contenido de Datos", o similar.</p>
+
+
+<h2>Mapa de la Aplicación:</h2>
+<p>Con apoyo de la descripción de las funcionalidades, y de las diferentes Vistas que componen la aplicación, se debe Especificar y Diseñar el Mapa de la Aplicación, mostrando el conjunto de páginas, vistas, piezas, etc, que forman parte de la aplicación y que a través de los elementos de interacción del usuario o similares (botones, enlaces, temporizadores, eventos, ...) permiten cambiar de una zona a otra de la aplicación.</p>
+
+<h3>Boceto de Pantalla de Acceso al Sistema:</h3>
+<pantalla>
+  <iframe src="Bloque01 - Ejemplo - Vista Login - Pantalla.xml" type="text/xml" class="marco"></iframe>
+</pantalla>
+<p>...El mismo boceto, pero viendo sólamente la pieza de la "Vista Login".</p>
+<pieza style="width:40%;">
+<iframe src="Bloque01 - Ejemplo - Vista Login - Pieza.xml" type="text/xml" class="marco"></iframe>
+</pieza>
+
+
+<h2>Integración de otros Lenguajes XML:</h2>
+<!-- El grafico vectorial siguiente no se muestra en IE.. -->
+<p>Un gráfico Vectorial de Ejemplo...
+<svg xmlns="http://www.w3.org/2000/svg" width="1cm" height="1cm"
+     viewBox="0 0 160 160" version="1.1">
+  <title>Estrella</title>
+  <polygon style="fill:#F0F080; stroke:#404080; stroke-width:5"
+           points="70,0 87,50 141,51 98,83 114,135 70,104 26,135 42,83 0,51 53,51"
+           transform="translate(10,10)"/>
+</svg>
+</p>
+
+<!-- La ecuación matemática siguiente no se muestra en IE.. -->
+<p>Un ejemplo de Ecuación Matemática... Las soluciones de la ecuación general de segundo grado
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+  <msup><mi>ax</mi><mn>2</mn></msup>
+  <mo>+</mo><mi>bx</mi><mo>+</mo><mi>c</mi><mo>=</mo><mn>0</mn>
+</math> son <math xmlns="http://www.w3.org/1998/Math/MathML">
+  <mi>x</mi><mo>=</mo>
+  <mfrac>
+    <mrow>
+      <mo>&minus;</mo><mi>b</mi><mo>±</mo>
+      <msqrt>
+        <mrow>
+          <msup><mi>b</mi><mn>2</mn></msup>
+          <mo>&minus;</mo><mn>4</mn><mi>ac</mi>
+        </mrow>
+      </msqrt>
+    </mrow>
+    <mrow>
+      <mn>2</mn><mi>a</mi>
+    </mrow>
+  </mfrac>
+</math>.</p>
+
+</body>
+</html>

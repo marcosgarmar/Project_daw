@@ -1,3 +1,35 @@
+<?php
+include 'funciones_conexion.php';
+session_start();
+if(isset($_SESSION['rol'])){
+comprobar_sesion($_SESSION['rol']);
+}
+
+$conn = conexion();
+if(isset($_POST['login'])){
+$email = mysqli_real_escape_string($conn,$_POST['email']);
+$pass = mysqli_real_escape_string($conn,$_POST['pass']);
+  $sql = "SELECT * FROM usuarios WHERE email ='$email' and password = '$pass' ";
+
+  if($rs = $conn->query($sql)){
+    if($rs->num_rows>0){
+  //  echo "<script>window.alert('Logeado correctamente');</script>";
+    $rs = $rs->fetch_assoc();
+    $rol = $rs['rol'];
+  //  echo $rol;
+    $_SESSION['rol'] = $rol;
+    comprobar_sesion($_SESSION['rol']);
+    } else {
+  //  echo "<script>window.alert('Email o contraseña incorrectos');</script>";
+    }
+  }
+
+}
+
+$conn->close();
+?>
+
+
 <!doctype html>
 <html lang="es">
   <head>
@@ -33,21 +65,22 @@
           </li>
           <li class="nav-item">
             <a class="nav-link " href="#">Noticias</a>
-          </li>   
+          </li>
       </ul>
     </div>
       <ul class="navbar-nav">
+        <li class="nav-link border border-success"><?php//$_SESSION['nombre'];?></li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle px-4" href="#" id="dropdown01" data-bs-toggle="dropdown" aria-expanded="false">Acceder</a>
           <ul class="dropdown-menu" aria-labelledby="dropdown01">
-            <li><a class="dropdown-item" href="login.html">Entrar</a></li>
+            <li><a class="dropdown-item" href="login.php">Entrar</a></li>
             <li><a class="dropdown-item" href="elegir_perfil.html">Registrarse</a></li>
-    
+
           </ul>
         </li>
       </ul>
 
- </div>  
+ </div>
   </nav>
 <!-- Recuadro de login -->
 
@@ -63,15 +96,15 @@
     </div>
 
     <!-- Login Form -->
-    <form>
-      <input type="text" id="login" class="fadeIn second" name="login" placeholder="login">
-      <input type="password" id="password" class="fadeIn third" name="login" placeholder="password">
-      <input type="submit" class="fadeIn fourth" value="Log In">
+    <form method="post">
+      <input type="email" id="login" class="fadeIn second" name="email" placeholder="login" required>
+      <input type="password" id="password" class="fadeIn third" name="pass" placeholder="password" required>
+      <input type="submit" class="fadeIn fourth" value="Log In" name="login">
     </form>
 
     <!-- Remind Passowrd -->
     <div id="formFooter">
-      <a class="underlineHover" href="#">Forgot Password?</a>
+      <a class="underlineHover" href="#" >Forgot Password?</a>
     </div>
   </div>
 </div>

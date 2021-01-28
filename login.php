@@ -2,8 +2,9 @@
 include 'funciones_conexion.php';
 session_start();
 if(isset($_SESSION['rol'])){
-comprobar_sesion($_SESSION['rol']);
+  comprobar_sesion($_SESSION['rol']);
 }
+
 
 $conn = conexion();
 if(isset($_POST['login'])){
@@ -16,9 +17,11 @@ $pass = mysqli_real_escape_string($conn,$_POST['pass']);
   //  echo "<script>window.alert('Logeado correctamente');</script>";
     $rs = $rs->fetch_assoc();
     $rol = $rs['rol'];
+    $nombre = $rs['nombre_usuario'];
+    $_SESSION['nombre'] = $nombre;
   //  echo $rol;
     $_SESSION['rol'] = $rol;
-    comprobar_sesion($_SESSION['rol']);
+    comprobar_sesion($rol);
     } else {
   //  echo "<script>window.alert('Email o contraseña incorrectos');</script>";
     }
@@ -69,7 +72,6 @@ $conn->close();
       </ul>
     </div>
       <ul class="navbar-nav">
-        <li class="nav-link border border-success"><?php//$_SESSION['nombre'];?></li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle px-4" href="#" id="dropdown01" data-bs-toggle="dropdown" aria-expanded="false">Acceder</a>
           <ul class="dropdown-menu" aria-labelledby="dropdown01">
@@ -97,8 +99,8 @@ $conn->close();
 
     <!-- Login Form -->
     <form method="post">
-      <input type="email" id="login" class="fadeIn second" name="email" placeholder="login" required>
-      <input type="password" id="password" class="fadeIn third" name="pass" placeholder="password" required>
+      <input type="email" id="login" class="fadeIn second" name="email" placeholder="login" maxlength="15" required>
+      <input type="password" id="password" class="fadeIn third" name="pass" maxlength="12" placeholder="password" required>
       <input type="submit" class="fadeIn fourth" value="Log In" name="login">
     </form>
 

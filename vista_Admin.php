@@ -1,3 +1,16 @@
+<?php
+include 'funciones_conexion.php';
+session_start();
+if(isset($_SESSION['rol'])){
+  if($_SESSION['rol'] != "admin"){
+    header('Location:login.php');
+  }
+}else {
+  header('Location:login.php');
+}
+
+?>
+
 <!doctype html>
 <html lang="es">
   <head>
@@ -26,7 +39,7 @@
   <div class="collapse navbar-collapse" id="navbarNav" >
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link " aria-current="page" href="vista_Admin.html">Inicio</a>
+            <a class="nav-link " aria-current="page" href="vista_Admin.php">Inicio</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="gestionar_ofertas.html">Gestionar ofertas</a>
@@ -41,6 +54,7 @@
       </div>
 
         <ul class="navbar-nav">
+          <p class="px-2 m-1 mx-2 border border-dark"><?=$_SESSION['nombre'] ;?></p>
           <li class="nav-item">
             <a href="logout.php" class="btn btn-danger px-4">Salir</a>
           </li>

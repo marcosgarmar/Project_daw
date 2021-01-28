@@ -9,17 +9,17 @@ function conexion(){
   return $conexion;
 }
 
-function comprobar_sesion($sesion){
-switch ($sesion) {
+
+function comprobar_sesion($rol){
+switch ($rol) {
   case 'admin':
-    header('Location:vista_admin.html');
+    header('Location:vista_admin.php');
     break;
   case 'cliente':
-    header('Location:vista_usuario.html');
+    header('Location:vista_usuario.php');
     break;
   case 'empresa':
-    header('Location:vista_empresa.html');
+    header('Location:vista_empresa.php');
     break;
-
-}
+    }
 }

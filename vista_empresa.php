@@ -49,9 +49,9 @@ if(isset($_SESSION['rol'])){
         </ul>
       </div>
   <ul class="navbar-nav ">
-    <p class="px-2 m-1 mx-2 border border-dark"><?=$_SESSION['nombre'] ;?></p>  
+    <p class="px-2 m-1 mx-2 border border-dark"><?=$_SESSION['nombre'] ;?></p>
     <li class="nav-item">
-      <a href="index.html" class="btn btn-danger px-4">Salir</a>
+      <a href="logout.php" class="btn btn-danger px-4">Salir</a>
     </li>
   </ul>
       </div>

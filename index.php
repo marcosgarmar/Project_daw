@@ -1,3 +1,18 @@
+<?php
+include 'funciones_conexion.php';
+$conn = conexion();
+
+$sql = "SELECT * FROM ofertas";
+if($rs = $conn->query($sql)){
+  if($rs->num_rows<0){
+//  $mensaje = $rs['salario'];
+  die("Error en sacar los datos de la DB");
+  }
+}
+$opcion= getParameter( 'radio');
+
+?>
+
 <!doctype html>
 <html lang="es">
   <head>
@@ -26,7 +41,7 @@
   <div class="collapse navbar-collapse" id="navbarNav" >
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link " aria-current="page" href="index.html">Inicio</a>
+            <a class="nav-link " aria-current="page" href="index.php">Inicio</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Empresas</a>
@@ -92,131 +107,78 @@
       <!--FIlTROS-->
       <div class="col-md-3 col-sm-9 align-self-start">
         <br>
-        <form>
+        <form method="post">
         <fieldset>
           <legend>Filtros</legend>
 
-            <fieldset>
-              <legend>Rango salarial</legend>
-              <input type="range">
-            </fieldset>
+          <label>Salario</label>
+          <select class="form-control" >
+            <option value="980">Más de 980€</option>
+            <option value="1100">Más de 1100€</option>
+            <option value="1200">Más de 1200€</option>
+            <option value="1300">1300€</option>
+          </select>
 
             <label>Categoria</label>
             <select class="form-control" >
-              <option>Fijo</option>
-              <option>Temporal</option>
-              <option>Practicas</option>
-              <option>Doctorado/ Trabajo de investigación</option>
-
+              <option value="fijo">Fijo</option>
+              <option value="temporal">Temporal</option>
+              <option value="practicas">Practicas</option>
             </select>
 
           <fieldset>
             <legend>Fecha de publicación </legend>
             <div class="form-check">
               <label class="form-check-label">
-                <input type="radio" class="form-check-input" name="optionsRadios"  value="option1" checked="">
-                &lt; 24h </label>
+                <input type="radio" class="form-check-input" name="radio"  value="semana" <?php echo (($opcion == "semana")?'checked':'' ); ?>>
+               En esta semana </label>
             </div>
             <div class="form-check">
               <label class="form-check-label  ">
-                <input type="radio" class="form-check-input" name="optionsRadios" value="option2">
-                  24h >  &lt; 1 semana
+                <input type="radio" class="form-check-input" name="radio" value="mes" <?php echo (($opcion == "mes")?'checked':'' ); ?>>
+                  En este mes
               </label>
             </div>
             <div class="form-check">
               <label class="form-check-label">
-                <input type="radio" class="form-check-input" name="optionsRadios" value="option2">
-                  1 semana >  &lt; 1 mes
-              </label>
-            </div>
-            <div class="form-check">
-              <label class="form-check-label">
-                <input type="radio" class="form-check-input" name="optionsRadios"  value="option2">
-                  1 mes >
+                <input type="radio" class="form-check-input" name="radio" value="tresMeses" <?php echo (($opcion == "tresMeses")?'checked':'' ); ?>>
+                  En los ultimos 3 meses
               </label>
             </div>
 
           </fieldset>
 
-          <button type="submit" class="btn btn-primary mt-3">Filtrar</button>
+          <button type="submit" class="btn btn-primary mt-3" name="btn_filtrar">Filtrar</button>
         </fieldset>
       </form>
       </div>
 
       <!--OFERTAS-->
           <div class="col-md-8 justify-content-end">
+        <?php   $datos = $rs->fetch_assoc();
+        while($datos) { ?>
+
       <div class="card mb-3 container-md bg-light   mt-5 border-light" >
 
         <div class="card-body">
-          <h4 class="card-header">Backend developer Google</h4>
+          <h4 class="card-header"><?=$datos['titulo_oferta'];?></h4>
           <div class="d-flex ">
-          <img src="img/google.png" alt="Google" width="50" height="50" class="d-inline-block m-2">
 
-          <p class="card-text m-2">Se trata e una posición como Backend Developer en Google en nuestras oficinas de Nevada</p>     </div>
+          <p class="card-text m-2"><?=$datos['oferta']; ?></p>     </div>
       <ul >
-          <li class=" list-inline-item card-text"><small class="text-muted align-bottom">Nevada, EEUU</small></li>
-          <li class=" list-inline-item card-text"><small class="text-muted align-bottom">2 dias</small></li>
+          <li class=" list-inline-item card-text"><small class="text-muted align-bottom">Salario: <?=$datos['salario'];?>€</small></li><br>
+          <li class=" list-inline-item card-text"><small class="text-muted align-bottom">Categoria: <?=$datos['categoria'];?></small></li><br>
+          <li class=" list-inline-item card-text"><small class="text-muted align-bottom"><?=$datos['ciudad'];?></small></li>
+          <li class=" list-inline-item card-text"><small class="text-muted align-bottom"><?=$datos['fecha'];?></small></li>
 
       </ul>
-          <button class="btn btn-outline-primary">Oferta</button>
+        <a href="login.php" ><button class="btn btn-outline-primary">Inscribirme</button></a>
         </div>
       </div>
+      <?php  $datos = $rs->fetch_assoc();
+    }  $rs->free();
+    ?>
 
-      <div class="card mb-3 container-md bg-light   mt-5 border-light" >
-
-        <div class="card-body">
-          <h4 class="card-header  ">Ingeniero Mecanico BMW</h4>
-          <div class="d-flex ">
-          <img src="img/bmw.png" alt="bmw" width="50" height="50" class="d-inline-block m-2">
-
-          <p class="card-text m-2">   ¿Te gusta conducir? ¿Eres Ingeniero/a Técnico/a-Industrial y especialista en mecánica?
-      Proa Premium, Concesionario Oficial de la Red Comercial de BMW y MINI en Palma de Mallorca</p>     </div>
-      <ul >
-          <li class=" list-inline-item card-text"><small class="text-muted align-bottom">Palma de Mallorca, EEUU</small></li>
-          <li class=" list-inline-item card-text"><small class="text-muted align-bottom">10 dias</small></li>
-
-      </ul>
-          <button class="btn btn-outline-primary">Oferta</button>
-
-        </div>
-
-      </div>
-
-      <div class="card mb-3 container-md bg-light   mt-5 border-light" >
-
-        <div class="card-body">
-          <h4 class="card-header  ">ES-Market Leader Apple</h4>
-          <div class="d-flex ">
-          <img src="img/apple.png" alt="Apple" width="50" height="50" class="d-inline-block m-2">
-
-          <p class="card-text m-2">  Como Responsable de Zona, te apasiona el reto de contribuir al desarrollo de los trabajadores, formar equipos y consolidar el crecimiento de los Apple Store.</p>     </div>
-      <ul>
-          <li class=" list-inline-item card-text"><small class="text-muted align-bottom">Madrid, España</small></li>
-          <li class=" list-inline-item card-text"><small class="text-muted align-bottom">15 dias</small></li>
-
-      </ul>
-          <button class="btn btn-outline-primary">Oferta</button>
-        </div>
-
-      </div>
-
-      <div class="card mb-3 container-md bg-light   mt-5 border-light" >
-
-        <div class="card-body">
-          <h4 class="card-header  ">Systems Engineer AWS Amazon I</h4>
-          <div class="d-flex ">
-          <img src="img/amazon.png" alt="amazon" width="50" height="50" class="d-inline-block m-2">
-
-          <p class="card-text m-2">    Have you ever thought about helping U.S. Intelligence Community agencies implement innovative cloud computing solutions and solve technical problems?</p>     </div>
-      <ul >
-          <li class=" list-inline-item card-text"><small class="text-muted align-bottom">Vancuver, Canada</small></li>
-          <li class=" list-inline-item card-text"><small class="text-muted align-bottom">20 dias</small></li>
-
-      </ul>
-        <button class="btn btn-outline-primary">Oferta</button>
-        </div>
-
-      </div>
 
         </div>
       </div>

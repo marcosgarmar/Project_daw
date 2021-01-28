@@ -61,7 +61,7 @@ $conn->close();
   <div class="collapse navbar-collapse " id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link " aria-current="page" href="index.html">Inicio</a>
+            <a class="nav-link " aria-current="page" href="index.php">Inicio</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Empresas</a>
@@ -103,11 +103,6 @@ $conn->close();
       <input type="password" id="password" class="fadeIn third" name="pass" maxlength="12" placeholder="password" required>
       <input type="submit" class="fadeIn fourth" value="Log In" name="login">
     </form>
-
-    <!-- Remind Passowrd -->
-    <div id="formFooter">
-      <a class="underlineHover" href="#" >Forgot Password?</a>
-    </div>
   </div>
 </div>
 <!-- FOOTER -->

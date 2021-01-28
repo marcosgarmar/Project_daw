@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 24-01-2021 a las 22:09:26
+-- Tiempo de generación: 28-01-2021 a las 21:24:52
 -- Versión del servidor: 10.4.13-MariaDB
 -- Versión de PHP: 7.2.31
 
@@ -29,6 +29,7 @@ USE `ofertas_trabajo_daw1`;
 -- Estructura de tabla para la tabla `demandante`
 --
 
+DROP TABLE IF EXISTS `demandante`;
 CREATE TABLE `demandante` (
   `id_demandantes` int(11) NOT NULL,
   `id_usuario` int(11) NOT NULL,
@@ -41,11 +42,19 @@ CREATE TABLE `demandante` (
 -- Estructura de tabla para la tabla `empresas`
 --
 
+DROP TABLE IF EXISTS `empresas`;
 CREATE TABLE `empresas` (
   `id_empresa` int(10) NOT NULL,
   `id_usuario` int(10) NOT NULL,
   `email` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `empresas`
+--
+
+INSERT INTO `empresas` (`id_empresa`, `id_usuario`, `email`) VALUES
+(1, 3, 'mar@daw.es');
 
 -- --------------------------------------------------------
 
@@ -53,6 +62,7 @@ CREATE TABLE `empresas` (
 -- Estructura de tabla para la tabla `inscritos`
 --
 
+DROP TABLE IF EXISTS `inscritos`;
 CREATE TABLE `inscritos` (
   `id_oferta` int(10) NOT NULL,
   `id_demandante` int(10) NOT NULL,
@@ -65,6 +75,7 @@ CREATE TABLE `inscritos` (
 -- Estructura de tabla para la tabla `ofertas`
 --
 
+DROP TABLE IF EXISTS `ofertas`;
 CREATE TABLE `ofertas` (
   `id_oferta` int(10) NOT NULL,
   `id_empresa` int(10) NOT NULL,
@@ -76,12 +87,23 @@ CREATE TABLE `ofertas` (
   `fecha` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `ofertas`
+--
+
+INSERT INTO `ofertas` (`id_oferta`, `id_empresa`, `titulo_oferta`, `oferta`, `ciudad`, `categoria`, `salario`, `fecha`) VALUES
+(2, 1, 'Comercial de telefonía', 'Se busca un empleado para trabajar como un comercial de telefonia.SL, se Requiere disponobilidad inmediata y con ganas de trabajar.', 'Zamora', 'fijo', 1100, '2021-01-28'),
+(4, 1, 'Cocinero', 'Se busca un cocinero o chef de cocina con diploma y experienca de más 5 años', 'Salamanca', 'fijo', 1200, '2021-01-28'),
+(5, 1, 'Funcionario', 'Se ofrece un puesto de Funcionario', 'Madrid ', 'fijo', 1200, '2021-01-28'),
+(6, 1, 'Conductor', 'Se busca un conductor, experiencia de más 5 años', 'Salamanca', 'temporal', 1100, '2021-01-28');
+
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `usuarios`
 --
 
+DROP TABLE IF EXISTS `usuarios`;
 CREATE TABLE `usuarios` (
   `id_usuario` int(10) NOT NULL,
   `rol` varchar(15) NOT NULL,
@@ -90,12 +112,22 @@ CREATE TABLE `usuarios` (
   `password` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `usuarios`
+--
+
+INSERT INTO `usuarios` (`id_usuario`, `rol`, `nombre_usuario`, `email`, `password`) VALUES
+(1, 'admin', 'administrador', 'admin@daw.es', 'admin'),
+(2, 'cliente', 'demandante1', 'cliente1@daw.es', 'cliente1'),
+(3, 'empresa', 'mar.sl', 'mar@daw.es', 'marsl');
+
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `valoraciones`
 --
 
+DROP TABLE IF EXISTS `valoraciones`;
 CREATE TABLE `valoraciones` (
   `id_valoracion` int(10) NOT NULL,
   `id_demandante` int(10) NOT NULL,
@@ -155,19 +187,19 @@ ALTER TABLE `demandante`
 -- AUTO_INCREMENT de la tabla `empresas`
 --
 ALTER TABLE `empresas`
-  MODIFY `id_empresa` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_empresa` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `ofertas`
 --
 ALTER TABLE `ofertas`
-  MODIFY `id_oferta` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_oferta` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_usuario` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_usuario` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `valoraciones`

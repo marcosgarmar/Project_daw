@@ -10,20 +10,21 @@ if(isset($_SESSION['rol'])){
   header('Location:login.php');
 }
 $id_dem = $_SESSION['id_dem'];
-$sql_mis = "SELECT * FROM inscritos where id_dem ='$id_dem'";
+/*$sql_mis = "SELECT * FROM inscritos where id_dem ='$id_dem'";
 if($rs_mis = $conn->query($sql_mis)){
   if($rs_mis->num_rows<0){
   die("Error en sacar los datos de la DB");
   }
-}
+}*/
 
-$sql_oferta = "SELECT * FROM ofertas";
+$sql_oferta = "select ofertas.id_empresa,ofertas.titulo_oferta,oferta,ciudad,categoria,salario
+from ofertas,inscritos
+where ofertas.id_oferta = inscritos.id_oferta AND inscritos.id_dem='$id_dem'";
 if($rs_oferta = $conn->query($sql_oferta)){
   if($rs_oferta->num_rows<0){
   die("Error en sacar los datos de la DB");
   }
 }
-
 ?>
 
 <!doctype html>
@@ -70,6 +71,7 @@ if($rs_oferta = $conn->query($sql_oferta)){
       </div>
 
         <ul class="navbar-nav ">
+          <p class="px-2 m-1 mx-2 border border-dark"><?=$_SESSION['nombre'] ;?></p>
           <li class="nav-item">
             <a href="logout.php" class="btn btn-danger px-4">Salir</a>
           </li>
@@ -82,34 +84,28 @@ if($rs_oferta = $conn->query($sql_oferta)){
 <!-- El cuerpo -->
   <div class="ofertas-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
     <h1 class="display-4">Tus ofertas inscritas</h1>
-    <p class="lead">Aquí encontrarás tus ofertas que te han interesado.</p>
+    <p class="lead">Aquí encontrarás las ofertas que te han interesado.</p>
   </div>
   <main class="container container-mis">
   <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
 
     <?php
 
-     while($datos = $rs_mis->fetch_assoc()) {
-       while($tabla_oferta = $rs_oferta->fetch_assoc()) {
-         if(strcasecmp($tabla_oferta['titulo_oferta'],$datos['titulo_oferta'])==0){?>
+       while($tabla_oferta = $rs_oferta->fetch_assoc()) { ?>
     <div class="col">
       <div class="card mb-4 shadow-sm">
       <div class="card-header">
-        <h4 class="my-0 fw-normal"><?=$datos['titulo_oferta'];?></h4>
+        <h4 class="my-0 fw-normal"><?=$tabla_oferta['titulo_oferta'];?></h4>
       </div>
       <div class="card-body">
         <p>
-          <?=$tabla_oferta['oferta'];?>
+            <?=$tabla_oferta['ciudad'].'<br>'.$tabla_oferta['salario'].'€<br>'.$tabla_oferta['categoria']; ?><br>
         </p>
         <button type="button" class="w-100 btn btn-lg btn-outline-danger">Quitar oferta</button>
       </div>
     </div>
     </div>
   <?php
-  }
-  $tabla_oferta = $rs_oferta->fetch_assoc();
- }
- $datos = $rs_mis->fetch_assoc();
 }
 ?>
 

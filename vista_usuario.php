@@ -57,7 +57,7 @@ $_SESSION['id_dem'] = $id_dem;
   <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link " aria-current="page" href="vista_usuario.html">Inicio</a>
+            <a class="nav-link " aria-current="page" href="vista_usuario.php">Inicio</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Noticias</a>

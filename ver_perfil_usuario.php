@@ -1,3 +1,15 @@
+<?php
+session_start();
+if(isset($_SESSION['rol'])){
+  if($_SESSION['rol'] != "cliente"){
+    header('Location:login.php');
+  }
+}else {
+  header('Location:login.php');
+}
+?>
+
+
 <!doctype html>
 <html lang="es">
   <head>
@@ -32,7 +44,7 @@
             <a class="nav-link" href="#">Noticias</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link " href="mis_candidaturas.html">Mis candidaturas</a>
+            <a class="nav-link " href="mis_candidaturas.php">Mis candidaturas</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Ver mi Perfil</a>
@@ -41,6 +53,7 @@
       </div>
 
         <ul class="navbar-nav ">
+          <p class="px-2 m-1 mx-2 border border-dark"><?=$_SESSION['nombre'] ;?></p>
           <li class="nav-item">
             <a href="logout.php" class="btn btn-danger px-4">Salir</a>
           </li>

@@ -5,7 +5,7 @@ if(isset($_SESSION['rol'])){
   comprobar_sesion($_SESSION['rol']);
 }
 
-
+$mensaje ='';
 $conn = conexion();
 if(isset($_POST['login'])){
 $email = mysqli_real_escape_string($conn,$_POST['email']);
@@ -24,15 +24,13 @@ $pass = mysqli_real_escape_string($conn,$_POST['pass']);
     $_SESSION['rol'] = $rol;
     comprobar_sesion($rol);
     } else {
-  //  echo "<script>window.alert('Email o contraseña incorrectos');</script>";
+      $mensaje = 'Usuario no encontrado';
     }
   }
-
 }
 
 $conn->close();
 ?>
-
 
 <!doctype html>
 <html lang="es">
@@ -78,17 +76,12 @@ $conn->close();
           <ul class="dropdown-menu" aria-labelledby="dropdown01">
             <li><a class="dropdown-item" href="login.php">Entrar</a></li>
             <li><a class="dropdown-item" href="elegir_perfil.html">Registrarse</a></li>
-
           </ul>
         </li>
       </ul>
-
  </div>
   </nav>
 <!-- Recuadro de login -->
-
-
-
 <div class="wrapperlog fadeInDown">
   <div id="formContent">
     <!-- Tabs Titles -->
@@ -97,15 +90,16 @@ $conn->close();
     <div class="fadeIn first">
       <img src="img/login.png" id="icon" alt="User Icon" style= "width: 20%;"/>
     </div>
-
+    <p><?php echo $mensaje; ?></p>
     <!-- Login Form -->
     <form method="post">
-      <input type="email" id="login" class="fadeIn second" name="email" placeholder="login" maxlength="15" required>
+      <input type="email" id="login" class="fadeIn second" name="email" placeholder="Email" maxlength="15" required>
       <input type="password" id="password" class="fadeIn third" name="pass" maxlength="12" placeholder="password" required>
       <input type="submit" class="fadeIn fourth" value="Log In" name="login">
     </form>
   </div>
 </div>
+
 <!-- FOOTER -->
 <footer class="fixed-bottom text-center text-lg-start shadow" style="background-color: #D1EAFC;">
 

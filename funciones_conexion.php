@@ -24,6 +24,21 @@ switch ($rol) {
     }
 }
 
+// saber si existe un usuario en la DB
+// le pasas la tabla donde tiene que buscar, campo en la tabla, y la condicion.
+// id_where es el campo y $id_registro es lo que tiene que cumplir.
+ function si_existe($id_tabla,$tabla,$id_where,$id_registro){
+$conn = conexion();
+$sql = " select $id_tabla from $tabla where $id_where='$id_registro'";
+$existe = null;
+if($rs = $conn->query($sql)){
+  if($rs->num_rows>0){
+    $existe = true;
+  }else $existe = false;
+}
+return $existe;
+}
+
 //---------------------------------------------------------------------------
 //Funcion para obtener un parametro de $_POST o $_GET, en ese orden.
 //Si se encuentra el parametro deseado, se devuelve un String, o "null" si no.

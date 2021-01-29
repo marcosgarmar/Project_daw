@@ -2,13 +2,14 @@
 include 'funciones_conexion.php';
 $conn = conexion();
 
+// Para inscribirse en una oferta
 if(isset($_GET['id_dem']) && isset($_GET['id_oferta']) && isset($_GET['id_emp'])){
   $id_dem = $_GET['id_dem'];
   $id_oferta = $_GET['id_oferta'];
   $id_emp = $_GET['id_emp'];
   $titulo = $_GET['titulo'];
 
-  $sql_si_existe = "Select titulo_oferta from inscritos where id_oferta='$id_oferta' and id_emp='$id_emp'";
+  $sql_si_existe = "Select titulo_oferta from inscritos where id_oferta='$id_oferta' and id_dem='$id_dem'";
   $si_existe = $conn->query($sql_si_existe);
   if($si_existe){
     if($si_existe->num_rows>0){
@@ -24,8 +25,9 @@ if(isset($_GET['id_dem']) && isset($_GET['id_oferta']) && isset($_GET['id_emp'])
   }
 }
 
-if(isset($_GET['borrar_oferta']) && isset($_GET['id_dem'])){
-  $id_oferta_borrar = $_GET['borrar_oferta'];
+// Para borrar una oferta
+if(isset($_GET['borrar_oferta_usuario']) && isset($_GET['id_dem'])){
+  $id_oferta_borrar = $_GET['borrar_oferta_usuario'];
   $id_dem =  $_GET['id_dem'];
   $sql_borrar = "delete from inscritos where id_oferta=$id_oferta_borrar AND id_dem='$id_dem'";
 

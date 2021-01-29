@@ -1,3 +1,41 @@
+<?php
+include 'funciones_conexion.php';
+$conn = conexion();
+if(isset($_POST['btn_registrar'])){
+  $nombre = mysqli_real_escape_string($conn,$_POST['nombre']);
+  $email = mysqli_real_escape_string($conn,$_POST['email']);
+  $dni = mysqli_real_escape_string($conn,$_POST['dni']);
+  $pass = mysqli_real_escape_string($conn,$_POST['pass']);
+  $fecha_nac = $_POST['fecha_nac'];
+
+ $sql_reg = "insert into usuarios(rol,nombre_usuario,email,password) values('cliente','$nombre','$email','$pass')";
+
+  $verificar_si_existe = si_existe('id_usuario','usuarios','email',$email);
+  if($verificar_si_existe == true){
+    echo'<script>window.alert(\'Este usuario ya existe\');</script>';
+    echo '<script>window.location=\'login.php\';</script>';
+  }else {
+    $rs_reg = $conn->query($sql_reg);
+    if($rs_reg){
+      $sql_id_usuario = "select id_usuario from usuarios where email='$email'";
+      $rs_id = $conn->query($sql_id_usuario);
+      $rs_id = $rs_id->fetch_assoc();
+      $id_usuario = $rs_id['id_usuario'];
+      $sql_tabla_dem = "insert into demandante(id_usuario,nombre,email,dni,fecha_nac) values('$id_usuario','$nombre','$email','$dni','$fecha_nac')";
+      $rs_dem = $conn->query($sql_tabla_dem);
+      if($rs_dem){
+      echo'<script>window.alert(\'Usuario registrado correctamente\');</script>';
+      echo '<script>window.location=\'login.php\';</script>';
+      }
+    }
+  }
+}
+
+
+
+?>
+
+
 <!doctype html>
 <html lang="es">
   <head>
@@ -8,7 +46,7 @@
     <!-- Bootstrap CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet" >
     <link href="fontawesome/css/all.min.css" rel="stylesheet" />
-    
+
 
     <title>Pagina de inicio</title>
   </head>
@@ -18,22 +56,22 @@
     <!-- Barra NavBar -->
     <nav class="navbar navbar-expand-lg navbar-light shadow" style="background-color: #D1EAFC;">
       <div class="container-fluid">
-  
+
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"  data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-  
+
     <div class="collapse navbar-collapse " id="navbarNav">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link " aria-current="page" href="index.html">Inicio</a>
+              <a class="nav-link " aria-current="page" href="index.php">Inicio</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">Empresas</a>
             </li>
             <li class="nav-item">
               <a class="nav-link " href="#">Noticias</a>
-            </li>   
+            </li>
         </ul>
       </div>
         <ul class="navbar-nav">
@@ -42,10 +80,10 @@
             <ul class="dropdown-menu" aria-labelledby="dropdown01">
               <li><a class="dropdown-item" href="login.html">Entrar</a></li>
               <li><a class="dropdown-item" href="elegir_perfil.html">Registrarse</a></li>
-      
+
             </ul>
           </li>
-        </ul>   
+        </ul>
    </div>
    </nav>
 <!--  Cuerpo  -->
@@ -56,13 +94,12 @@
     <div class="card">
         <form class="card-body form-group"  method="post" >
             <h1 class="text-center">Registrarse</h1>
-            
-              <input style="margin-top: 3%; " id="fname" name="name" type="text" placeholder="Nombre completo" class="form-control" required>
-              <input style="margin-top: 3%;" id="fnamee" name="name" type="email" placeholder="Correo electronico" class="form-control" required>
-              <input class="form-control" placeholder="Contraseña" type="text" style="margin-top: 3%;" required>
-              <input class="form-control" placeholder="Repetir contraseña" type="text" style="margin-top: 3%;" required>
-              <input class="form-control" placeholder="Dni" type="text" style="margin-top: 3%;" required> <br>
-              
+
+              <input style="margin-top: 3%; " id="fname" name="nombre" type="text" placeholder="Nombre completo" class="form-control" maxlength="19" required>
+              <input style="margin-top: 3%;" id="fnamee" name="email" type="email" placeholder="Correo electronico" class="form-control" maxlength="20" required>
+              <input class="form-control" name="pass" placeholder="contraseña" type="text" style="margin-top: 3%;" maxlength="13" required>
+              <input class="form-control" placeholder="Dni" type="text" name="dni" style="margin-top: 3%;" maxlength="10" required> <br>
+
               <div class="input-group mb-3" >
                 <div class="input-group-prepend">
                   <label class="input-group-text" >Lo que me interesa es</label>
@@ -76,12 +113,11 @@
               </div>
               <div class="input-group mb-1">
               <label class="input-group-text">Fecha de nacimiento</label>
-              <input type="date" value="1995-01-01" min="1900-01-01" max="2002-01-01" required><br>
+              <input type="date" name="fecha_nac" value="1995-01-01" min="1900-01-01" max="2002-01-01" required><br>
              </div>
-              <div class="text-center"> 
-              <button style="margin-top: 3%;" type="submit" class="btn btn-outline-success">Registrarme</button>
+              <div class="text-center">
+              <input style="margin-top: 3%;" type="submit" class="btn btn-outline-success" value="Registrarme" name="btn_registrar">
               </div>
-             
         </form>
     </div>
   </div>
@@ -109,7 +145,7 @@
             <a href="https://www.youtube.com/watch?v=FwhKhecN-1E" ><i class="fab fa-youtube" style="font-size:25px;" ></i></a>
             <a href="https://www.instagram.com/usal" ><i class="fab fa-instagram" style="font-size:25px;" ></i></a>
           </li>
-        
+
           <li>
             <a href="https://www.twitter.com/usal"><i class="fab fa-twitter" style="font-size:25px;" ></i></a>
             <a href="https://www.facebook.com/" ><i class="fab fa-facebook" style="font-size:25px;" ></i></a>

@@ -8,6 +8,4 @@
 			return false;
 		}
 	}
-
-
 </script>

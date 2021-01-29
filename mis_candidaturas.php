@@ -58,7 +58,7 @@ if($rs_oferta = $conn->query($sql_oferta)){
             <a class="nav-link" href="#">Noticias</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link " href="mis_candidaturas.html">Mis candidaturas</a>
+            <a class="nav-link " href="mis_candidaturas.php">Mis candidaturas</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="ver_perfil_usuario.html">Ver mi Perfil</a>
@@ -97,7 +97,7 @@ if($rs_oferta = $conn->query($sql_oferta)){
         <p>
             <?=$tabla_oferta['ciudad'].'<br>'.$tabla_oferta['salario'].'€<br>'.$tabla_oferta['categoria']; ?><br>
         </p>
-        <a href="acciones_usuario.php?borrar_oferta=<?=$tabla_oferta['id_oferta'];?>&id_dem=<?=$tabla_oferta['id_dem'];?>" onclick="return confirmar()"><button type="button" class="w-50 btn btn-lg btn-outline-danger">Quitar oferta</button></a>
+        <a href="acciones_usuario.php?borrar_oferta_usuario=<?=$tabla_oferta['id_oferta'];?>&id_dem=<?=$tabla_oferta['id_dem'];?>" onclick="return confirmar()"><button type="button" class="w-50 btn btn-lg btn-outline-danger">Quitar oferta</button></a>
       </div>
     </div>
     </div>
@@ -109,7 +109,7 @@ if($rs_oferta = $conn->query($sql_oferta)){
 
   </div>
 </main>
-
+<br><br><br><br><br><br><br>
 <!-- FOOTER -->
   <footer class="bottom text-center text-lg-start shadow" style="background-color: #D1EAFC;">
 

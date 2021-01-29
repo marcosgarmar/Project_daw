@@ -22,15 +22,21 @@ if(isset($_GET['id_dem']) && isset($_GET['id_oferta']) && isset($_GET['id_emp'])
       }
     }
   }
+}
 
+if(isset($_GET['borrar_oferta']) && isset($_GET['id_dem'])){
+  $id_oferta_borrar = $_GET['borrar_oferta'];
+  $id_dem =  $_GET['id_dem'];
+  $sql_borrar = "delete from inscritos where id_oferta=$id_oferta_borrar AND id_dem='$id_dem'";
 
-
-
+  if($borrar_exito = $conn->query($sql_borrar)){
+      echo '<script>window.location=\'mis_candidaturas.php\';</script>';
+  }
 }
 
 
 
 
-
+$conn->close();
 
  ?>

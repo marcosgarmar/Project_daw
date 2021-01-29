@@ -1,5 +1,6 @@
 <?php
 include 'funciones_conexion.php';
+include 'confirmar_accion.js';
 $conn = conexion();
 session_start();
 if(isset($_SESSION['rol'])){
@@ -10,14 +11,8 @@ if(isset($_SESSION['rol'])){
   header('Location:login.php');
 }
 $id_dem = $_SESSION['id_dem'];
-/*$sql_mis = "SELECT * FROM inscritos where id_dem ='$id_dem'";
-if($rs_mis = $conn->query($sql_mis)){
-  if($rs_mis->num_rows<0){
-  die("Error en sacar los datos de la DB");
-  }
-}*/
 
-$sql_oferta = "select ofertas.id_empresa,ofertas.titulo_oferta,oferta,ciudad,categoria,salario
+$sql_oferta = "select inscritos.id_dem,ofertas.id_empresa,ofertas.id_oferta,ofertas.titulo_oferta,oferta,ciudad,categoria,salario
 from ofertas,inscritos
 where ofertas.id_oferta = inscritos.id_oferta AND inscritos.id_dem='$id_dem'";
 if($rs_oferta = $conn->query($sql_oferta)){
@@ -25,6 +20,7 @@ if($rs_oferta = $conn->query($sql_oferta)){
   die("Error en sacar los datos de la DB");
   }
 }
+
 ?>
 
 <!doctype html>
@@ -86,8 +82,8 @@ if($rs_oferta = $conn->query($sql_oferta)){
     <h1 class="display-4">Tus ofertas inscritas</h1>
     <p class="lead">Aquí encontrarás las ofertas que te han interesado.</p>
   </div>
-  <main class="container container-mis">
-  <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+  <main class="container container-mis ">
+  <div class="row row-cols-1 row-cols-md-2 mb-3 text-center">
 
     <?php
 
@@ -101,7 +97,7 @@ if($rs_oferta = $conn->query($sql_oferta)){
         <p>
             <?=$tabla_oferta['ciudad'].'<br>'.$tabla_oferta['salario'].'€<br>'.$tabla_oferta['categoria']; ?><br>
         </p>
-        <button type="button" class="w-100 btn btn-lg btn-outline-danger">Quitar oferta</button>
+        <a href="acciones_usuario.php?borrar_oferta=<?=$tabla_oferta['id_oferta'];?>&id_dem=<?=$tabla_oferta['id_dem'];?>" onclick="return confirmar()"><button type="button" class="w-50 btn btn-lg btn-outline-danger">Quitar oferta</button></a>
       </div>
     </div>
     </div>

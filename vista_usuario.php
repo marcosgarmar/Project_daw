@@ -104,7 +104,7 @@ $_SESSION['id_dem'] = $id_dem;
              <li class=" list-inline-item card-text"><small class="text-muted align-bottom"><?=$datos['ciudad'];?></small></li>
              <li class=" list-inline-item card-text"><small class="text-muted align-bottom"><?=$datos['fecha'];?></small></li>
           </ul>
-           <a href="inscribirse.php?id_oferta=<?=$datos['id_oferta'];?>&id_dem=<?=$id_dem;?>&id_emp=<?=$datos['id_empresa'];?>&titulo=<?=$datos['titulo_oferta'];?>" ><button class="btn btn-outline-primary">Inscribirme</button></a>
+           <a href="acciones_usuario.php?id_oferta=<?=$datos['id_oferta'];?>&id_dem=<?=$id_dem;?>&id_emp=<?=$datos['id_empresa'];?>&titulo=<?=$datos['titulo_oferta'];?>" ><button class="btn btn-outline-primary">Inscribirme</button></a>
            </div>
           </div>
           <?php  $datos = $rs->fetch_assoc();

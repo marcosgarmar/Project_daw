@@ -8,6 +8,24 @@ if(isset($_SESSION['rol'])){
 }else {
   header('Location:login.php');
 }
+
+$conn = conexion();
+
+$sql = "SELECT * FROM ofertas";
+if($rs = $conn->query($sql)){
+  if($rs->num_rows<0){
+//  $mensaje = $rs['salario'];
+  die("Error en sacar los datos de la DB");
+  }
+}
+$opcion= getParameter( 'radio');
+$id_usuario = $_SESSION['id_user'];
+$sql_id_dem = "SELECT id_demandante FROM demandante WHERE id_usuario=$id_usuario";
+if($rs_id = $conn->query($sql_id_dem)){
+  $rs_id = $rs_id->fetch_assoc();
+}
+$id_dem = $rs_id['id_demandante'];
+$_SESSION['id_dem'] = $id_dem;
 ?>
 
 <!doctype html>
@@ -45,7 +63,7 @@ if(isset($_SESSION['rol'])){
             <a class="nav-link" href="#">Noticias</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link " href="mis_candidaturas.html">Mis candidaturas</a>
+            <a class="nav-link " href="mis_candidaturas.php">Mis candidaturas</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="ver_perfil_usuario.html">Ver mi Perfil</a>
@@ -60,178 +78,41 @@ if(isset($_SESSION['rol'])){
           </li>
         </ul>
       </div>
-
   </nav>
 
+            <!-- Carrusel -->
+          <?php include 'Carrusel.html'; ?>
 
-  <div id="carouselExampleInterval" class="carousel slide container-fluid mt-5" style="width:75%" data-bs-ride="carousel">
+          <div class="row justify-content-around">
+          <!--FIlTROS-->
+          <?php include 'filtros.php'; ?>
 
-    <ol class="carousel-indicators ">
-        <li data-bs-target="#carouselExampleIndicators " data-bs-slide-to="0" class="active"></li>
-        <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"></li>
-    </ol>
-    <div class="carousel-inner shadow-lg ">
-      <div class="carousel-item active" data-bs-interval="10000">
-        <img src="img/carrusel4.jpg" class="d-block w-100"   alt="...">
-        <div class="carousel-caption d-none d-md-block text-dark">
-          <h2>¿Como causar una buena impresion?</h2>
-          <h5>10 Trucos para tu primera entrevista de trabajo</h5>
-        </div>
-      </div>
+          <!--OFERTAS-->
+             <div class="col-md-8 justify-content-end">
+           <?php   $datos = $rs->fetch_assoc();
+                  while($datos) { ?>
 
-      <div class="carousel-item">
-        <img src="img/free_lance.jpg" class="d-block w-100 "   alt="...">
-        <div class="carousel-caption d-none d-md-block text-warning">
-          <h2>Mundo Freelance</h2>
-          <h5> Consejos para organizar tu espacio de trabajo</h5>
-        </div>
-      </div>
-    </div>
-    <a class="carousel-control-prev" href="#carouselExampleInterval" role="button" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon " aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-    </a>
-    <a class="carousel-control-next" href="#carouselExampleInterval" role="button" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </a>
-  </div>
+          <div class="card mb-3 container-md bg-light   mt-5 border-light" >
+           <div class="card-body">
+             <h4 class="card-header"><?=$datos['titulo_oferta'];?></h4>
+             <div class="d-flex ">
+               <img src="img/oferta-empleo.jpg" alt="bmw" width="50" height="50" class="d-inline-block m-2">
+             <p class="card-text m-2"><?=$datos['oferta']; ?></p>     </div>
+          <ul >
+             <li class=" list-inline-item card-text"><small class="text-muted align-bottom">Salario: <?=$datos['salario'];?>€</small></li><br>
+             <li class=" list-inline-item card-text"><small class="text-muted align-bottom">Categoria: <?=$datos['categoria'];?></small></li><br>
+             <li class=" list-inline-item card-text"><small class="text-muted align-bottom"><?=$datos['ciudad'];?></small></li>
+             <li class=" list-inline-item card-text"><small class="text-muted align-bottom"><?=$datos['fecha'];?></small></li>
+          </ul>
+           <a href="inscribirse.php?id_oferta=<?=$datos['id_oferta'];?>&id_dem=<?=$id_dem;?>&id_emp=<?=$datos['id_empresa'];?>&titulo=<?=$datos['titulo_oferta'];?>" ><button class="btn btn-outline-primary">Inscribirme</button></a>
+           </div>
+          </div>
+          <?php  $datos = $rs->fetch_assoc();
+          }  $rs->free();
+          ?>
 
-
-
-<div class="row justify-content-around">
-<!--FIlTROS-->
-<div class="col-md-3 col-sm-9 align-self-start">
-  <br>
-  <form>
-    <fieldset>
-      <legend>Filtros</legend>
-
-        <fieldset>
-          <legend>Rango salarial</legend>
-          <input type="range">
-        </fieldset>
-
-      <label>Categoria</label>
-      <select class="form-control" >
-        <option>Fijo</option>
-        <option>Temporal</option>
-        <option>Practicas</option>
-        <option>Doctorado/ Trabajo de investigación</option>
-
-      </select>
-
-    <fieldset>
-      <legend>Fecha de publicación </legend>
-      <div class="form-check">
-        <label class="form-check-label">
-          <input type="radio" class="form-check-input" name="optionsRadios"  value="option1" checked="">
-          &lt; 24h </label>
-      </div>
-      <div class="form-check">
-        <label class="form-check-label  ">
-          <input type="radio" class="form-check-input" name="optionsRadios" value="option2">
-            24h >  &lt; 1 semana
-        </label>
-      </div>
-      <div class="form-check">
-        <label class="form-check-label">
-          <input type="radio" class="form-check-input" name="optionsRadios" value="option2">
-            1 semana >  &lt; 1 mes
-        </label>
-      </div>
-      <div class="form-check">
-        <label class="form-check-label">
-          <input type="radio" class="form-check-input" name="optionsRadios"  value="option2">
-            1 mes >
-        </label>
-      </div>
-
-    </fieldset>
-
-    <button type="submit" class="btn btn-primary mt-3">Filtrar</button>
-  </fieldset>
-</form>
-</div>
-
-<!--OFERTAS-->
-  	<div class="col-md-8 justify-content-end">
-<div class="card mb-3 container-md bg-light   mt-5 border-light" >
-
-  <div class="card-body">
-    <h4 class="card-header  ">Backend developer Google</h4>
-    <div class="d-flex ">
-    <img src="img/google.png" alt="Google" width="50" height="50" class="d-inline-block m-2">
-
-    <p class="card-text m-2">Se trata e una posición como Backend Developer en Google en nuestras oficinas de Nevada</p>
-  </div>
-<ul >
-    <li class=" list-inline-item card-text"><small class="text-muted align-bottom">Nevada, EEUU</small></li>
-    <li class=" list-inline-item card-text"><small class="text-muted align-bottom">2 dias</small></li>
-
-</ul>
-    <a href="#" class="btn  btn-outline-success">Me interesa</a>
-  </div>
-</div>
-
-<div class="card mb-3 container-md bg-light   mt-5 border-light" >
-
-  <div class="card-body">
-    <h4 class="card-header  ">Ingeniero Mecanico BMW</h4>
-    <div class="d-flex ">
-    <img src="img/bmw.png" alt="bmw" width="50" height="50" class="d-inline-block m-2">
-
-    <p class="card-text m-2">   ¿Te gusta conducir? ¿Eres Ingeniero/a Técnico/a-Industrial y especialista en mecánica?
-Proa Premium, Concesionario Oficial de la Red Comercial de BMW y MINI en Palma de Mallorca</p>     </div>
-<ul >
-    <li class=" list-inline-item card-text"><small class="text-muted align-bottom">Palma de Mallorca, EEUU</small></li>
-    <li class=" list-inline-item card-text"><small class="text-muted align-bottom">10 dias</small></li>
-
-</ul>
-    <a href="#" class="btn  btn-outline-success">Me interesa</a>
-
-  </div>
-
-</div>
-
-<div class="card mb-3 container-md bg-light   mt-5 border-light" >
-
-  <div class="card-body">
-    <h4 class="card-header  ">ES-Market Leader Apple</h4>
-    <div class="d-flex ">
-    <img src="img/apple.png" alt="Apple" width="50" height="50" class="d-inline-block m-2">
-
-    <p class="card-text m-2">  Como Responsable de Zona, te apasiona el reto de contribuir al desarrollo de los trabajadores, formar equipos y consolidar el crecimiento de los Apple Store.</p>     </div>
-<ul>
-    <li class=" list-inline-item card-text"><small class="text-muted align-bottom">Madrid, España</small></li>
-    <li class=" list-inline-item card-text"><small class="text-muted align-bottom">15 dias</small></li>
-
-</ul>
-    <a href="#" class="btn  btn-outline-success">Me interesa</a>
-  </div>
-
-</div>
-
-<div class="card mb-3 container-md bg-light   mt-5 border-light" >
-
-  <div class="card-body">
-    <h4 class="card-header  ">Systems Engineer AWS Amazon I</h4>
-    <div class="d-flex ">
-    <img src="img/amazon.png" alt="amazon" width="50" height="50" class="d-inline-block m-2">
-
-    <p class="card-text m-2">Have you ever thought about helping U.S. Intelligence Community agencies implement innovative cloud computing solutions and solve technical problems?</p>     </div>
-<ul >
-    <li class=" list-inline-item card-text"><small class="text-muted align-bottom">Vancuver, Canada</small></li>
-    <li class=" list-inline-item card-text"><small class="text-muted align-bottom">20 dias</small></li>
-
-</ul>
-    <a href="#" class="btn  btn-outline-success">Me interesa</a>
-  </div>
-
-</div>
-
-  </div>
-</div>
+           </div>
+          </div>
 <!-- FOOTER -->
   <footer class="text-center text-lg-start shadow" style="background-color: #D1EAFC;">
 

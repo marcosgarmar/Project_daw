@@ -1,3 +1,31 @@
+<?php
+include 'funciones_conexion.php';
+$conn = conexion();
+session_start();
+if(isset($_SESSION['rol'])){
+  if($_SESSION['rol'] != "cliente"){
+    header('Location:login.php');
+  }
+}else {
+  header('Location:login.php');
+}
+$id_dem = $_SESSION['id_dem'];
+$sql_mis = "SELECT * FROM inscritos where id_dem ='$id_dem'";
+if($rs_mis = $conn->query($sql_mis)){
+  if($rs_mis->num_rows<0){
+  die("Error en sacar los datos de la DB");
+  }
+}
+
+$sql_oferta = "SELECT * FROM ofertas";
+if($rs_oferta = $conn->query($sql_oferta)){
+  if($rs_oferta->num_rows<0){
+  die("Error en sacar los datos de la DB");
+  }
+}
+
+?>
+
 <!doctype html>
 <html lang="es">
   <head>
@@ -9,7 +37,7 @@
     <link href="css/bootstrap.min.css" rel="stylesheet" >
     <link href="estilo_mis_ofertas.css" rel="stylesheet">
     <link href="fontawesome/css/all.min.css" rel="stylesheet" />
-    
+
     <title>Mis ofertas</title>
   </head>
 
@@ -27,7 +55,7 @@
   <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link " aria-current="page" href="vista_usuario.html">Inicio</a>
+            <a class="nav-link " aria-current="page" href="vista_usuario.php">Inicio</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Noticias</a>
@@ -40,14 +68,14 @@
           </li>
         </ul>
       </div>
-        
+
         <ul class="navbar-nav ">
           <li class="nav-item">
-            <a href="index.html" class="btn btn-danger px-4">Salir</a>
+            <a href="logout.php" class="btn btn-danger px-4">Salir</a>
           </li>
         </ul>
-      </div> 
-      
+      </div>
+
   </nav>
 
 
@@ -58,50 +86,38 @@
   </div>
   <main class="container container-mis">
   <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+
+    <?php
+
+     while($datos = $rs_mis->fetch_assoc()) {
+       while($tabla_oferta = $rs_oferta->fetch_assoc()) {
+         if(strcasecmp($tabla_oferta['titulo_oferta'],$datos['titulo_oferta'])==0){?>
     <div class="col">
       <div class="card mb-4 shadow-sm">
       <div class="card-header">
-        <h4 class="my-0 fw-normal">título de oferta</h4>
+        <h4 class="my-0 fw-normal"><?=$datos['titulo_oferta'];?></h4>
       </div>
       <div class="card-body">
         <p>
-          Cuerpo de la oferta.
+          <?=$tabla_oferta['oferta'];?>
         </p>
         <button type="button" class="w-100 btn btn-lg btn-outline-danger">Quitar oferta</button>
       </div>
     </div>
     </div>
+  <?php
+  }
+  $tabla_oferta = $rs_oferta->fetch_assoc();
+ }
+ $datos = $rs_mis->fetch_assoc();
+}
+?>
 
-    <div class="col">
-        <div class="card mb-4 shadow-sm">
-        <div class="card-header">
-          <h4 class="my-0 fw-normal">título de oferta</h4>
-        </div>
-        <div class="card-body">
-          <p>
-                Cuerpo de la oferta.
-          </p>
-          <button type="button" class="w-100 btn btn-lg btn-outline-danger">Quitar oferta</button>
-        </div>
-      </div>
-    </div>
-    
-      <div class="col">
-        <div class="card mb-4 shadow-sm">
-        <div class="card-header">
-          <h4 class="my-0 fw-normal">título de oferta</h4>
-        </div>
-        <div class="card-body">
-          <p>
-            Cuerpo de la oferta.
-          </p>
-          <button type="button" class="w-100 btn btn-lg btn-outline-danger">Quitar oferta</button>
-        </div>
-      </div>
-      </div>
+
+
   </div>
 </main>
-  
+
 <!-- FOOTER -->
   <footer class="bottom text-center text-lg-start shadow" style="background-color: #D1EAFC;">
 
@@ -129,7 +145,7 @@
             <a href="https://www.youtube.com/watch?v=FwhKhecN-1E" ><i class="fab fa-youtube" style="font-size:25px;" ></i></a>
             <a href="https://www.instagram.com/usal" ><i class="fab fa-instagram" style="font-size:25px;" ></i></a>
           </li>
-        
+
           <li>
             <a href="https://www.twitter.com/usal"><i class="fab fa-twitter" style="font-size:25px;" ></i></a>
             <a href="https://www.facebook.com/" ><i class="fab fa-facebook" style="font-size:25px;" ></i></a>

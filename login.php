@@ -18,8 +18,9 @@ $pass = mysqli_real_escape_string($conn,$_POST['pass']);
     $rs = $rs->fetch_assoc();
     $rol = $rs['rol'];
     $nombre = $rs['nombre_usuario'];
+    $id = $rs['id_usuario'];
     $_SESSION['nombre'] = $nombre;
-  //  echo $rol;
+    $_SESSION['id_user'] = $id;
     $_SESSION['rol'] = $rol;
     comprobar_sesion($rol);
     } else {

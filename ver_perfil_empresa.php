@@ -1,5 +1,6 @@
+
+
 <?php
-include 'funciones_conexion.php';
 session_start();
 if(isset($_SESSION['rol'])){
   if($_SESSION['rol'] != "empresa"){
@@ -9,6 +10,7 @@ if(isset($_SESSION['rol'])){
   header('Location:login.php');
 }
 ?>
+
 
 <!doctype html>
 <html lang="es">
@@ -21,7 +23,8 @@ if(isset($_SESSION['rol'])){
     <link href="css/bootstrap.min.css" rel="stylesheet" >
     <link href="fontawesome/css/all.min.css" rel="stylesheet" />
 
-    <title>Empresa</title>
+
+    <title>Pagina de inicio</title>
   </head>
 
   <body style="background-color: #f2f2f2;">
@@ -44,7 +47,7 @@ if(isset($_SESSION['rol'])){
             <a class="nav-link " href="vista_empresa.php">Mis ofertas</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="ver_perfil_empresa.php">Perfil de empresa</a>
+            <a class="nav-link" href="ver_perfil_empresa.html">Perfil de empresa</a>
           </li>
         </ul>
       </div>
@@ -57,57 +60,29 @@ if(isset($_SESSION['rol'])){
       </div>
   </nav>
 
-  <!-- de que se trata la página  -->
-  <div class="px-3 py-3 pt-md-3 pb-md-1 text-center text-uppercase">
-    <h1 >Tus ofertas creadas</h1>
-    <p class="lead text-center">Este apartado es para editar las ofertas que has creado</p>
-    <a href="crear_oferta.html" class="btn btn-success px-2">Crear una nueva oferta</a>
-  </div>
+        <div class="container text-center" >
+            <br>
+              <a data-toggle="modal" data-target="#myModal"><img src="img/perfil.png" alt="aboutme" width="110" height="110"></a>
+          <section class=" row">
+            <h3>Empresa.SL</h3><br>
+          <article style="margin-left: 12%; margin-right: 15%" class="col-sm-9 col-md-9 col-lg-9">
+            <h6>&nbsp;</h6><br>
+                <table class="table table-striped">
+                    <tr><th>Nombre: Empresa.SL</th></tr>
+                    <tr><th>Correo electrónico: empresa@correo.es</th></tr>
+                    <tr><th>CIF: 1541515c</th></tr>
+                    <tr><th><a href="opiniones_empresa.php" type="submit" class="btn btn-outline-primary btn-sm  ">Opiniones</a></th></tr>
+
+                </table>
+        </article>
+	    	</section>
+	    </div>
+      <br><br><br><br>
 
 
-  <!--OFERTAS-->
-<div class="row justify-content-around">
-<div class="col-md-8 justify-content-end">
-<div class="card mb-3 container-md bg-light   mt-5 border-light" >
-
-  <div class="card-body">
-    <h4 class="card-header  ">Backend developer Google</h4>
-    <div class="d-flex ">
-    <img src="img/google.png" alt="Google" width="50" height="50" class="d-inline-block m-2">
-
-    <p class="m-2">    Se trata e una posición como Backend Developer en Google en nuestras oficinas de Nevada</p>     </div>
-<ul>
-    <li class=" list-inline-item card-text"><small class="text-muted align-bottom">Nevada, EEUU</small></li>
-    <li class=" list-inline-item card-text"><small class="text-muted align-bottom">2 dias</small></li>
-
-</ul>
-    <a href="#" class="btn  btn-outline-danger">Borrar</a>
-    <a href="candidatos_empresa.html" class="btn  btn-outline-primary">Ver Candidatos</a>
-
-  </div>
-</div>
 
 
-<div class="card mb-3 container-md bg-light   mt-5 border-light" >
-  <div class="card-body">
-    <h4 class="card-header  ">Ingeniero Mecanico BMW</h4>
-    <div class="d-flex ">
-    <img src="img/bmw.png" alt="bmw" width="50" height="50" class="d-inline-block m-2">
 
-    <p class="card-text m-2">   ¿Te gusta conducir? ¿Eres Ingeniero/a Técnico/a-Industrial y especialista en mecánica?
-Proa Premium, Concesionario Oficial de la Red Comercial de BMW y MINI en Palma de Mallorca</p>     </div>
-<ul >
-    <li class=" list-inline-item card-text"><small class="text-muted align-bottom">Palma de Mallorca, EEUU</small></li>
-    <li class=" list-inline-item card-text"><small class="text-muted align-bottom">10 dias</small></li>
-
-</ul>
-    <a href="#" class="btn  btn-outline-danger">Borrar</a>
-    <a href="candidatos_empresa.html" class="btn  btn-outline-primary">Ver Candidatos</a>
-  </div>
-  </div>
-</div>
-</div>
-<p class="pb-md-5"></p>
 <!-- FOOTER -->
   <footer class="text-center text-lg-start shadow" style="background-color: #D1EAFC;">
 
@@ -125,8 +100,6 @@ Proa Premium, Concesionario Oficial de la Red Comercial de BMW y MINI en Palma d
         </p>
       </div>
 
-
-
       <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
         <h5 class="text-uppercase text-center">Links</h5>
 
@@ -142,25 +115,17 @@ Proa Premium, Concesionario Oficial de la Red Comercial de BMW y MINI en Palma d
           </li>
         </ul>
       </div>
-
     </div>
-
   </div>
 
-
-
   <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
-    © 2020 Copyright:
-    <a class="text-white" href="https://youtu.be/dQw4w9WgXcQ">FindJobs.com</a>
+    © 2020 Copyright: Fahd & Marcos,
+    <a class="text-muted" style="text-decoration:none">EncuentraJob</a>
   </div>
 
 </footer>
 
-
     <!-- Javascript -->
-
     <script src="js/bootstrap.min.js"></script>
-
-
   </body>
 </html>

@@ -36,9 +36,6 @@ if(isset($_GET['borrar_oferta_usuario']) && isset($_GET['id_dem'])){
   }
 }
 
-
-
-
 $conn->close();
 
  ?>

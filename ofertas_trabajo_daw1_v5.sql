@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 30-01-2021 a las 18:18:06
--- Versión del servidor: 10.4.17-MariaDB
--- Versión de PHP: 8.0.1
+-- Tiempo de generación: 30-01-2021 a las 19:57:56
+-- Versión del servidor: 10.4.13-MariaDB
+-- Versión de PHP: 7.2.31
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,12 +20,9 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `ofertas_trabajo_daw1`
 --
-DROP DATABASE IF EXISTS `ofertas_trabajo_daw1`;
-CREATE DATABASE IF NOT EXISTS `ofertas_trabajo_daw1`
-  CHARACTER SET 'utf8'
-  COLLATE 'utf8_general_ci';
-  
+CREATE DATABASE IF NOT EXISTS `ofertas_trabajo_daw1` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 USE `ofertas_trabajo_daw1`;
+
 -- --------------------------------------------------------
 
 --
@@ -35,15 +32,19 @@ USE `ofertas_trabajo_daw1`;
 CREATE TABLE `demandante` (
   `id_demandante` varchar(11) NOT NULL,
   `id_usuario` int(11) NOT NULL,
-  `email` varchar(20) NOT NULL
+  `nombre` varchar(19) NOT NULL,
+  `dni` varchar(10) NOT NULL,
+  `email` varchar(20) NOT NULL,
+  `fecha_nac` varchar(12) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `demandante`
 --
 
-INSERT INTO `demandante` (`id_demandante`, `id_usuario`, `email`) VALUES
-('dem_1', 2, 'cliente1@daw.es');
+INSERT INTO `demandante` (`id_demandante`, `id_usuario`, `nombre`, `dni`, `email`, `fecha_nac`) VALUES
+('dem_1', 2, 'demandante1', '010121A', 'cliente1@daw.es', '1998-12-12'),
+('dem_8', 8, 'demandante2', '101010F', 'cliente2@daw.es', '1995-01-20');
 
 -- --------------------------------------------------------
 
@@ -140,7 +141,8 @@ INSERT INTO `usuarios` (`id_usuario`, `rol`, `nombre_usuario`, `email`, `passwor
 (3, 'empresa', 'mar.sl', 'mar@daw.es', 'marsl'),
 (4, 'empresa', 'empresa2', 'empresa2@daw.es', 'empresa2'),
 (5, 'empresa', 'empresa3', 'empresa3@daw.es', 'empresa3'),
-(6, 'empresa', 'cotec', 'cotec@daw.es', 'cotec1');
+(6, 'empresa', 'cotec', 'cotec@daw.es', 'cotec1'),
+(8, 'cliente', 'demandante2', 'cliente2@daw.es', 'cliente2');
 
 -- --------------------------------------------------------
 
@@ -214,7 +216,7 @@ ALTER TABLE `ofertas`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_usuario` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_usuario` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `valoraciones`

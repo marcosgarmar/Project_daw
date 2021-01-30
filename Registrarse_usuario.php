@@ -21,7 +21,8 @@ if(isset($_POST['btn_registrar'])){
       $rs_id = $conn->query($sql_id_usuario);
       $rs_id = $rs_id->fetch_assoc();
       $id_usuario = $rs_id['id_usuario'];
-      $sql_tabla_dem = "insert into demandante(id_usuario,nombre,email,dni,fecha_nac) values('$id_usuario','$nombre','$email','$dni','$fecha_nac')";
+      $id_dem = 'dem_'.$id_usuario;
+      $sql_tabla_dem = "insert into demandante(id_demandante,id_usuario,nombre,email,dni,fecha_nac) values('$id_dem','$id_usuario','$nombre','$email','$dni','$fecha_nac')";
       $rs_dem = $conn->query($sql_tabla_dem);
       if($rs_dem){
       echo'<script>window.alert(\'Usuario registrado correctamente\');</script>';

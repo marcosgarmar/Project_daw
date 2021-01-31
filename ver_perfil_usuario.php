@@ -1,4 +1,6 @@
 <?php
+include 'funciones_conexion.php';
+$conn = conexion();
 session_start();
 if(isset($_SESSION['rol'])){
   if($_SESSION['rol'] != "cliente"){
@@ -7,8 +9,21 @@ if(isset($_SESSION['rol'])){
 }else {
   header('Location:login.php');
 }
-?>
+$id_usuario = $_SESSION['id_user'];
+$sql_curriculum = "select * from demandante where id_usuario=$id_usuario";
+if($rs_curriculum = $conn->query($sql_curriculum)){
+  $rs_curriculum = $rs_curriculum->fetch_assoc();
+}else {
+  die("Error en obtener los datos necesarios");
+}
+$id_dem = $rs_curriculum['id_demandante'];
 
+$post = isset($_POST['btn_guardar'])?$_POST['btn_guardar']:null;
+$avatar = isset($_FILES['avatar']['tmp_name'])?$_FILES['avatar']['tmp_name']:null;
+
+modificar_perfil_usuario($post,$avatar,$id_dem);
+
+?>
 
 <!doctype html>
 <html lang="es">
@@ -61,25 +76,35 @@ if(isset($_SESSION['rol'])){
       </div>
   </nav>
 
-        <div class="container text-center">
+
+        <div class="container text-center bg-white shadow mt-4">
             <br>
-              <img src="img/perfil.png" alt="aboutme" width="110" height="110">
+              <img src="img/perfil_img/<?=$rs_curriculum['avatar'];?>" alt="Avatar" width="auto" height="110">
           <section class="row">
-            <h3>Marcos </h3><br>
+            <h3><?=$rs_curriculum['nombre'] ;?></h3><br>
           <article style="margin-left: 12%; margin-right: 15%" class="col-sm-9 col-md-9 col-lg-9">
-            <h6><small class="text-muted align-bottom">Datos Básicos</small></h6><br>
-                <table class="table table-striped">
-                    <tr><th>Nombre: Marcos</th></tr>
-                  <tr><th>Nombre de usuario: Marcos2020</th></tr>
-                  <tr><th>Correo electrónico: Marcos@correo.es</th></tr>
-                  <tr><th>Fecha de nacimiento: 1990/12/01</th></tr>
+            <h6><small class="text-muted align-bottom">Currículum vitae</small></h6><br>
+                <table class="table">
+                  <tr><th class="bg-secondary text-white">Informacion básica</th></tr>
+                  <tr><th>Nombre de usuario: <?=$rs_curriculum['nombre'] ;?></th></tr>
+                  <tr><th>Correo electrónico: <?=$rs_curriculum['email'] ;?></th></tr>
+                  <tr><th>Fecha de nacimiento: <?=$rs_curriculum['fecha_nac'] ;?></th></tr>
+                  <tr><th class="bg-secondary text-white">Formacion academica</th></tr>
+                  <tr><th><?= $rs_curriculum['formacion_academica']; ?></th></tr>
+
+                  <tr><th class="bg-secondary text-white">Formacion Profesional</th></tr>
+                  <tr><th><?= $rs_curriculum['formacion_profesional'];?></th></tr>
+
+                  <tr><th class="bg-secondary text-white">Datode de interés</th></tr>
+                  <tr><th><?= $rs_curriculum['datos_de_interes'];?></th></tr>
+
                 </table>
         </article>
         </section>
 
 
         <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+        <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
           Editar
         </button>
 
@@ -88,15 +113,23 @@ if(isset($_SESSION['rol'])){
           <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                <h5 class="modal-title" id="staticBackdropLabel">Editar Currículum</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
-                <form method="get">
-                <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-                <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+                <form method="post" enctype="multipart/form-data">
+                <label class="fw-bold">Cambiar el Avatar</label><br>
+                <input type="file" name="avatar" accept="image/png, image/jpeg"><br><br>
+                <label class="fw-bold">Formación academica</label><br>
+                <textarea name="form_aca" maxlength="480" cols="50" rows="5"><?=$rs_curriculum['formacion_academica'] ;?></textarea><br>
+                <label class="fw-bold">Formación profesional</label><br>
+                <textarea name="form_pro" maxlength="480" cols="50" rows="5"><?=$rs_curriculum['formacion_profesional'] ;?></textarea><br>
+                <label class="fw-bold">Datos de interés</label><br>
+                <textarea name="dato_inter" maxlength="480" cols="50" rows="5"><?=$rs_curriculum['datos_de_interes'] ;?></textarea><br>
                 <input type="submit" class="btn btn-success" name="btn_guardar" value="Guardar">
                 </form>
+
               </div>
               <div class="modal-footer text-center">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

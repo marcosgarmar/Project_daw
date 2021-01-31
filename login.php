@@ -8,8 +8,8 @@ if(isset($_SESSION['rol'])){
 $mensaje ='';
 $conn = conexion();
 if(isset($_POST['login'])){
-$email = mysqli_real_escape_string($conn,$_POST['email']);
-$pass = mysqli_real_escape_string($conn,$_POST['pass']);
+$email = mysqli_real_escape_string($conn,htmlspecialchars($_POST['email']));
+$pass = mysqli_real_escape_string($conn,htmlspecialchars($_POST['pass']));
   $sql = "SELECT * FROM usuarios WHERE email ='$email' and password = '$pass' ";
 
   if($rs = $conn->query($sql)){

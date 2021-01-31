@@ -110,12 +110,12 @@ $_SESSION['id_dem'] = $id_dem;
               <li class=" list-inline-item card-text"><small class="text-muted align-bottom"><?=$datos['fecha'];?></small></li>
           </ul>
         <a href="acciones_usuario.php?id_oferta=<?=$datos['id_oferta'];?>&id_dem=<?=$id_dem;?>&id_emp=<?=$datos['id_empresa'];?>&titulo=<?=$datos['titulo_oferta'];?>" ><button class="btn btn-outline-primary">Inscribirme</button></a>
-        <a href="opiniones_empresa_users.php?id_empresa1=<?=$datos['id_empresa'];?>" ><button class="btn btn-outline-primary">Valorar empresa</button></a>
+        <a href="opiniones_empresa_users.php?id_empresa1=<?=$datos['id_empresa'];?>" ><button class="btn btn-outline-primary">Ver opiniones</button></a>
             </div>
           </div>
           <?php  $datos = $rs->fetch_assoc();
                 $nombre_empresa = $rs_nombre_empresa->fetch_assoc();
-        }}  $rs->free();
+        }}  $rs->free();//rgi
         ?>
 
 

@@ -89,7 +89,7 @@ if($rs = $conn->query($sql)){
               <a class="nav-link " href="mis_candidaturas.php">Mis candidaturas</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="ver_perfil_usuario.html">Ver mi Perfil</a>
+              <a class="nav-link" href="ver_perfil_usuario.php">Ver mi Perfil</a>
             </li>
           </ul>
         </div>

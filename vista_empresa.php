@@ -8,7 +8,31 @@ if(isset($_SESSION['rol'])){
 }else {
   header('Location:login.php');
 }
+
+$conn=conexion();
+
+$rs_nombre_empresa = sacar_nombres_empresa_ofertas();
+
+$opcion= getParameter( 'radio');
+
+
+
+$id_usuario = $_SESSION['id_user'];
+$sql_id_empresa = "SELECT id_empresa FROM empresas WHERE id_usuario=$id_usuario";
+if($rs_id = $conn->query($sql_id_empresa)){
+
+$id_empresa_lista = $rs_id->fetch_assoc();
+
+}
+
+$id_empresa = $id_empresa_lista['id_empresa'];
+
+
+  $rs = sacar_ofertas_empresa($id_empresa);
 ?>
+
+
+
 
 <!doctype html>
 <html lang="es">
@@ -60,53 +84,42 @@ if(isset($_SESSION['rol'])){
   <!-- de que se trata la página  -->
   <div class="px-3 py-3 pt-md-3 pb-md-1 text-center text-uppercase">
     <h1 >Tus ofertas creadas</h1>
-    <p class="lead text-center">Este apartado es para editar las ofertas que has creado</p>
-    <a href="crear_oferta.html" class="btn btn-success px-2">Crear una nueva oferta</a>
+    <a href="crear_oferta.php" class="btn btn-success px-2">Crear una nueva oferta</a>
   </div>
 
+  <div class="row justify-content-around">
 
+ <?php include 'filtros.php'; ?>
   <!--OFERTAS-->
-<div class="row justify-content-around">
-<div class="col-md-8 justify-content-end">
-<div class="card mb-3 container-md bg-light   mt-5 border-light" >
 
-  <div class="card-body">
-    <h4 class="card-header  ">Backend developer Google</h4>
-    <div class="d-flex ">
-    <img src="img/google.png" alt="Google" width="50" height="50" class="d-inline-block m-2">
+      <div class="col-md-8 justify-content-end">
+    <?php   $datos = $rs->fetch_assoc();
+    while($datos) {
+    ?>
 
-    <p class="m-2">    Se trata e una posición como Backend Developer en Google en nuestras oficinas de Nevada</p>     </div>
-<ul>
-    <li class=" list-inline-item card-text"><small class="text-muted align-bottom">Nevada, EEUU</small></li>
-    <li class=" list-inline-item card-text"><small class="text-muted align-bottom">2 dias</small></li>
+  <div class="card mb-3 container-md bg-light   mt-5 border-light" >
 
-</ul>
-    <a href="#" class="btn  btn-outline-danger">Borrar</a>
-    <a href="candidatos_empresa.html" class="btn  btn-outline-primary">Ver Candidatos</a>
-
+    <div class="card-body">
+      <h4 class="card-header"><?=$datos['titulo_oferta'];?>  </h4>
+      <div class="d-flex ">
+      <img src="img/oferta-empleo.jpg" alt="bmw" width="50" height="50" class="d-inline-block m-2">
+      <p class="card-text m-2"><?=$datos['oferta']; ?></p>     </div>
+  <ul >
+      <li class=" list-inline-item card-text"><small class="text-muted align-bottom">Salario: <?=$datos['salario'];?>€</small></li><br>
+      <li class=" list-inline-item card-text"><small class="text-muted align-bottom">Categoria: <?=$datos['categoria'];?></small></li><br>
+      <li class=" list-inline-item card-text"><small class="text-muted align-bottom"><?=$datos['ciudad'];?></small></li>
+      <li class=" list-inline-item card-text"><small class="text-muted align-bottom"><?=$datos['fecha'];?></small></li>
+  </ul>
+  <a  ><button class="btn btn-danger">Borrar oferta</button></a>
+    </div>
   </div>
-</div>
 
+<?php  $datos = $rs->fetch_assoc();
+}
+$rs->free();?>
 
-<div class="card mb-3 container-md bg-light   mt-5 border-light" >
-  <div class="card-body">
-    <h4 class="card-header  ">Ingeniero Mecanico BMW</h4>
-    <div class="d-flex ">
-    <img src="img/bmw.png" alt="bmw" width="50" height="50" class="d-inline-block m-2">
-
-    <p class="card-text m-2">   ¿Te gusta conducir? ¿Eres Ingeniero/a Técnico/a-Industrial y especialista en mecánica?
-Proa Premium, Concesionario Oficial de la Red Comercial de BMW y MINI en Palma de Mallorca</p>     </div>
-<ul >
-    <li class=" list-inline-item card-text"><small class="text-muted align-bottom">Palma de Mallorca, EEUU</small></li>
-    <li class=" list-inline-item card-text"><small class="text-muted align-bottom">10 dias</small></li>
-
-</ul>
-    <a href="#" class="btn  btn-outline-danger">Borrar</a>
-    <a href="candidatos_empresa.html" class="btn  btn-outline-primary">Ver Candidatos</a>
+   </div>
   </div>
-  </div>
-</div>
-</div>
 <p class="pb-md-5"></p>
 <!-- FOOTER -->
   <footer class="text-center text-lg-start shadow" style="background-color: #D1EAFC;">

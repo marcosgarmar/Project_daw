@@ -1,10 +1,14 @@
+<?php
+$rs_categorias = sacar_categorias();
+?>
+
 <div class="col-md-3 col-sm-9 align-self-start">
  <br>
  <form method="post">
  <fieldset>
    <legend>Filtros</legend>
 
-   <label>Salario</label>
+   <label><h5>Salario</h5></label>
    <select class="form-control" >
      <option value="980">Más de 980€</option>
      <option value="1100">Más de 1100€</option>
@@ -12,15 +16,15 @@
      <option value="1300">1300€</option>
    </select>
 
-     <label>Categoria</label>
+    <br><label><h5>Categoria</h5></label>
      <select class="form-control" >
-       <option value="fijo">Fijo</option>
-       <option value="temporal">Temporal</option>
-       <option value="practicas">Practicas</option>
+       <?php while($categoria=$rs_categorias->fetch_assoc()){ ?>
+       <option><?=$categoria['nombre_categoria'] ;?></option>
+     <?php } ?>
      </select>
 
    <fieldset>
-     <legend>Fecha de publicación </legend>
+  <br><legend><h5>Fecha de publicación</h5></legend>
      <div class="form-check">
        <label class="form-check-label">
          <input type="radio" class="form-check-input" name="radio"  value="semana" <?php echo (($opcion == "semana")?'checked':'' ); ?>>

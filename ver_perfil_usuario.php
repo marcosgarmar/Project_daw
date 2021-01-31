@@ -59,11 +59,9 @@ if(isset($_SESSION['rol'])){
           </li>
         </ul>
       </div>
-
   </nav>
 
         <div class="container text-center">
-
             <br>
               <img src="img/perfil.png" alt="aboutme" width="110" height="110">
           <section class="row">
@@ -79,104 +77,34 @@ if(isset($_SESSION['rol'])){
         </article>
         </section>
 
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-Ver Currículum
-</button>
-</div>
 
-<!-- Modal -->
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-
-  <div class="modal-dialog modal-dialog-scrollable">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Curriclum Vitae</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body text-center">
-        <img src="img/perfil.png" alt="aboutme" width="110" height="110"><br>
-        <section class="row">
-          <h3>Marcos </h3><br>
-        <article style="margin-left: 12%; margin-right: 15%" class="col-sm-9 col-md-9 col-lg-9">
-          <h6>&nbsp;</h6><br>
-              <div class="border border-dark">
-                <span class="fw-bold">Información básica</span><hr>
-                <p><span class="fw-bold">Nombre:</span> Marcos</p>
-                <p><span class="fw-bold">Correo:</span> Marcos@correo.es</p>
-                <p><span class="fw-bold">Edad:</span> 30</p><hr>
-                <p><span class="fw-bold">Formación Profesional</span></p><hr>
-                 <p>Titulado en Ing-Informática<br>
-                Master en ...</p><hr>
-                <p><span class="fw-bold">Datos de Interés</span></p><hr>
-                  <p>Soy muy Dinámico, amable y Hablo Inglés muy bien...</p>
-              </div>
-      </article>
-      </section>
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
         <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+          Editar
+        </button>
 
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop_edit">
-  Editar
-</button>
-
-<!-- Modal -->
-<div class="modal fade" id="staticBackdrop_edit" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel_edit" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel_edit">Editar datos</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <!-- Modal -->
+        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <form method="get">
+                <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+                <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+                <input type="submit" class="btn btn-success" name="btn_guardar" value="Guardar">
+                </form>
+              </div>
+              <div class="modal-footer text-center">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="modal-body">
-        <form class="text-center">
-          <input type="email" name="correo_nuevo"  placeholder="Tu email" required>
-          <input type="text" name="edad_nueva"  placeholder="Tu edad" required><br><br>
-          Formación Profesional<br>
-          <textarea rows="4" cols="50">
-            Titulado en Ing-Informática
-            Master en ...
-          </textarea ><br>
-          Datos de interés<br>
-          <textarea rows="4" cols="50">
-            Soy muy Dinámico, amable y .....
-          </textarea><br>
-          <input class="btn btn-success" type="submit" value="guardar">
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      </div>
-    </div>
-  </div>
-</div>
 
 <script>
   var myModal = document.getElementById('myModal')
@@ -186,9 +114,7 @@ Ver Currículum
   myInput.focus()
     })
   </script>
-      <br><br><br><br>
-
-
+  <br><br><br><br>
 
 <!-- FOOTER -->
   <footer class="text-center text-lg-start shadow" style="background-color: #D1EAFC;">

@@ -32,7 +32,7 @@ if(isset($_POST['btn_registrar'])){
   }
 }
 
-
+$rs_categorias = sacar_categorias();
 
 ?>
 
@@ -105,16 +105,15 @@ if(isset($_POST['btn_registrar'])){
                 <div class="input-group-prepend">
                   <label class="input-group-text" >Lo que me interesa es</label>
                 </div>
-                <select class="custom-select" id="inputGroupSelect01">
-                  <option selected>Cocinero</option>
-                  <option value="1">Jardinero</option>
-                  <option value="3">Mozo de almacen</option>
-                  <option value="2">Responsable de empresa</option>
-                </select>
+                 <select class="form-control mx-4">
+                   <?php while($categoria=$rs_categorias->fetch_assoc()){ ?>
+                   <option><?=$categoria['nombre_categoria'] ;?></option>
+                 <?php } ?>
+                 </select>
               </div>
               <div class="input-group mb-1">
               <label class="input-group-text">Fecha de nacimiento</label>
-              <input type="date" name="fecha_nac" value="1995-01-01" min="1900-01-01" max="2002-01-01" required><br>
+              <input class="mx-4 form-control" type="date" name="fecha_nac" value="1995-01-01" min="1900-01-01" max="2002-01-01" required><br>
              </div>
               <div class="text-center">
               <input style="margin-top: 3%;" type="submit" class="btn btn-outline-success" value="Registrarme" name="btn_registrar">

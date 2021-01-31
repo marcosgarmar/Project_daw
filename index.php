@@ -1,14 +1,12 @@
 <?php
 include 'funciones_conexion.php';
-$conn = conexion();
 
-$sql = "SELECT * FROM ofertas";
-if($rs = $conn->query($sql)){
-  if($rs->num_rows<0){
-//  $mensaje = $rs['salario'];
-  die("Error en sacar los datos de la DB");
-  }
-}
+$rs = sacar_ofertas();
+
+$rs_nombre_empresa = sacar_nombres_empresa_ofertas();
+
+$rs_categorias = sacar_categorias();
+
 $opcion= getParameter( 'radio');
 
 ?>
@@ -77,12 +75,14 @@ $opcion= getParameter( 'radio');
       <!--OFERTAS-->
           <div class="col-md-8 justify-content-end">
         <?php   $datos = $rs->fetch_assoc();
-        while($datos) { ?>
+            $nombre_empresa = $rs_nombre_empresa->fetch_assoc();
+        while($datos) {
+          if($datos['id_empresa'] == $nombre_empresa['id_empresa']){?>
 
       <div class="card mb-3 container-md bg-light   mt-5 border-light" >
 
         <div class="card-body">
-          <h4 class="card-header"><?=$datos['titulo_oferta'];?></h4>
+          <h4 class="card-header"><?=$datos['titulo_oferta'];?> / <?=$nombre_empresa['nombre_usuario'];?>  </h4>
           <div class="d-flex ">
           <img src="img/oferta-empleo.jpg" alt="bmw" width="50" height="50" class="d-inline-block m-2">
           <p class="card-text m-2"><?=$datos['oferta']; ?></p>     </div>
@@ -97,7 +97,8 @@ $opcion= getParameter( 'radio');
         </div>
       </div>
       <?php  $datos = $rs->fetch_assoc();
-    }  $rs->free();
+            $nombre_empresa = $rs_nombre_empresa->fetch_assoc();
+    }}  $rs->free();
     ?>
 
 

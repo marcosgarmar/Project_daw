@@ -1,5 +1,6 @@
 <?php
 include 'funciones_conexion.php';
+// Comprobacion de session
 session_start();
 if(isset($_SESSION['rol'])){
   if($_SESSION['rol'] != "cliente"){
@@ -11,14 +12,14 @@ if(isset($_SESSION['rol'])){
 
 $conn = conexion();
 
-$sql = "SELECT * FROM ofertas";
-if($rs = $conn->query($sql)){
-  if($rs->num_rows<0){
-//  $mensaje = $rs['salario'];
-  die("Error en sacar los datos de la DB");
-  }
-}
+$rs = sacar_ofertas();
+
+$rs_nombre_empresa = sacar_nombres_empresa_ofertas();
+
+$rs_categorias = sacar_categorias();
+
 $opcion= getParameter( 'radio');
+
 $id_usuario = $_SESSION['id_user'];
 $sql_id_dem = "SELECT id_demandante FROM demandante WHERE id_usuario=$id_usuario";
 if($rs_id = $conn->query($sql_id_dem)){
@@ -66,7 +67,7 @@ $_SESSION['id_dem'] = $id_dem;
             <a class="nav-link " href="mis_candidaturas.php">Mis candidaturas</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="ver_perfil_usuario.html">Ver mi Perfil</a>
+            <a class="nav-link" href="ver_perfil_usuario.php">Ver mi Perfil</a>
           </li>
         </ul>
       </div>
@@ -88,30 +89,35 @@ $_SESSION['id_dem'] = $id_dem;
           <?php include 'filtros.php'; ?>
 
           <!--OFERTAS-->
-             <div class="col-md-8 justify-content-end">
-           <?php   $datos = $rs->fetch_assoc();
-                  while($datos) { ?>
+          <!--OFERTAS-->
+              <div class="col-md-8 justify-content-end">
+            <?php   $datos = $rs->fetch_assoc();
+                $nombre_empresa = $rs_nombre_empresa->fetch_assoc();
+            while($datos) {
+              if($datos['id_empresa'] == $nombre_empresa['id_empresa']){?>
 
           <div class="card mb-3 container-md bg-light   mt-5 border-light" >
-           <div class="card-body">
-             <h4 class="card-header"><?=$datos['titulo_oferta'];?></h4>
-             <div class="d-flex ">
-               <img src="img/oferta-empleo.jpg" alt="bmw" width="50" height="50" class="d-inline-block m-2">
-             <p class="card-text m-2"><?=$datos['oferta']; ?></p>     </div>
-          <ul >
-             <li class=" list-inline-item card-text"><small class="text-muted align-bottom">Salario: <?=$datos['salario'];?>€</small></li><br>
-             <li class=" list-inline-item card-text"><small class="text-muted align-bottom">Categoria: <?=$datos['categoria'];?></small></li><br>
-             <li class=" list-inline-item card-text"><small class="text-muted align-bottom"><?=$datos['ciudad'];?></small></li>
-             <li class=" list-inline-item card-text"><small class="text-muted align-bottom"><?=$datos['fecha'];?></small></li>
-          </ul>
-           <a href="acciones_usuario.php?id_oferta=<?=$datos['id_oferta'];?>&id_dem=<?=$id_dem;?>&id_emp=<?=$datos['id_empresa'];?>&titulo=<?=$datos['titulo_oferta'];?>" ><button class="btn btn-outline-primary">Inscribirme</button></a>
-           <a href="opiniones_empresa_users.php?id_empresa1=<?=$datos['id_empresa'];?>" ><button class="btn btn-outline-primary">Valorar empresa</button></a>
 
-           </div>
+            <div class="card-body">
+              <h4 class="card-header"><?=$datos['titulo_oferta'];?> / <?=$nombre_empresa['nombre_usuario'];?>  </h4>
+              <div class="d-flex ">
+              <img src="img/oferta-empleo.jpg" alt="bmw" width="50" height="50" class="d-inline-block m-2">
+              <p class="card-text m-2"><?=$datos['oferta']; ?></p>     </div>
+          <ul >
+              <li class=" list-inline-item card-text"><small class="text-muted align-bottom">Salario: <?=$datos['salario'];?>€</small></li><br>
+              <li class=" list-inline-item card-text"><small class="text-muted align-bottom">Categoria: <?=$datos['categoria'];?></small></li><br>
+              <li class=" list-inline-item card-text"><small class="text-muted align-bottom"><?=$datos['ciudad'];?></small></li>
+              <li class=" list-inline-item card-text"><small class="text-muted align-bottom"><?=$datos['fecha'];?></small></li>
+          </ul>
+        <a href="acciones_usuario.php?id_oferta=<?=$datos['id_oferta'];?>&id_dem=<?=$id_dem;?>&id_emp=<?=$datos['id_empresa'];?>&titulo=<?=$datos['titulo_oferta'];?>" ><button class="btn btn-outline-primary">Inscribirme</button></a>
+        <a href="opiniones_empresa_users.php?id_empresa1=<?=$datos['id_empresa'];?>" ><button class="btn btn-outline-primary">Valorar empresa</button></a>
+            </div>
           </div>
           <?php  $datos = $rs->fetch_assoc();
-          }  $rs->free();
-          ?>
+                $nombre_empresa = $rs_nombre_empresa->fetch_assoc();
+        }}  $rs->free();
+        ?>
+
 
            </div>
           </div>

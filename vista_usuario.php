@@ -115,7 +115,7 @@ $_SESSION['id_dem'] = $id_dem;
           </div>
           <?php  $datos = $rs->fetch_assoc();
                 $nombre_empresa = $rs_nombre_empresa->fetch_assoc();
-        }}  $rs->free();
+        }}  $rs->free();//rgi
         ?>
 
 

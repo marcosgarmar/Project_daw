@@ -1,6 +1,9 @@
 
 
 <?php
+
+include 'funciones_conexion.php';
+
 session_start();
 if(isset($_SESSION['rol'])){
   if($_SESSION['rol'] != "empresa"){
@@ -9,6 +12,25 @@ if(isset($_SESSION['rol'])){
 }else {
   header('Location:login.php');
 }
+$conn = conexion();
+
+
+$id = $_SESSION['id_user'];
+$sql_crear="SELECT * FROM empresas emp INNER JOIN usuarios us ON emp.id_usuario = us.id_usuario WHERE emp.id_usuario = '$id' ";
+
+if($rs = $conn->query($sql_crear)){
+  if($rs->num_rows<0){
+//  $mensaje = $rs['salario'];
+  die("Error en sacar los datos de la DB");
+}
+
+ $datos = $rs->fetch_assoc();
+
+}
+
+
+
+
 ?>
 
 
@@ -47,7 +69,7 @@ if(isset($_SESSION['rol'])){
             <a class="nav-link " href="vista_empresa.php">Mis ofertas</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="ver_perfil_empresa.html">Perfil de empresa</a>
+            <a class="nav-link" href="ver_perfil_empresa.php">Perfil de empresa</a>
           </li>
         </ul>
       </div>
@@ -64,14 +86,14 @@ if(isset($_SESSION['rol'])){
             <br>
               <a data-toggle="modal" data-target="#myModal"><img src="img/perfil.png" alt="aboutme" width="110" height="110"></a>
           <section class=" row">
-            <h3>Empresa.SL</h3><br>
+            <h3><?=$datos['nombre_usuario'];?></h3><br>
           <article style="margin-left: 12%; margin-right: 15%" class="col-sm-9 col-md-9 col-lg-9">
             <h6>&nbsp;</h6><br>
                 <table class="table table-striped">
-                    <tr><th>Nombre: Empresa.SL</th></tr>
-                    <tr><th>Correo electrónico: empresa@correo.es</th></tr>
-                    <tr><th>CIF: 1541515c</th></tr>
-                    <tr><th><a href="opiniones_empresa.php" type="submit" class="btn btn-outline-primary btn-sm  ">Opiniones</a></th></tr>
+                    <tr><th>Nombre:<?=$datos['nombre_usuario'];?></th></tr>
+                    <tr><th>Correo electrónico:<?=$datos['email'];?></th></tr>
+                    <tr><th>CIF: <?=$datos['cif'];?></th></tr>
+                    <tr><th><a href="opiniones_empresa.php?id_empresa1=<?=$datos['id_empresa'];?>" ><button class="btn btn-outline-primary">Opiniones</button></a></th></tr>
 
                 </table>
         </article>

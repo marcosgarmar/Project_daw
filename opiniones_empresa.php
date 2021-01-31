@@ -12,8 +12,13 @@ if(isset($_SESSION['rol'])){
 
 $conn = conexion();
 
+
+$id_emp = $_GET['id_empresa1'];
+
+
 $sql = "SELECT * FROM valoraciones Val INNER JOIN  demandante De ON Val.id_demandante = De.id_demandante
-INNER JOIN  usuarios Ur ON De.id_usuario = Ur.id_usuario";
+INNER JOIN  usuarios Ur ON De.id_usuario = Ur.id_usuario
+WHERE  Val.id_empresa ='$id_emp'";
 if($rs = $conn->query($sql)){
   if($rs->num_rows<0){
 //  $mensaje = $rs['salario'];
@@ -22,10 +27,8 @@ if($rs = $conn->query($sql)){
 }
 $opcion= getParameter( 'radio');
 $id_usuario = $_SESSION['id_user'];
-$sql_id_dem = "SELECT id_demandante FROM demandante WHERE id_usuario=$id_usuario";
-if($rs_id = $conn->query($sql_id_dem)){
-  $rs_id = $rs_id->fetch_assoc();
-}
+
+
 
 ?>
 <html lang="es">
@@ -61,10 +64,10 @@ if($rs_id = $conn->query($sql_id_dem)){
                 <a class="nav-link" href="#"></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link " href="vista_empresa.html">Mis ofertas</a>
+                <a class="nav-link " href="vista_empresa.php">Mis ofertas</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="ver_perfil_empresa.html">Perfil de empresa</a>
+                <a class="nav-link" href="ver_perfil_empresa.php">Perfil de empresa</a>
               </li>
             </ul>
           </div>

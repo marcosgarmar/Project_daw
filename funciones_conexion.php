@@ -50,6 +50,21 @@ function sacar_ofertas(){
   }
   return $rs;
 }
+function sacar_ofertas_empresa($id){
+  $conn = conexion();
+  $sql = "SELECT * FROM ofertas WHERE id_empresa ='$id' ";
+  if($rs = $conn->query($sql)){
+    if($rs->num_rows<0){
+  //  $mensaje = $rs['salario'];
+    die("Error en sacar los datos de la DB");
+    }
+  }
+  return $rs;
+}
+
+
+
+
 
 function sacar_nombres_empresa_ofertas(){
   $conn = conexion();

@@ -109,12 +109,20 @@ $id_empresa = $id_empresa_lista['id_empresa'];
       <li class=" list-inline-item card-text"><small class="text-muted align-bottom">Categoria: <?=$datos['categoria'];?></small></li><br>
       <li class=" list-inline-item card-text"><small class="text-muted align-bottom"><?=$datos['ciudad'];?></small></li>
       <li class=" list-inline-item card-text"><small class="text-muted align-bottom"><?=$datos['fecha'];?></small></li>
-  </ul>
-  <a  ><button class="btn btn-danger">Borrar oferta</button></a>
+<p> </p>
+    <p><a style="margin-top: 3%;"  href="acciones_empresa.php?id_oferta=<?=$datos['id_oferta'];?>" ><button class="btn btn-outline-danger">Borrar oferta</button></a></p>
+
     </div>
   </div>
 
-<?php  $datos = $rs->fetch_assoc();
+<?php
+
+$datos = $rs->fetch_assoc();
+
+
+
+
+
 }
 $rs->free();?>
 

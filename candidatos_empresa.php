@@ -1,3 +1,27 @@
+<?php
+include 'funciones_conexion.php';
+session_start();
+$conn = conexion();
+if(isset($_SESSION['rol'])){
+  if($_SESSION['rol'] != "empresa"){
+    header('Location:login.php');
+  }
+}else {
+  header('Location:login.php');
+}
+
+$id_user = $_SESSION['id_user'];
+// Sacamos el id_empresa con la funcion.
+$id_emp = sacar_id_emp($id_user);
+
+//Para sacar los candidatos
+$rs_candidatos = $conn->query("select id_usuario,demandante.nombre,demandante.email,inscritos.titulo_oferta from demandante,inscritos where  inscritos.id_dem = demandante.id_demandante and inscritos.id_emp = '$id_emp'");
+if(!$rs_candidatos){
+die("Error en procesar la consulta");
+}
+?>
+
+
 <!doctype html>
 <html lang="es">
   <head>
@@ -22,48 +46,66 @@
     <span class="navbar-toggler-icon"></span>
   </button>
 
-  
+
   <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item">
             <a class="nav-link" href="#"></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link " href="vista_empresa.html">Mis ofertas</a>
+            <a class="nav-link " href="vista_empresa.php">Mis ofertas</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="ver_perfil_empresa.html">Perfil de empresa</a>
+            <a class="nav-link" href="ver_perfil_empresa.php">Perfil de empresa</a>
           </li>
         </ul>
       </div>
   <ul class="navbar-nav ">
+    <p class="px-2 m-1 mx-2 border border-dark"><?=$_SESSION['nombre'] ;?></p>
     <li class="nav-item">
-      <a href="index.html" class="btn btn-danger px-4">Salir</a>
+      <a href="logout.php" class="btn btn-danger px-4">Salir</a>
     </li>
   </ul>
       </div>
   </nav>
 
-        <div class="container text-center">
-            <br>
-              <a data-toggle="modal" data-target="#myModal"><img src="img/perfil.png" alt="aboutme" width="110" height="110"></a>   
-          <section class=" row">
-            <h3>Empresa.SL</h3><br>
-          <article style="margin-left: 12%; margin-right: 15%" class="col-sm-9 col-md-9 col-lg-9">
-            <h6>&nbsp;</h6><br>
-                <table class="table table-striped">
-                    <tr><th>Nombre: Empresa.SL</th></tr>
-                    <tr><th>Correo electrónico: empresa@correo.es</th></tr>	
-                    <tr><th>CIF: 1541515c</th></tr>
-                </table>
-        </article>
-	    	</section>
-	    </div>
-      <br><br><br><br>
+  <!-- de que se trata la página  -->
+  <div class="ofertas-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+    <main class="container text-center ">
+      <h1>Candidatos de tus ofertas</h1><br>
+  <table class="table table-bordered">
+    <thead class="table-dark">
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Correo</th>
+        <th scope="col">Oferta aplicada</th>
+        <th scope="col"></th>
+      </tr>
 
+    </thead>
+    <tbody>
+      <?php $i=1;
+      while($datos = $rs_candidatos->fetch_assoc()){   ?>
+      <tr>
+        <td><?=$i;$i+=1;?></td>
+        <td><?=$datos['nombre'] ;?></td>
+        <td><?=$datos['email'] ;?></td>
+        <td><?=$datos['titulo_oferta'] ;?></td>
+        <td><button  type="submit" class="btn btn-success">Preseleccionar</button>
+          <a href="ver_perfil_candidato.php?id_user=<?=$datos['id_usuario'];?>" class="btn btn-primary">Ver Perfil</a></td>
+      </tr>
+        <?php
+      } ?>
 
-
-
+    </tbody>
+  </table>
+  <hr>
+</main>
+</div>
+  <!-- eliminar por con el id  -->
+  <br><br><br><br><br><br><br><br>
+<p class="pb-md-5"></p>
 <!-- FOOTER -->
   <footer class="text-center text-lg-start shadow" style="background-color: #D1EAFC;">
 
@@ -81,6 +123,8 @@
         </p>
       </div>
 
+
+
       <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
         <h5 class="text-uppercase text-center">Links</h5>
 
@@ -89,23 +133,23 @@
             <a href="https://www.youtube.com/watch?v=FwhKhecN-1E" ><i class="fab fa-youtube" style="font-size:25px;" ></i></a>
             <a href="https://www.instagram.com/usal" ><i class="fab fa-instagram" style="font-size:25px;" ></i></a>
           </li>
-        
+
           <li>
             <a href="https://www.twitter.com/usal"><i class="fab fa-twitter" style="font-size:25px;" ></i></a>
             <a href="https://www.facebook.com/" ><i class="fab fa-facebook" style="font-size:25px;" ></i></a>
           </li>
         </ul>
       </div>
-    </div>
-  </div>
 
+    </div>
+
+  </div>
   <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
-    © 2020 Copyright: Fahd & Marcos,
-    <a class="text-muted" style="text-decoration:none">EncuentraJob</a>
+    © 2020 Copyright:
+    <a class="text-white" href="https://youtu.be/dQw4w9WgXcQ">FindJobs.com</a>
   </div>
 
 </footer>
-
     <!-- Javascript -->
     <script src="js/bootstrap.min.js"></script>
   </body>

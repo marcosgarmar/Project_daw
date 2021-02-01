@@ -179,9 +179,8 @@ $id_definitivo = $id_emp['id_empresa'];
               } $rs_categorias->free();//rgi?>
             </select>
 
-
               <div class="text-center">
-                <input style="margin-top: 3%;" type="submit" class="btn btn-outline-success" value="oferta" name="btn_oferta">
+                <input style="margin-top: 3%;" type="submit" class="btn btn-outline-success" value="Crear" name="btn_oferta">
               </div>
 
         </form>

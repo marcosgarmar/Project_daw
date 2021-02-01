@@ -105,9 +105,7 @@ $id_usuario = $_SESSION['id_user'];
 
 </div>
 
-
-
-
+<br><br><br><br><br><br><br><br><br><br><br>
 
   <!-- FOOTER -->  <footer class="text-center text-lg-start shadow " style="background-color: #D1EAFC;">
 

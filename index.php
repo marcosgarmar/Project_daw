@@ -1,13 +1,21 @@
 <?php
 include 'funciones_conexion.php';
 
-$rs = sacar_ofertas();
 
 $rs_nombre_empresa = sacar_nombres_empresa_ofertas();
-
 $rs_categorias = sacar_categorias();
+$rs_sacar_nombre_empresa = sacar_nombres_empresa();
 
-$opcion= getParameter( 'radio');
+if(isset($_POST['btn_filtrar'])){
+  $salario = $_POST['salario'];
+  $categoria = $_POST['categoria'];
+  $empresa= $_POST['empresas'];
+  $empresa = sacar_id_emp_con_nombre($empresa);
+
+  $rs = sacar_ofertas_con_filtro($salario,$categoria,$empresa);
+}else {
+  $rs = sacar_ofertas();
+}
 
 ?>
 
@@ -74,9 +82,10 @@ $opcion= getParameter( 'radio');
 
       <!--OFERTAS-->
           <div class="col-md-8 justify-content-end">
+
         <?php   $datos = $rs->fetch_assoc();
-            $nombre_empresa = $rs_nombre_empresa->fetch_assoc();
         while($datos) {
+          while($nombre_empresa = $rs_nombre_empresa->fetch_assoc()){
           if($datos['id_empresa'] == $nombre_empresa['id_empresa']){?>
 
       <div class="card mb-3 container-md bg-light   mt-5 border-light" >
@@ -97,8 +106,8 @@ $opcion= getParameter( 'radio');
         </div>
       </div>
       <?php  $datos = $rs->fetch_assoc();
-            $nombre_empresa = $rs_nombre_empresa->fetch_assoc();
-    }}  $rs->free();
+    }}      $nombre_empresa = $rs_nombre_empresa->fetch_assoc();
+    }  $rs->free();
     ?>
 
 

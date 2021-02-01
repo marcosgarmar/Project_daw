@@ -27,8 +27,7 @@ $id_empresa_lista = $rs_id->fetch_assoc();
 
 $id_empresa = $id_empresa_lista['id_empresa'];
 
-
-  $rs = sacar_ofertas_empresa($id_empresa);
+$rs = sacar_ofertas_empresa($id_empresa);
 ?>
 
 
@@ -89,8 +88,6 @@ $id_empresa = $id_empresa_lista['id_empresa'];
 
   <div class="row justify-content-around">
 
- <?php include 'filtros.php'; ?>
-  <!--OFERTAS-->
 
       <div class="col-md-8 justify-content-end">
     <?php   $datos = $rs->fetch_assoc();
@@ -110,7 +107,8 @@ $id_empresa = $id_empresa_lista['id_empresa'];
       <li class=" list-inline-item card-text"><small class="text-muted align-bottom"><?=$datos['ciudad'];?></small></li>
       <li class=" list-inline-item card-text"><small class="text-muted align-bottom"><?=$datos['fecha'];?></small></li>
 <p> </p>
-    <p><a style="margin-top: 3%;"  href="acciones_empresa.php?id_oferta=<?=$datos['id_oferta'];?>" ><button class="btn btn-outline-danger">Borrar oferta</button></a></p>
+    <a style="margin-top: 3%;"  href="acciones_empresa.php?id_oferta=<?=$datos['id_oferta'];?>" ><button class="btn btn-outline-danger">Borrar oferta</button></a>
+    <a href="candidatos_empresa.php" class="btn  btn-outline-primary">Ver Candidatos</a>
 
     </div>
   </div>

@@ -50,6 +50,19 @@ function sacar_ofertas(){
   }
   return $rs;
 }
+
+function sacar_ofertas_con_filtro($salario,$categoria,$empresa){
+  $conn = conexion();
+  $sql = "SELECT * FROM ofertas where salario > $salario and categoria like '$categoria' and id_empresa like '$empresa'";
+  if($rs = $conn->query($sql)){
+    if($rs->num_rows<0){
+  //  $mensaje = $rs['salario'];
+    die("Error en sacar los datos de la DB");
+    }
+  }
+  return $rs;
+}
+
 function sacar_ofertas_empresa($id){
   $conn = conexion();
   $sql = "SELECT * FROM ofertas WHERE id_empresa ='$id' ";
@@ -62,13 +75,33 @@ function sacar_ofertas_empresa($id){
   return $rs;
 }
 
+function sacar_id_emp($id_user){
+  $conn = conexion();
+  $rs_id_emp = $conn->query("select id_empresa from empresas where id_usuario = '$id_user' ");
+  $rs_id_emp = $rs_id_emp->fetch_assoc();
+ return $rs_id_emp['id_empresa'];
+}
 
-
-
+function sacar_id_emp_con_nombre($nombre_empresa){
+  $conn = conexion();
+  $rs_id_emp = $conn->query("SELECT id_empresa from empresas join usuarios on usuarios.email = empresas.email where nombre_usuario = '$nombre_empresa'");
+  $rs_id_emp = $rs_id_emp->fetch_assoc();
+ return $rs_id_emp['id_empresa'];
+}
 
 function sacar_nombres_empresa_ofertas(){
   $conn = conexion();
   $sql_nombre_empresa = "select usuarios.nombre_usuario,empresas.id_empresa from usuarios JOIN empresas ON empresas.email = usuarios.email JOIN ofertas ON ofertas.id_empresa = empresas.id_empresa";
+  $rs_nombre = $conn->query($sql_nombre_empresa);
+  if($rs_nombre->num_rows<0){
+  die("Error en sacar los datos de la DB");
+    }
+    return $rs_nombre;
+}
+
+function sacar_nombres_empresa(){
+  $conn = conexion();
+  $sql_nombre_empresa = "SELECT nombre_usuario from usuarios join empresas on empresas.id_usuario = usuarios.id_usuario";
   $rs_nombre = $conn->query($sql_nombre_empresa);
   if($rs_nombre->num_rows<0){
   die("Error en sacar los datos de la DB");
@@ -131,23 +164,3 @@ if(isset($post_btn)){
     }
 
 }
-
-//Funcion para obtener un parametro de $_POST o $_GET, en ese orden.
-//Si se encuentra el parametro deseado, se devuelve un String, o "null" si no.
-function getParameter($nombre)
-{
-  $res= null;
-
-  if (isset( $_POST[$nombre])) {
-    $res= $_POST[$nombre];
-  } else if (isset( $_GET[$nombre])) {
-    $res= $_GET[$nombre];
-  }//if
-
-  //Si el resultado es un array, coger el primer elemento del array.
-  if (is_array($res)) {
-    $res= reset( $res);
-  }//if
-
-  return ($res);
-}//getParameter

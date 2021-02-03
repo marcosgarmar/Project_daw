@@ -180,3 +180,23 @@ function gestionar_usuarios(){
 
   return $rs_gest_user;
 }
+
+// Para Modificar usuarios
+function modificar_usuario($id_user,$rol,$nombre_nuevo,$pass_nuevo){
+
+  $conn = conexion();
+  if($rol == "cliente"){
+    $sql = "update usuarios set nombre_usuario = '$nombre_nuevo',password='$pass_nuevo' where id_usuario = '$id_user'";
+    if($rs = $conn->query($sql)){
+      $sql_dem = "update demandante set nombre = '$nombre_empresa' where id_usuario = '$id_user'";
+      if($rs = $conn->query($sql_dem)){
+        header('Location:gestionar_usuarios.php');
+      }
+    }
+  }if($rol == "empresa" ){
+    $sql = "update usuarios set nombre_usuario = '$nombre_nuevo',password = '$pass_nuevo' where id_usuario = '$id_user'";
+    if($rs = $conn->query($sql)){
+        header('Location:gestionar_usuarios.php');
+    }
+  }
+}

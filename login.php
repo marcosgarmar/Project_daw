@@ -8,9 +8,9 @@ if(isset($_SESSION['rol'])){
 $mensaje ='';
 $conn = conexion();
 if(isset($_POST['login'])){
-$email = mysqli_real_escape_string($conn,htmlspecialchars($_POST['email']));
-$pass = mysqli_real_escape_string($conn,htmlspecialchars($_POST['pass']));
-  $sql = "SELECT * FROM usuarios WHERE email ='$email' and password = '$pass' ";
+$email = mysqli_real_escape_string($conn,htmlentities($_POST['email']));
+$pass = mysqli_real_escape_string($conn,htmlentities($_POST['pass']));
+  $sql = "SELECT * FROM usuarios WHERE email ='$email' and password = '$pass'";
 
   if($rs = $conn->query($sql)){
     if($rs->num_rows>0){

@@ -39,10 +39,10 @@ if(isset($_SESSION['rol'])){
   <div class="collapse navbar-collapse" id="navbarNav" >
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link " aria-current="page" href="vista_Admin.php">Inicio</a>
+            <a class="nav-link " aria-current="page" href="#">Inicio</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link " href="gestionar_empresas.php">gestionar empresas</a>
+            <a class="nav-link " href="gestionar_categorias.php">Gestionar categorias</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="gestionar_usuarios.php">Gestionar usuarios</a>
@@ -67,8 +67,8 @@ if(isset($_SESSION['rol'])){
   </div>
   <main class="container text-center ">
     <div class="mb-5">
-    <a href="gestionar_usuarios.html" class="btn btn-dark btn-lg my-1">Gestionar usuarios</a>
-    <a href="gestionar_empresas.html" class="btn btn-warning btn-lg">Gestionar Empresas</a>
+    <a href="gestionar_categorias.php" class="btn btn-warning btn-lg">Gestionar Categorias</a>
+    <a href="gestionar_usuarios.php" class="btn btn-dark btn-lg my-1">Gestionar Usuarios</a>
     </div>
     <!-- Para generar espacio y dejar el footer abajo -->
     <br><br><br><br><br><br><br><br>

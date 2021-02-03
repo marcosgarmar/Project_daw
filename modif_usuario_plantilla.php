@@ -1,5 +1,6 @@
 <?php
 include 'funciones_conexion.php';
+include 'confirmar_accion.js';
 session_start();
 if(isset($_SESSION['rol'])){
   if($_SESSION['rol'] != "admin"){
@@ -7,6 +8,23 @@ if(isset($_SESSION['rol'])){
   }
 }else {
   header('Location:login.php');
+}
+$conn = conexion();
+if(isset($_GET['modif_id']) && isset($_GET['rol'])){
+  $id_user = $_GET['modif_id'];
+  $rol = $_GET['rol'];
+  $sql_modif = "Select * from usuarios where id_usuario = '$id_user'";
+  if($rs_modif = $conn->query($sql_modif)){
+    $rs_modif = $rs_modif->fetch_assoc();
+  }
+  else die("Error al sacar los datos");
+}
+
+$conn = conexion();
+if(isset($_POST['btn_modif'])){
+  $nombre = htmlentities(mysqli_real_escape_string($conn,$_POST['nombre']));
+  $pass = htmlentities(mysqli_real_escape_string($conn,$_POST['pass']));
+  modificar_usuario($id_user,$rol,$nombre,$pass);
 }
 
 ?>
@@ -22,7 +40,7 @@ if(isset($_SESSION['rol'])){
     <link href="css/bootstrap.min.css" rel="stylesheet" >
     <link href="fontawesome/css/all.min.css" rel="stylesheet" />
 
-    <title>Pagina de inicio</title>
+    <title>Admin</title>
   </head>
 
   <body style="background-color: #f2f2f2;">
@@ -42,7 +60,7 @@ if(isset($_SESSION['rol'])){
           <a class="nav-link " aria-current="page" href="vista_Admin.php">Inicio</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link " href="gestionar_empresas.php">gestionar empresas</a>
+          <a class="nav-link " href="gestionar_categorias.php">Gestionar categorias</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="gestionar_usuarios.php">Gestionar usuarios</a>
@@ -51,7 +69,7 @@ if(isset($_SESSION['rol'])){
     </div>
 
       <ul class="navbar-nav">
-        <p class="px-2 m-1 mx-2 border border-dark"><?=$_SESSION['nombre'];?></p>
+        <p class="px-2 m-1 mx-2 border border-dark"><?=$_SESSION['nombre'] ;?></p>
         <li class="nav-item">
           <a href="logout.php" class="btn btn-danger px-4">Salir</a>
         </li>
@@ -60,65 +78,41 @@ if(isset($_SESSION['rol'])){
 
 </nav>
 <!-- Cuerpo -->
-<div class="ofertas-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+<div class="px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
   <main class="container text-center ">
-    <h1>Administracion de Empresas</h1><br>
+    <h1>Administracion de usuarios</h1><br>
 <table class="table table-bordered">
   <thead class="table-dark">
-    <tr>
+    <tr  class="text-center">
       <th scope="col">ID</th>
       <th scope="col">Nombre</th>
       <th scope="col">Correo</th>
-      <th scope="col">CIF</th>
-      <th scope="col"></th>
-
+      <th scope="col">Contraseña</th>
+      <th scope="col">rol</th>
+      <th scope="col">Operación</th>
     </tr>
 
   </thead>
   <tbody>
-    <tr>
+    <form method="post" class="form-control">
+
+    <tr  class="text-center">
       <td>1</td>
-      <td>XXXX.SL</td>
-      <td>XXX@correo.es</td>
-      <td>1223356-X</td>
-      <td> <a href="perfil_empresa_admin.html" class="btn btn-primary">Ver Perfil de empresa</a></td>
-
+      <td><input name="nombre" type="text" value="<?=$rs_modif['nombre_usuario'];?>" class="form-control"></td>
+      <td><input  type="text" readonly value="<?=$rs_modif['email'];?>" class="form-control"></td>
+      <td><input name="pass" type="text" value="<?=$rs_modif['password'];?>" class="form-control"></td>
+      <td><input  type="text" readonly value="<?=$rs_modif['rol'];?>" class="form-control"></td>
+     <td><input type="submit" name="btn_modif" class="btn btn-primary" value="Modificar"></td>
     </tr>
-
-    <tr>
-      <td>2</td>
-      <td>XXXX.SA</td>
-      <td>XXX@correo.es</td>
-      <td>1223356-X</td>
-      <td> <a href="perfil_empresa_admin.html" class="btn btn-primary">Ver Perfil de empresa</a></td>
-
-    </tr>
-
-    <tr>
-      <td>3</td>
-      <td>XXXX.SC</td>
-      <td>XXX@correo.es</td>
-      <td>1223356-X</td>
-      <td> <a href="perfil_empresa_admin.html" class="btn btn-primary">Ver Perfil de empresa</a></td>
-
-    </tr>
-
+  </form>
   </tbody>
 </table>
 <hr>
 </main>
 </div>
-<!-- eliminar por con el id  -->
-<div class="container text-center col-md-6">
-    <form method="post">
-      <p class="my-4">Puedes eliminar cualquier empresa con simplimente introduciendo su ID</p>
-      <input  id="fname" name="name" type="text" placeholder="ID de la empresa" class="form-control" required>
-      <button  type="submit" class="btn btn-danger my-4">Eliminar</button>
-  </form>
-</div>
+
+
 <br><br><br><br><br><br><br><br>
-
-
 
 <!-- FOOTER -->
   <footer class="text-center text-lg-start shadow" style="background-color: #D1EAFC;">
@@ -137,8 +131,6 @@ if(isset($_SESSION['rol'])){
         </p>
       </div>
 
-
-
       <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
         <h5 class="text-uppercase text-center">Links</h5>
 
@@ -154,13 +146,9 @@ if(isset($_SESSION['rol'])){
           </li>
         </ul>
       </div>
-
-
     </div>
 
   </div>
-
-
 
   <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
     © 2020 Copyright: Fahd & Marcos,

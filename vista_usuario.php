@@ -116,16 +116,23 @@ $_SESSION['id_dem'] = $id_dem;
               <li class=" list-inline-item card-text"><small class="text-muted align-bottom"><?=$datos['ciudad'];?></small></li>
               <li class=" list-inline-item card-text"><small class="text-muted align-bottom"><?=$datos['fecha'];?></small></li>
           </ul>
+
+          <?php
+          $d_o = $datos['id_oferta'] ;
+          $sql_si_existe = "Select titulo_oferta from inscritos where id_oferta='$d_o' and id_dem='$id_dem'";
+          $si_existe = $conn->query($sql_si_existe);
+          if($si_existe && $si_existe->num_rows>0){ ?>
+            <a ><button class="btn btn-outline-secondary text-dark disabled">Suscrito</button></a>
+            <a href="opiniones_empresa_users.php?id_empresa1=<?=$datos['id_empresa'];?>" ><button class="btn btn-outline-primary">Ver opiniones</button></a>
+          <?php }else { ?>
         <a href="acciones_usuario.php?id_oferta=<?=$datos['id_oferta'];?>&id_dem=<?=$id_dem;?>&id_emp=<?=$datos['id_empresa'];?>&titulo=<?=$datos['titulo_oferta'];?>" ><button class="btn btn-outline-primary">Inscribirme</button></a>
-        <a href="opiniones_empresa_users.php?id_empresa1=<?=$datos['id_empresa'];?>" ><button class="btn btn-outline-primary">Ver opiniones</button></a>
+        <a href="opiniones_empresa_users.php?id_empresa1=<?=$datos['id_empresa'];?>" ><button class="btn btn-outline-primary">Ver opiniones</button></a> <?php } ?>
             </div>
           </div>
-          <?php  $datos = $rs->fetch_assoc();
+        <?php  $datos = $rs->fetch_assoc();
         }}      $nombre_empresa = $rs_nombre_empresa->fetch_assoc();
         }  $rs->free();
         ?>
-
-
            </div>
           </div>
 <!-- FOOTER -->

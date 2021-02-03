@@ -1,3 +1,16 @@
+<?php
+include 'funciones_conexion.php';
+session_start();
+if(isset($_SESSION['rol'])){
+  if($_SESSION['rol'] != "admin"){
+    header('Location:login.php');
+  }
+}else {
+  header('Location:login.php');
+}
+
+?>
+
 <!doctype html>
 <html lang="es">
   <head>
@@ -26,46 +39,84 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link " aria-current="page" href="vista_Admin.html">Inicio</a>
+          <a class="nav-link " aria-current="page" href="vista_Admin.php">Inicio</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="gestionar_ofertas.html">Gestionar ofertas</a>
+          <a class="nav-link " href="#">Gestionar categorias</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link " href="gestionar_empresas.html">gestionar empresas</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="gestionar_usuarios.html">Gestionar usuarios</a>
+          <a class="nav-link" href="gestionar_usuarios.php">Gestionar usuarios</a>
         </li>
       </ul>
     </div>
-      
+
       <ul class="navbar-nav">
+        <p class="px-2 m-1 mx-2 border border-dark"><?=$_SESSION['nombre'];?></p>
         <li class="nav-item">
-          <a href="index.html" class="btn btn-danger px-4">Salir</a>
+          <a href="logout.php" class="btn btn-danger px-4">Salir</a>
         </li>
       </ul>
-    </div> 
-    
+    </div>
+
 </nav>
+<!-- Cuerpo -->
+<div class="ofertas-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+  <main class="container text-center ">
+    <h1>Administracion de Empresas</h1><br>
+<table class="table table-bordered">
+  <thead class="table-dark">
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Correo</th>
+      <th scope="col">CIF</th>
+      <th scope="col"></th>
 
-        <div class="container text-center">
-            <br>
-              <a data-toggle="modal" data-target="#myModal"><img src="img/perfil.png" alt="aboutme" width="110" height="110"></a>   
-          <section class=" row">
-            <h3>Empresa.SL</h3><br>
-          <article style="margin-left: 12%; margin-right: 15%" class="col-sm-9 col-md-9 col-lg-9">
-            <h6>&nbsp;</h6><br>
-                <table class="table table-striped">
-                    <tr><th>Nombre: Empresa.SL</th></tr>
-                    <tr><th>Correo electrónico: empresa@correo.es</th></tr>	
-                    <tr><th>CIF: 1541515c</th></tr>
-                </table>
-        </article>
-	    	</section>
-	    </div>
-      <br><br><br><br>
+    </tr>
 
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>XXXX.SL</td>
+      <td>XXX@correo.es</td>
+      <td>1223356-X</td>
+      <td> <a href="perfil_empresa_admin.html" class="btn btn-primary">Ver Perfil de empresa</a></td>
+
+    </tr>
+
+    <tr>
+      <td>2</td>
+      <td>XXXX.SA</td>
+      <td>XXX@correo.es</td>
+      <td>1223356-X</td>
+      <td> <a href="perfil_empresa_admin.html" class="btn btn-primary">Ver Perfil de empresa</a></td>
+
+    </tr>
+
+    <tr>
+      <td>3</td>
+      <td>XXXX.SC</td>
+      <td>XXX@correo.es</td>
+      <td>1223356-X</td>
+      <td> <a href="perfil_empresa_admin.html" class="btn btn-primary">Ver Perfil de empresa</a></td>
+
+    </tr>
+
+  </tbody>
+</table>
+<hr>
+</main>
+</div>
+<!-- eliminar por con el id  -->
+<div class="container text-center col-md-6">
+    <form method="post">
+      <p class="my-4">Puedes eliminar cualquier empresa con simplimente introduciendo su ID</p>
+      <input  id="fname" name="name" type="text" placeholder="ID de la empresa" class="form-control" required>
+      <button  type="submit" class="btn btn-danger my-4">Eliminar</button>
+  </form>
+</div>
+<br><br><br><br><br><br><br><br>
 
 
 
@@ -86,6 +137,8 @@
         </p>
       </div>
 
+
+
       <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
         <h5 class="text-uppercase text-center">Links</h5>
 
@@ -94,15 +147,20 @@
             <a href="https://www.youtube.com/watch?v=FwhKhecN-1E" ><i class="fab fa-youtube" style="font-size:25px;" ></i></a>
             <a href="https://www.instagram.com/usal" ><i class="fab fa-instagram" style="font-size:25px;" ></i></a>
           </li>
-        
+
           <li>
             <a href="https://www.twitter.com/usal"><i class="fab fa-twitter" style="font-size:25px;" ></i></a>
             <a href="https://www.facebook.com/" ><i class="fab fa-facebook" style="font-size:25px;" ></i></a>
           </li>
         </ul>
       </div>
+
+
     </div>
+
   </div>
+
+
 
   <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
     © 2020 Copyright: Fahd & Marcos,
@@ -111,7 +169,10 @@
 
 </footer>
 
+
     <!-- Javascript -->
     <script src="js/bootstrap.min.js"></script>
+
+
   </body>
 </html>

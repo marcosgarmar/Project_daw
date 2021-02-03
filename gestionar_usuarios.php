@@ -44,10 +44,10 @@ $rs_usuarios = gestionar_usuarios();
           <a class="nav-link " aria-current="page" href="vista_Admin.php">Inicio</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link " href="gestionar_empresas.php">gestionar empresas</a>
+          <a class="nav-link " href="gestionar_categorias.php">Gestionar categorias</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="gestionar_usuarios.php">Gestionar usuarios</a>
+          <a class="nav-link" href="#">Gestionar usuarios</a>
         </li>
       </ul>
     </div>
@@ -55,7 +55,7 @@ $rs_usuarios = gestionar_usuarios();
       <ul class="navbar-nav">
         <p class="px-2 m-1 mx-2 border border-dark"><?=$_SESSION['nombre'] ;?></p>
         <li class="nav-item">
-          <a href="index.html" class="btn btn-danger px-4">Salir</a>
+          <a href="logout.php" class="btn btn-danger px-4">Salir</a>
         </li>
       </ul>
     </div>
@@ -65,15 +65,15 @@ $rs_usuarios = gestionar_usuarios();
 <div class="px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
   <main class="container text-center ">
     <h1>Administracion de usuarios</h1><br>
-<table class="table table-bordered">
+<table class="table table-bordered text-center">
   <thead class="table-dark">
     <tr>
       <th scope="col">ID</th>
       <th scope="col">Nombre</th>
       <th scope="col">Correo</th>
       <th scope="col">Contraseña</th>
-      <th scope="col">rol</th>
-      <th scope="col"></th>
+      <th scope="col">Rol</th>
+      <th scope="col">Operación</th>
     </tr>
 
   </thead>
@@ -86,11 +86,10 @@ $rs_usuarios = gestionar_usuarios();
       <td><?=$datos['email'];?></td>
       <td><?=$datos['password'];?></td>
       <td><?=$datos['rol'];?></td>
-     <td><a href="acciones_admin.php?modif_id=<?=$datos['id_usuario'];?>" onclick="return confirmar()" class="btn btn-primary">Modificar</a>
+     <td><a href="modif_usuario_plantilla.php?modif_id=<?=$datos['id_usuario'];?>&rol=<?=$datos['rol'];?>" class="btn btn-primary">Modificar</a>
   <a href="acciones_admin.php?borrar_id=<?=$datos['id_usuario'];?>&rol=<?=$datos['rol'];?>" onclick="return confirmar()" class="btn btn-danger">Borrar</a></td>
-    </tr>
+  </tr>
     <?php } ?>
-
   </tbody>
 </table>
 <hr>

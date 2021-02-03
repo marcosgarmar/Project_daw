@@ -1,6 +1,11 @@
 <?php
 include 'funciones_conexion.php';
-
+session_start();
+if(isset($_SESSION['rol'])){
+  if($_SESSION['rol'] == "cliente"){
+    header('Location:vista_usuario.php');
+  }
+}
 
 $rs_nombre_empresa = sacar_nombres_empresa_ofertas();
 $rs_categorias = sacar_categorias();

@@ -25,7 +25,7 @@ if($rs = $conn->query($sql)){
   die("Error en sacar los datos de la DB");
   }
 }
-$opcion= getParameter( 'radio');
+
 $id_usuario = $_SESSION['id_user'];
 
 

@@ -42,13 +42,10 @@ if(isset($_SESSION['rol'])){
             <a class="nav-link " aria-current="page" href="vista_Admin.php">Inicio</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="gestionar_ofertas.html">Gestionar ofertas</a>
+            <a class="nav-link " href="gestionar_empresas.php">gestionar empresas</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link " href="gestionar_empresas.html">gestionar empresas</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="gestionar_usuarios.html">Gestionar usuarios</a>
+            <a class="nav-link" href="gestionar_usuarios.php">Gestionar usuarios</a>
           </li>
         </ul>
       </div>
@@ -72,7 +69,6 @@ if(isset($_SESSION['rol'])){
     <div class="mb-5">
     <a href="gestionar_usuarios.html" class="btn btn-dark btn-lg my-1">Gestionar usuarios</a>
     <a href="gestionar_empresas.html" class="btn btn-warning btn-lg">Gestionar Empresas</a>
-    <a href="gestionar_ofertas.html" class="btn btn-info btn-lg">Gestionar ofertas</a>
     </div>
     <!-- Para generar espacio y dejar el footer abajo -->
     <br><br><br><br><br><br><br><br>

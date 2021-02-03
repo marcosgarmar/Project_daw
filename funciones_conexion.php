@@ -53,7 +53,7 @@ function sacar_ofertas(){
 
 function sacar_ofertas_con_filtro($salario,$categoria,$empresa){
   $conn = conexion();
-  $sql = "SELECT * FROM ofertas where salario > $salario and categoria like '$categoria' and id_empresa like '$empresa'";
+  $sql = "SELECT * FROM ofertas where salario >= $salario and categoria like '$categoria' and id_empresa like '$empresa'";
   if($rs = $conn->query($sql)){
     if($rs->num_rows<0){
   //  $mensaje = $rs['salario'];
@@ -148,9 +148,9 @@ if(isset($post_btn)){
       echo "<script>window.location = 'ver_perfil_usuario.php';</script>"; }
   }
 
-  $formacion_academica = mysqli_real_escape_string($conn,$_POST['form_aca']);
-  $formacion_profesional = mysqli_real_escape_string($conn,$_POST['form_pro']);
-  $datos_interes = mysqli_real_escape_string($conn,$_POST['dato_inter']);
+  $formacion_academica = htmlentities(mysqli_real_escape_string($conn,$_POST['form_aca']));
+  $formacion_profesional = htmlentities(mysqli_real_escape_string($conn,$_POST['form_pro']));
+  $datos_interes = htmlentities(mysqli_real_escape_string($conn,$_POST['dato_inter']));
 
   $rs_update_curriculum = $conn->query("update demandante set formacion_academica='$formacion_academica',formacion_profesional='$formacion_profesional',datos_de_interes='$datos_interes' where id_demandante='$id_dem'");
   if($rs_update_curriculum){
@@ -163,4 +163,20 @@ if(isset($post_btn)){
 
     }
 
+}
+
+
+function gestionar_usuarios(){
+  $conn = conexion();
+
+  $sql_gest_user = "Select * from usuarios where rol != 'admin'";
+  if($gest_user = $conn->query($sql_gest_user)){
+    if($gest_user->num_rows>0){
+      $rs_gest_user = $gest_user;
+    }
+  }else{
+    die("Error el sacar los datos");
+  }
+
+  return $rs_gest_user;
 }

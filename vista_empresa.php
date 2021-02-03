@@ -1,5 +1,6 @@
 <?php
 include 'funciones_conexion.php';
+include 'confirmar_accion.js';
 session_start();
 if(isset($_SESSION['rol'])){
   if($_SESSION['rol'] != "empresa"){
@@ -12,9 +13,6 @@ if(isset($_SESSION['rol'])){
 $conn=conexion();
 
 $rs_nombre_empresa = sacar_nombres_empresa_ofertas();
-
-$opcion= getParameter( 'radio');
-
 
 
 $id_usuario = $_SESSION['id_user'];
@@ -107,7 +105,7 @@ $rs = sacar_ofertas_empresa($id_empresa);
       <li class=" list-inline-item card-text"><small class="text-muted align-bottom"><?=$datos['ciudad'];?></small></li>
       <li class=" list-inline-item card-text"><small class="text-muted align-bottom"><?=$datos['fecha'];?></small></li>
 <p> </p>
-    <a style="margin-top: 3%;"  href="acciones_empresa.php?id_oferta=<?=$datos['id_oferta'];?>" ><button class="btn btn-outline-danger">Borrar oferta</button></a>
+    <a style="margin-top: 3%;"  href="acciones_empresa.php?id_oferta=<?=$datos['id_oferta'];?>" ><button class="btn btn-outline-danger" onclick="return confirmar()">Borrar oferta</button></a>
     <a href="candidatos_empresa.php" class="btn  btn-outline-primary">Ver Candidatos</a>
 
     </div>

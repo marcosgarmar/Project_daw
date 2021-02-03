@@ -90,13 +90,12 @@ modificar_perfil_usuario($post,$avatar,$id_dem);
                   <tr><th>Correo electrónico: <?=$rs_curriculum['email'] ;?></th></tr>
                   <tr><th>Fecha de nacimiento: <?=$rs_curriculum['fecha_nac'] ;?></th></tr>
                   <tr><th class="bg-secondary text-white">Formacion academica</th></tr>
-                  <tr><th><?= $rs_curriculum['formacion_academica']; ?></th></tr>
-
+                  <tr><th><?=nl2br($rs_curriculum['formacion_academica']); ?></th></tr>
                   <tr><th class="bg-secondary text-white">Formacion Profesional</th></tr>
-                  <tr><th><?= $rs_curriculum['formacion_profesional'];?></th></tr>
+                  <tr><th><?=nl2br($rs_curriculum['formacion_profesional']);?></th></tr>
 
                   <tr><th class="bg-secondary text-white">Datode de interés</th></tr>
-                  <tr><th><?= $rs_curriculum['datos_de_interes'];?></th></tr>
+                  <tr><th><?=nl2br($rs_curriculum['datos_de_interes']);?></th></tr>
 
                 </table>
         </article>

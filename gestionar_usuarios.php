@@ -1,3 +1,18 @@
+<?php
+include 'funciones_conexion.php';
+include 'confirmar_accion.js';
+session_start();
+if(isset($_SESSION['rol'])){
+  if($_SESSION['rol'] != "admin"){
+    header('Location:login.php');
+  }
+}else {
+  header('Location:login.php');
+}
+
+$rs_usuarios = gestionar_usuarios();
+?>
+
 <!doctype html>
 <html lang="es">
   <head>
@@ -9,7 +24,7 @@
     <link href="css/bootstrap.min.css" rel="stylesheet" >
     <link href="fontawesome/css/all.min.css" rel="stylesheet" />
 
-    <title>Pagina de inicio</title>
+    <title>Admin</title>
   </head>
 
   <body style="background-color: #f2f2f2;">
@@ -29,85 +44,61 @@
           <a class="nav-link " aria-current="page" href="vista_Admin.php">Inicio</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="gestionar_ofertas.html">Gestionar ofertas</a>
+          <a class="nav-link " href="gestionar_empresas.php">gestionar empresas</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link " href="gestionar_empresas.html">gestionar empresas</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="gestionar_usuarios.html">Gestionar usuarios</a>
+          <a class="nav-link" href="gestionar_usuarios.php">Gestionar usuarios</a>
         </li>
       </ul>
     </div>
 
       <ul class="navbar-nav">
+        <p class="px-2 m-1 mx-2 border border-dark"><?=$_SESSION['nombre'] ;?></p>
         <li class="nav-item">
-          <a href="logout.php" class="btn btn-danger px-4">Salir</a>
+          <a href="index.html" class="btn btn-danger px-4">Salir</a>
         </li>
       </ul>
     </div>
 
 </nav>
 <!-- Cuerpo -->
-<div class="ofertas-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+<div class="px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
   <main class="container text-center ">
-    <h1>Administracion de Empresas</h1><br>
+    <h1>Administracion de usuarios</h1><br>
 <table class="table table-bordered">
   <thead class="table-dark">
     <tr>
       <th scope="col">ID</th>
       <th scope="col">Nombre</th>
       <th scope="col">Correo</th>
-      <th scope="col">CIF</th>
+      <th scope="col">Contraseña</th>
+      <th scope="col">rol</th>
       <th scope="col"></th>
-
     </tr>
 
   </thead>
   <tbody>
+    <?php $i=1;
+    while ($datos = $rs_usuarios->fetch_assoc()) {?>
     <tr>
-      <td>1</td>
-      <td>XXXX.SL</td>
-      <td>XXX@correo.es</td>
-      <td>1223356-X</td>
-      <td> <a href="perfil_empresa_admin.html" class="btn btn-primary">Ver Perfil de empresa</a></td>
-
+      <td><?=$i;$i++;?></td>
+      <td><?=$datos['nombre_usuario'];?></td>
+      <td><?=$datos['email'];?></td>
+      <td><?=$datos['password'];?></td>
+      <td><?=$datos['rol'];?></td>
+     <td><a href="acciones_admin.php?modif_id=<?=$datos['id_usuario'];?>" onclick="return confirmar()" class="btn btn-primary">Modificar</a>
+  <a href="acciones_admin.php?borrar_id=<?=$datos['id_usuario'];?>&rol=<?=$datos['rol'];?>" onclick="return confirmar()" class="btn btn-danger">Borrar</a></td>
     </tr>
-
-    <tr>
-      <td>2</td>
-      <td>XXXX.SA</td>
-      <td>XXX@correo.es</td>
-      <td>1223356-X</td>
-      <td> <a href="perfil_empresa_admin.html" class="btn btn-primary">Ver Perfil de empresa</a></td>
-
-    </tr>
-
-    <tr>
-      <td>3</td>
-      <td>XXXX.SC</td>
-      <td>XXX@correo.es</td>
-      <td>1223356-X</td>
-      <td> <a href="perfil_empresa_admin.html" class="btn btn-primary">Ver Perfil de empresa</a></td>
-
-    </tr>
+    <?php } ?>
 
   </tbody>
 </table>
 <hr>
 </main>
 </div>
-<!-- eliminar por con el id  -->
-<div class="container text-center col-md-6">
-    <form method="post">
-      <p class="my-4">Puedes eliminar cualquier empresa con simplimente introduciendo su ID</p>
-      <input  id="fname" name="name" type="text" placeholder="ID de la empresa" class="form-control" required>
-      <button  type="submit" class="btn btn-danger my-4">Eliminar</button>
-  </form>
-</div>
+
+
 <br><br><br><br><br><br><br><br>
-
-
 
 <!-- FOOTER -->
   <footer class="text-center text-lg-start shadow" style="background-color: #D1EAFC;">
@@ -126,8 +117,6 @@
         </p>
       </div>
 
-
-
       <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
         <h5 class="text-uppercase text-center">Links</h5>
 
@@ -143,13 +132,9 @@
           </li>
         </ul>
       </div>
-
-
     </div>
 
   </div>
-
-
 
   <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
     © 2020 Copyright: Fahd & Marcos,

@@ -103,7 +103,7 @@ if(isset($_POST['btn_filtrar'])){
       <ul >
           <li class=" list-inline-item card-text"><small class="text-muted align-bottom">Salario: <?=$datos['salario'];?>€</small></li><br>
           <li class=" list-inline-item card-text"><small class="text-muted align-bottom">Categoria: <?=$datos['categoria'];?></small></li><br>
-          <li class=" list-inline-item card-text"><small class="text-muted align-bottom"><?=$datos['ciudad'];?></small></li>
+          <li class=" list-inline-item card-text"><small class="text-muted align-bottom"><?=ucwords($datos['ciudad']);?></small></li>
           <li class=" list-inline-item card-text"><small class="text-muted align-bottom"><?=$datos['fecha'];?></small></li>
 
       </ul>

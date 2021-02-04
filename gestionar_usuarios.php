@@ -86,7 +86,7 @@ $rs_usuarios = gestionar_usuarios();
       <td><?=$datos['email'];?></td>
       <td><?=$datos['password'];?></td>
       <td><?=$datos['rol'];?></td>
-     <td><a href="modif_usuario_plantilla.php?modif_id=<?=$datos['id_usuario'];?>&rol=<?=$datos['rol'];?>" class="btn btn-primary">Modificar</a>
+     <td class="w-25"><a href="modif_usuario_plantilla.php?modif_id=<?=$datos['id_usuario'];?>&rol=<?=$datos['rol'];?>" class="btn btn-primary">Modificar</a>
   <a href="acciones_admin.php?borrar_id=<?=$datos['id_usuario'];?>&rol=<?=$datos['rol'];?>" onclick="return confirmar()" class="btn btn-danger">Borrar</a></td>
   </tr>
     <?php } ?>

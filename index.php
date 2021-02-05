@@ -76,8 +76,6 @@ if(isset($_POST['btn_filtrar'])){
  </div>
   </nav>
 
-
-
      <!-- Carrusel -->
      <?php include 'carrusel.html'; ?>
 
@@ -91,6 +89,7 @@ if(isset($_POST['btn_filtrar'])){
         <?php   $datos = $rs->fetch_assoc();
         while($datos) {
           while($nombre_empresa = $rs_nombre_empresa->fetch_assoc()){
+            if(isset($datos['id_empresa']))
           if($datos['id_empresa'] == $nombre_empresa['id_empresa']){?>
 
       <div class="card mb-3 container-md bg-light   mt-5 border-light" >

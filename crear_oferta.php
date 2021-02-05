@@ -16,11 +16,11 @@ $rs_categorias = sacar_categorias();
 
 
 if(isset($_POST['btn_oferta'])){
-  $titulo = mysqli_real_escape_string($conn,$_POST['titulo']);
-  $texto = mysqli_real_escape_string($conn,$_POST['texto']);
-  $salario = mysqli_real_escape_string($conn,$_POST['salario']);
-  $provincia = mysqli_real_escape_string($conn,$_POST['provincia']);
-  $categoria_oferta = mysqli_real_escape_string($conn,$_POST['categoria_oferta']);
+  $titulo = htmlentities(mysqli_real_escape_string($conn,$_POST['titulo']));
+  $texto = htmlentities(mysqli_real_escape_string($conn,$_POST['texto']));
+  $salario = htmlentities(mysqli_real_escape_string($conn,$_POST['salario']));
+  $provincia = htmlentities(mysqli_real_escape_string($conn,$_POST['provincia']));
+  $categoria_oferta = htmlentities(mysqli_real_escape_string($conn,$_POST['categoria_oferta']));
 
 $id = $_SESSION['id_user'] ;
 

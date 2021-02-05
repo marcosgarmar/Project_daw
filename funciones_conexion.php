@@ -82,6 +82,7 @@ function sacar_id_emp($id_user){
  return $rs_id_emp['id_empresa'];
 }
 
+// Sacar el di de la empresa con solo pasarle su nombre 
 function sacar_id_emp_con_nombre($nombre_empresa){
   $conn = conexion();
   $rs_id_emp = $conn->query("SELECT id_empresa from empresas join usuarios on usuarios.email = empresas.email where nombre_usuario = '$nombre_empresa'");
@@ -89,6 +90,7 @@ function sacar_id_emp_con_nombre($nombre_empresa){
  return $rs_id_emp['id_empresa'];
 }
 
+// Sacar el nombre de la empresa en la ofertas
 function sacar_nombres_empresa_ofertas(){
   $conn = conexion();
   $sql_nombre_empresa = "select usuarios.nombre_usuario,empresas.id_empresa from usuarios JOIN empresas ON empresas.email = usuarios.email JOIN ofertas ON ofertas.id_empresa = empresas.id_empresa";
@@ -99,6 +101,7 @@ function sacar_nombres_empresa_ofertas(){
     return $rs_nombre;
 }
 
+// sacar los nombres de empresa
 function sacar_nombres_empresa(){
   $conn = conexion();
   $sql_nombre_empresa = "SELECT nombre_usuario from usuarios join empresas on empresas.id_usuario = usuarios.id_usuario";
@@ -109,6 +112,7 @@ function sacar_nombres_empresa(){
     return $rs_nombre;
 }
 
+// Para sacar las categorias
 function sacar_categorias(){
 $conn = conexion();
 $sql_categorias = "select * from categorias";
@@ -119,6 +123,7 @@ $sql_categorias = "select * from categorias";
     return $rs_categorias;
 }
 
+// Para cuando un usuario desea modificar su curriculum
 function modificar_perfil_usuario($post_btn,$file_avatar,$id_dem){
 
 $conn = conexion();
@@ -165,7 +170,7 @@ if(isset($post_btn)){
 
 }
 
-
+// Para sacar la tabla de usuarios para el admin
 function gestionar_usuarios(){
   $conn = conexion();
 
@@ -181,14 +186,14 @@ function gestionar_usuarios(){
   return $rs_gest_user;
 }
 
-// Para Modificar usuarios
+// Para Modificar los datos de los usuarios usuarios
 function modificar_usuario($id_user,$rol,$nombre_nuevo,$pass_nuevo){
 
   $conn = conexion();
   if($rol == "cliente"){
     $sql = "update usuarios set nombre_usuario = '$nombre_nuevo',password='$pass_nuevo' where id_usuario = '$id_user'";
     if($rs = $conn->query($sql)){
-      $sql_dem = "update demandante set nombre = '$nombre_empresa' where id_usuario = '$id_user'";
+      $sql_dem = "update demandante set nombre = '$nombre_nuevo' where id_usuario = '$id_user'";
       if($rs = $conn->query($sql_dem)){
         header('Location:gestionar_usuarios.php');
       }

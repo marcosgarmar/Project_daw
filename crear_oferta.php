@@ -79,8 +79,9 @@ $id_definitivo = $id_emp['id_empresa'];
         </ul>
       </div>
   <ul class="navbar-nav ">
-    <p class="px-2 m-1 mx-2 border border-dark"><?=$_SESSION['nombre'] ;?></p>
-
+    <li class="nav-item me-2 p-1 border border-dark rounded">
+    Hola&nbsp;<?=ucwords($_SESSION['nombre']) ;?>
+    </li>
     <li class="nav-item">
 
       <a href="logout.php" class="btn btn-danger px-4">Salir</a>

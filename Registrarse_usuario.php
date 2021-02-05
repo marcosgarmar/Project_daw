@@ -2,10 +2,10 @@
 include 'funciones_conexion.php';
 $conn = conexion();
 if(isset($_POST['btn_registrar'])){
-  $nombre = mysqli_real_escape_string($conn,$_POST['nombre']);
-  $email = mysqli_real_escape_string($conn,$_POST['email']);
-  $dni = mysqli_real_escape_string($conn,$_POST['dni']);
-  $pass = mysqli_real_escape_string($conn,$_POST['pass']);
+  $nombre = htmlentities(mysqli_real_escape_string($conn,$_POST['nombre']));
+  $email = htmlentities(mysqli_real_escape_string($conn,$_POST['email']));
+  $dni = htmlentities(mysqli_real_escape_string($conn,$_POST['dni']));
+  $pass = htmlentities(mysqli_real_escape_string($conn,$_POST['pass']));
   $fecha_nac = $_POST['fecha_nac'];
 
  $sql_reg = "insert into usuarios(rol,nombre_usuario,email,password) values('cliente','$nombre','$email','$pass')";

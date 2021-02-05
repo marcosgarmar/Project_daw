@@ -61,7 +61,9 @@ if($rs_curriculum = $conn->query($sql_curriculum)){
         </ul>
       </div>
   <ul class="navbar-nav ">
-    <p class="px-2 m-1 mx-2 border border-dark"><?=$_SESSION['nombre'] ;?></p>
+    <li class="nav-item me-2 p-1 border border-dark rounded">
+    Hola&nbsp;<?=ucwords($_SESSION['nombre']) ;?>
+    </li>
     <li class="nav-item">
       <a href="index.html" class="btn btn-danger px-4">Salir</a>
     </li>
@@ -74,7 +76,7 @@ if($rs_curriculum = $conn->query($sql_curriculum)){
         <img src="img/perfil_img/<?=$rs_curriculum['avatar'];?>" alt="Avatar" width="auto" height="110">
     <section class="row">
       <h3><?=$rs_curriculum['nombre'] ;?></h3><br>
-    <article style="margin-left: 12%; margin-right: 15%" class="col-sm-9 col-md-9 col-lg-9">
+    <article class="col-sm-9 col-md-9 col-lg-8 mx-auto">
       <h6><small class="text-muted align-bottom">Currículum vitae</small></h6><br>
           <table class="table">
             <tr><th class="bg-secondary text-white">Informacion básica</th></tr>

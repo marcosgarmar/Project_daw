@@ -6,10 +6,10 @@ $conn = conexion();
 
 
 if(isset($_POST['btn_registrar'])){
-  $nombre = mysqli_real_escape_string($conn,$_POST['nombre']);
-  $email = mysqli_real_escape_string($conn,$_POST['email']);
-  $pass = mysqli_real_escape_string($conn,$_POST['pass']);
-  $cif = mysqli_real_escape_string($conn,$_POST['cif']);
+  $nombre = htmlentities(mysqli_real_escape_string($conn,$_POST['nombre']));
+  $email = htmlentities(mysqli_real_escape_string($conn,$_POST['email']));
+  $pass = htmlentities(mysqli_real_escape_string($conn,$_POST['pass']));
+  $cif = htmlentities(mysqli_real_escape_string($conn,$_POST['cif']));
 
 
 

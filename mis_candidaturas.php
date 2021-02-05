@@ -58,7 +58,7 @@ if($rs_oferta = $conn->query($sql_oferta)){
             <a class="nav-link" href="#">Noticias</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link " href="mis_candidaturas.php">Mis candidaturas</a>
+            <a class="nav-link active" href="mis_candidaturas.php">Mis candidaturas</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="ver_perfil_usuario.php">Ver mi Perfil</a>
@@ -67,7 +67,9 @@ if($rs_oferta = $conn->query($sql_oferta)){
       </div>
 
         <ul class="navbar-nav ">
-          <p class="px-2 m-1 mx-2 border border-dark"><?=$_SESSION['nombre'] ;?></p>
+          <li class="nav-item me-2 p-1 border border-dark rounded">
+          Hola&nbsp;<?=ucwords($_SESSION['nombre']) ;?>
+          </li>
           <li class="nav-item">
             <a href="logout.php" class="btn btn-danger px-4">Salir</a>
           </li>

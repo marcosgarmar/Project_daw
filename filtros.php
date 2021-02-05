@@ -9,7 +9,7 @@ $rs_categorias = sacar_categorias();
    <legend>Filtros</legend>
 
    <?php $keep_sal = isset($_POST['salario'])?$_POST['salario']:'';?>
-   <label><h5>Salario</h5></label>
+   <label><h5>Salarios</h5></label>
    <select class="form-control" name=salario>
      <option value="980" <?php if($keep_sal == 980){echo 'selected';}?> >Más de 980€</option>
      <option value="1100" <?php if($keep_sal == 1100){echo 'selected';}?> >Más de 1100€</option>
@@ -18,7 +18,7 @@ $rs_categorias = sacar_categorias();
    </select>
 
     <?php $keep_cat = isset($_POST['categoria'])?$_POST['categoria']:'';?>
-    <br><label><h5>Categoria</h5></label>
+    <br><label><h5>Categorias</h5></label>
      <select class="form-control" name="categoria">
        <?php while($categoria=$rs_categorias->fetch_assoc()){ ?>
        <option <?php if($keep_cat == $categoria['nombre_categoria']){echo 'selected';}?> ><?=$categoria['nombre_categoria'] ;?></option>

@@ -2,7 +2,7 @@
 include 'funciones_conexion.php';
 $conn = conexion();
 
-// Para inscribirse en una oferta
+// Para borrar 
 if(isset($_GET['borrar_id']) && isset($_GET['rol'])){
   $id_user = $_GET['borrar_id'];
   $rol = $_GET['rol'];

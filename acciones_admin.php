@@ -2,7 +2,7 @@
 include 'funciones_conexion.php';
 $conn = conexion();
 
-// Para borrar 
+// Para borrar
 if(isset($_GET['borrar_id']) && isset($_GET['rol'])){
   $id_user = $_GET['borrar_id'];
   $rol = $_GET['rol'];
@@ -45,6 +45,20 @@ if($rol == "empresa"){
 
   }
 }
+
+// Borrar categorias
+if(isset($_GET['borrar_id_categoria'])){
+  $id_categoria = $_GET['borrar_id_categoria'];
+  $sql_borrar_categoria = "DELETE from categorias where id_categoria = '$id_categoria'";
+
+  if($borrar_exito = $conn->query($sql_borrar_categoria)){
+        echo '<script>window.location=\'gestionar_categorias.php\';</script>';
+      }else {
+        echo '<script>window.location=\'gestionar_categorias.php\';</script>';
+
+      }
+      }
+
 
 $conn->close();
 

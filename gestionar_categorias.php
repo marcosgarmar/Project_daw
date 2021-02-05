@@ -1,5 +1,7 @@
 <?php
 include 'funciones_conexion.php';
+include 'confirmar_accion.js';
+
 session_start();
 if(isset($_SESSION['rol'])){
   if($_SESSION['rol'] != "admin"){
@@ -8,6 +10,24 @@ if(isset($_SESSION['rol'])){
 }else {
   header('Location:login.php');
 }
+
+$conn = conexion();
+
+
+
+if(isset($_POST['btn_crear'])){
+
+
+  $categoria = htmlentities(mysqli_real_escape_string($conn,$_POST['categoria']));
+
+$sql_reg = "INSERT INTO categorias(nombre_categoria) VALUES('$categoria')";
+
+  $rs_dem = $conn->query($sql_reg);
+
+
+}
+$rs_categorias = gestionar_categorias();
+
 
 ?>
 
@@ -64,64 +84,48 @@ if(isset($_SESSION['rol'])){
 <!-- Cuerpo -->
 <div class="ofertas-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
   <main class="container text-center ">
-    <h1>Administracion de Empresas</h1><br>
+    <h1>Administracion de Categorias</h1><br>
+
+    <h2>Crear nueva  Categoria  </h2>
+
+<form  class="card-body form-group"  method="post">
+    <input class="form-control"  placeholder="Nueva categoria" type="text" name="categoria" >
+    <input style="margin-top: 3%;" type="submit" class="btn btn-outline-success" value="Crear" name="btn_crear">
+
+</form>
+
 <table class="table table-bordered">
   <thead class="table-dark">
     <tr>
       <th scope="col">ID</th>
       <th scope="col">Nombre</th>
-      <th scope="col">Correo</th>
-      <th scope="col">CIF</th>
-      <th scope="col"></th>
 
     </tr>
 
   </thead>
   <tbody>
+    <?php $i=1;
+    while ($datos = $rs_categorias->fetch_assoc()) {?>
     <tr>
-      <td>1</td>
-      <td>XXXX.SL</td>
-      <td>XXX@correo.es</td>
-      <td>1223356-X</td>
-      <td> <a href="perfil_empresa_admin.html" class="btn btn-primary">Ver Perfil de empresa</a></td>
-
-    </tr>
-
-    <tr>
-      <td>2</td>
-      <td>XXXX.SA</td>
-      <td>XXX@correo.es</td>
-      <td>1223356-X</td>
-      <td> <a href="perfil_empresa_admin.html" class="btn btn-primary">Ver Perfil de empresa</a></td>
-
-    </tr>
-
-    <tr>
-      <td>3</td>
-      <td>XXXX.SC</td>
-      <td>XXX@correo.es</td>
-      <td>1223356-X</td>
-      <td> <a href="perfil_empresa_admin.html" class="btn btn-primary">Ver Perfil de empresa</a></td>
-
-    </tr>
+      <td><?=$datos['id_categoria'];?></td>
+      <td><?=$datos['nombre_categoria'];?></td>
+     <td>
+  <a href="acciones_admin.php?borrar_id_categoria=<?=$datos['id_categoria'];?>" onclick="return confirmar()" class="btn btn-danger">Borrar</a></td>
+  </tr>
+    <?php } ?>
 
   </tbody>
 </table>
 <hr>
 </main>
 </div>
-<!-- eliminar por con el id  -->
-<div class="container text-center col-md-6">
-    <form method="post">
-      <p class="my-4">Puedes eliminar cualquier empresa con simplimente introduciendo su ID</p>
-      <input  id="fname" name="name" type="text" placeholder="ID de la empresa" class="form-control" required>
-      <button  type="submit" class="btn btn-danger my-4">Eliminar</button>
-  </form>
-</div>
+
 <br><br><br><br><br><br><br><br>
 
 
 
+<!-- FOOTER -->
+</div>
 <!-- FOOTER -->
   <footer class="text-center text-lg-start shadow" style="background-color: #D1EAFC;">
 
@@ -168,6 +172,7 @@ if(isset($_SESSION['rol'])){
   </div>
 
 </footer>
+
 
 
     <!-- Javascript -->

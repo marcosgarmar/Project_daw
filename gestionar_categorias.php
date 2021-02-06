@@ -18,11 +18,11 @@ $conn = conexion();
 if(isset($_POST['btn_crear'])){
 
 
-  $categoria = htmlentities(mysqli_real_escape_string($conn,$_POST['categoria']));
+$categoria = htmlentities(mysqli_real_escape_string($conn,$_POST['categoria']));
 
 $sql_reg = "INSERT INTO categorias(nombre_categoria) VALUES('$categoria')";
 
-  $rs_dem = $conn->query($sql_reg);
+$rs_dem = $conn->query($sql_reg);
 
 
 }
@@ -94,12 +94,12 @@ $rs_categorias = gestionar_categorias();
 
 </form>
 
-<table class="table table-bordered">
+<table class="table table-bordered text-center w-75 mx-auto">
   <thead class="table-dark">
     <tr>
       <th scope="col">ID</th>
       <th scope="col">Nombre</th>
-
+      <th scope="col">Operación</th>
     </tr>
 
   </thead>
@@ -107,7 +107,7 @@ $rs_categorias = gestionar_categorias();
     <?php $i=1;
     while ($datos = $rs_categorias->fetch_assoc()) {?>
     <tr>
-      <td><?=$datos['id_categoria'];?></td>
+      <td><?=$i;$i++;?></td>
       <td><?=$datos['nombre_categoria'];?></td>
      <td>
   <a href="acciones_admin.php?borrar_id_categoria=<?=$datos['id_categoria'];?>" onclick="return confirmar()" class="btn btn-danger">Borrar</a></td>

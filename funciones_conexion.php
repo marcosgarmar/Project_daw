@@ -82,7 +82,7 @@ function sacar_id_emp($id_user){
  return $rs_id_emp['id_empresa'];
 }
 
-// Sacar el di de la empresa con solo pasarle su nombre 
+// Sacar el di de la empresa con solo pasarle su nombre
 function sacar_id_emp_con_nombre($nombre_empresa){
   $conn = conexion();
   $rs_id_emp = $conn->query("SELECT id_empresa from empresas join usuarios on usuarios.email = empresas.email where nombre_usuario = '$nombre_empresa'");
@@ -204,4 +204,21 @@ function modificar_usuario($id_user,$rol,$nombre_nuevo,$pass_nuevo){
         header('Location:gestionar_usuarios.php');
     }
   }
+}
+
+
+
+function gestionar_categorias(){
+  $conn = conexion();
+
+  $sql_categorias = "Select * from categorias ";
+  if($gest_categoria = $conn->query($sql_categorias)){
+    if($gest_categoria->num_rows>0){
+      $rs_gest_categoria= $gest_categoria;
+    }
+  }else{
+    die("Error el sacar los datos");
+  }
+
+  return $rs_gest_categoria;
 }

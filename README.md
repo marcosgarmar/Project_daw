@@ -1,5 +1,5 @@
 # Project_daw
-Es un proyecto de una página web de empleo, donde puedes buscar trabajos, y las empresas donde pueden ofrecer trabajos.
+Es un proyecto de una página web de empleo, donde puedes buscar trabajos, y las empresas donde pueden ofrecer trabajos.\n
 Con búsqueda avanzada, para filtrar las ofertas.
 Inscribirse en la oferta.
 Crear un perfil "Empresa" o "Demandante de empleo".

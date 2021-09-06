@@ -1,6 +1,8 @@
 # Employment Web Portal
 the project consists in a portal, where the users can find jobs and companies can offer jobs vacancies.
-
+```diff
+- Website in Spanish
+```
 ## In this portal  users can:
 - A filter and sort jobs opportunities 
 - Have a profile as company or job seeker
@@ -12,9 +14,7 @@ the project consists in a portal, where the users can find jobs and companies ca
 ###  Companies can:
 - Visit  applicants profiles and select them.
 - Manage the offers 
-```diff
-- ##Website in Spanish
-```
+
 
 # Portal Web de empleo
 Es un proyecto de una página web de empleo, donde puedes buscar trabajos, y las empresas donde pueden ofrecer trabajos.  
